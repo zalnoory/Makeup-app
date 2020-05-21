@@ -4,11 +4,14 @@ import { getBrands } from '../services/productsService'
 import ListGroup from './common/listGroup'
 
 class Products extends React.Component {
-  state = {
+  constructor(props){
+    super(props)
+    state = {
     products: [],
     brands: [],
     selectedBrand: null,
   }
+}
   /*connect to server */
   async componentDidMount() {
     const { data: products } = await axios.get(
