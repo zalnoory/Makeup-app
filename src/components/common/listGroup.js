@@ -1,32 +1,35 @@
 import React, { Fragment } from 'react'
+import List from './list'
 import '../../style/listGroup.css'
 
 // displaying Item (Filtering).
 const ListGroup = (props) => {
-  const { items, onItemSelect, selectedItem } = props
+  const {
+    brands,
+    tags,
+    onBrandSelect,
+    onTagSelect,
+    selectedTag,
+    selectedBrand,
+  } = props
 
   return (
     <React.Fragment>
       <input type="checkbox" id="accord1" />
-      <label for="accord1">Brands</label>
+      <label htmlFor="brands">Brands</label>
+      <List
+        items={brands}
+        onItemSelect={onBrandSelect}
+        selectedItem={selectedBrand}
+      />
 
-      <div className="content">
-        <ul className="list-group">
-          {items.map((item) => (
-            <li
-              key={item}
-              className={
-                item === selectedItem
-                  ? 'list-group-item active'
-                  : 'list-group-item'
-              }
-              onClick={() => onItemSelect(item)}
-            >
-              {`${item.charAt(0).toUpperCase() + item.slice(1)}`}
-            </li>
-          ))}
-        </ul>
-      </div>
+      <input type="checkbox" id="accord2" />
+      <label htmlFor="byTag">By Tag</label>
+      <List
+        items={tags}
+        onItemSelect={onTagSelect}
+        selectedItem={selectedTag}
+      />
     </React.Fragment>
   )
 }

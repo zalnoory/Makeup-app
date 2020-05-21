@@ -1,0 +1,54 @@
+body {
+  font-size: 8px;
+  font-family: sans-serif;
+}
+
+input {
+  display: none;
+}
+label {
+  position: relative;
+  display: block;
+  padding: 8px 45px;
+  margin: 0 0 1px 0;
+  cursor: pointer;
+  background: white;
+  border-radius: 3px;
+  color: black;
+  transition: ease 0.5s;
+  font-size: 10px;
+}
+
+label::after {
+  content: '+';
+  font-size: 12px;
+  font-weight: bold;
+  position: absolute;
+  right: 20px;
+  top: 7px;
+}
+label:hover {
+  background: rgb(173, 172, 172);
+}
+
+input:checked + label::after {
+  content: '-';
+  right: 20px;
+  top: 7px;
+}
+
+.content {
+  background: white;
+  padding: 10px 25px;
+  border: 0px;
+  margin: 0 0 1px 0;
+  border-radius: 3px;
+}
+
+input + label + .content {
+  display: none;
+}
+
+input:checked + label + .content {
+  display: block;
+}
