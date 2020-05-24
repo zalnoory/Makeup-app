@@ -4,66 +4,66 @@ import { getBrands, getProductTag } from '../services/productsService'
 import ListGroup from './common/listGroup'
 
 class Products extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      products: [],
-      brands: [],
-      tags: [],
-      selectedBrand: null,
-      slectedTag: null,
-    }
+  state = {
+    products: [],
+    brands: [],
+    tags: [],
+    selectedBrand: 'All Brands',
+    selectedTag: 'All Tags',
   }
 
   /*connect to server */
   async componentDidMount() {
-    const { data: products } = await axios.get(
-      'http://makeup-api.herokuapp.com/api/v1/products.json'
+    const { data } = await axios.get(
+      // 'http://makeup-api.herokuapp.com/api/v1/products.json'
+      'https://gist.githubusercontent.com/zalnoory/153677c3cddf89017c0abce27e72c29d/raw/b16de56253f60efb6fd6465ead89abb878bf3eae/exampleproducts.json'
     )
+    // const hi = await axios.get(
+    //   // 'http://makeup-api.herokuapp.com/api/v1/products.json'
+    //   'https://gist.githubusercontent.com/zalnoory/153677c3cddf89017c0abce27e72c29d/raw/b16de56253f60efb6fd6465ead89abb878bf3eae/exampleproducts.json'
+    // )
+    // console.log(hi)
 
     /*adding *all Beauty Brands' to brands[]*/
-    const brands = ['all Brands', ...getBrands()]
+    const brands = ['All Brands', ...getBrands()]
 
-    this.setState({ products, brands, tags: getProductTag() })
+    this.setState({
+      ...this.state,
+      products: data.products,
+      brands,
+      tags: getProductTag(),
+    })
   }
 
   handleBrandSelect = (brand) => {
-    this.setState({ selectedBrand: brand })
-  }
-  handleTagSelect = (tag) => {
-    this.setState({ selectedTag: tag })
-    console.log(tag)
+    const state = this.state
+    this.setState({ ...state, selectedBrand: brand })
   }
 
-  // filterLists = () => {
-  //   const { products, brands, tags, selectedBrand, selectedTag } = this.state
-  //   return selectedBrand && selectedBrand !== 'all Brands'
-  //     ? products.filter((product) => product.brand === selectedBrand)
-  //     : products || selectedTag
-  //     ? products.filter((product) => {
-  //         for (let tag of product.tag_list) {
-  //           if (tag === selectedTag) return product
-  //         }
-  //       })
-  //     : products
-  // }
+  handleTagSelect = (tag) => {
+    const state = this.state
+    this.setState({ ...state, selectedTag: tag })
+  }
 
   filterLists = () => {
-    const { products, tags, selectedBrand, selectedTag } = this.state
+    const { selectedBrand, selectedTag, products } = this.state
 
-    if (selectedTag) {
-      return products.filter((product) => {
-        for (let tag of product.tag_list) {
-          if (tag === selectedTag) return product
+    const filtered = products
+      .filter((product) => {
+        if (selectedBrand !== 'All Brands') {
+          return product.brand === selectedBrand
+        } else return product
+      })
+      .filter((product) => {
+        if (selectedTag !== 'All Tags') {
+          return product.tag_list.includes(selectedTag)
+        } else {
+          return product
         }
       })
-    } else if (selectedBrand && selectedBrand !== 'all Brands') {
-      return products.filter((product) => product.brand === selectedBrand)
-    } else {
-      return products
-    }
-  }
 
+    return filtered
+  }
   render() {
     const { length: count } = this.state.products
     const { products, brands, tags, selectedBrand, selectedTag } = this.state
