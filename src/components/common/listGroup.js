@@ -2,7 +2,6 @@ import React, { Fragment } from 'react'
 import List from './list'
 import '../../style/listGroup.css'
 
-// displaying Item (Filtering).
 const ListGroup = (props) => {
   const {
     brands,
@@ -15,7 +14,7 @@ const ListGroup = (props) => {
 
   return (
     <React.Fragment>
-      <input type="checkbox" id="accord1" />
+      <input type="checkbox" id="brands" />
       <label htmlFor="brands">Brands</label>
       <List
         items={brands}
@@ -23,7 +22,7 @@ const ListGroup = (props) => {
         selectedItem={selectedBrand}
       />
 
-      <input type="checkbox" id="accord2" />
+      <input type="checkbox" id="byTag" />
       <label htmlFor="byTag">By Tag</label>
       <List
         items={tags}

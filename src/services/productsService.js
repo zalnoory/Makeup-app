@@ -4,15 +4,50 @@ const brands = [
   'benefit',
   'smashbox',
   'almay',
-  'dior',
   'covergirl',
   'physicians formula',
   'maybelline',
+  'rejuva minerals',
+  'lotus cosmetics usa',
+  // 'colourpop',
+  // 'boosh',
+  // 'deciem',
+  // 'zorah biocosmetiques',
+  // 'w3llpeople',
+  // "sally b's skin yummies",
+  // 'rejuva minerals',
+  // 'penny lane organics',
+  // 'nudus',
+  // 'marienatie',
+  // "maia's mineral galaxy",
+  // 'lotus cosmetics usa',
+  // 'green people',
+  // 'coastal classic creation',
+  // "c'est moi",
 ]
 
+// const brands = [
+//   'colourpop',
+//   'boosh',
+//   'deciem',
+//   'zorah biocosmetiques',
+//   'w3llpeople',
+//   "sally b's skin yummies",
+//   'rejuva minerals',
+//   'penny lane organics',
+//   'nudus',
+//   'marienatie',
+//   "maia's mineral galaxy",
+//   'lotus cosmetics usa',
+//   'green people',
+//   'coastal classic creation',
+//   "c'est moi",
+// ]
+
 const productTag = [
+  'All Tags',
   'Vegan',
-  'Canadian',
+  'cruelty free',
   'EcoCert',
   'Chemical Free',
   'Gluten Free',
@@ -21,18 +56,37 @@ const productTag = [
   'No Talc',
   'Hypoallergenic',
   'EWG Verified',
-  'silicone free',
-  'oil free',
-  'alcohol free',
-  'cruelty free',
-  'water free',
+  'USDA Organic',
   'Natural',
+  'Organic',
+  'water free',
+  'Silicone free',
 ]
 
+// const productTag = [
+//   'All Tags',
+//   'Vegan',
+//   'cruelty free',
+//   'Organic',
+//   'Chemical Free',
+//   'Gluten Free',
+//   'silicone free',
+//   'oil free',
+//   'alcohol free',
+//   'water free',
+//   'EcoCert',
+//   'purpicks',
+//   'EWG Verified',
+//   'No Talc',
+//   'Hypoallergenic',
+//   'CertClean',
+//   'USDA Organic',
+// ]
+
 export function getBrands() {
-  return brands.filter((b) => b)
+  return brands
 }
 
 export function getProductTag() {
-  return productTag.filter((t) => t)
+  return productTag
 }

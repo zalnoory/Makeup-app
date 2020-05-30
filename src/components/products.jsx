@@ -2,27 +2,27 @@ import React from 'react'
 import axios from 'axios'
 import { getBrands, getProductTag } from '../services/productsService'
 import ListGroup from './common/listGroup'
+import Pagination from './common/pagination'
+import Loader from './loader'
+import dataPagination from '../utils/data-pagination'
 
 class Products extends React.Component {
   state = {
+    isLoading: true,
     products: [],
     brands: [],
     tags: [],
     selectedBrand: 'All Brands',
     selectedTag: 'All Tags',
+    pageSize: 40,
+    currentPage: 1,
   }
 
   /*connect to server */
   async componentDidMount() {
     const { data } = await axios.get(
-      // 'http://makeup-api.herokuapp.com/api/v1/products.json'
-      'https://gist.githubusercontent.com/zalnoory/153677c3cddf89017c0abce27e72c29d/raw/b16de56253f60efb6fd6465ead89abb878bf3eae/exampleproducts.json'
+      'https://zahrah-products.s3.us-east-2.amazonaws.com/products.json'
     )
-    // const hi = await axios.get(
-    //   // 'http://makeup-api.herokuapp.com/api/v1/products.json'
-    //   'https://gist.githubusercontent.com/zalnoory/153677c3cddf89017c0abce27e72c29d/raw/b16de56253f60efb6fd6465ead89abb878bf3eae/exampleproducts.json'
-    // )
-    // console.log(hi)
 
     /*adding *all Beauty Brands' to brands[]*/
     const brands = ['All Brands', ...getBrands()]
@@ -32,6 +32,7 @@ class Products extends React.Component {
       products: data.products,
       brands,
       tags: getProductTag(),
+      isLoading: false,
     })
   }
 
@@ -45,6 +46,11 @@ class Products extends React.Component {
     this.setState({ ...state, selectedTag: tag })
   }
 
+  handlePageChange = (page) => {
+    const state = this.state
+    this.setState({ ...state, currentPage: page })
+  }
+
   filterLists = () => {
     const { selectedBrand, selectedTag, products } = this.state
 
@@ -52,7 +58,9 @@ class Products extends React.Component {
       .filter((product) => {
         if (selectedBrand !== 'All Brands') {
           return product.brand === selectedBrand
-        } else return product
+        } else {
+          return product
+        }
       })
       .filter((product) => {
         if (selectedTag !== 'All Tags') {
@@ -64,26 +72,25 @@ class Products extends React.Component {
 
     return filtered
   }
+
   render() {
-    const { length: count } = this.state.products
-    const { products, brands, tags, selectedBrand, selectedTag } = this.state
+    const {
+      products,
+      brands,
+      tags,
+      selectedBrand,
+      selectedTag,
+      pageSize,
+      currentPage,
+    } = this.state
 
     const filtered = this.filterLists()
 
-    // const filtered =
-    //   selectedBrand && selectedBrand !== 'all Brands'
-    //     ? products.filter((product) => product.brand === selectedBrand)
-    //     : products
+    const productsPagination = dataPagination(filtered, pageSize, currentPage)
 
-    // const filtered = selectedTag
-    //   ? products.filter((product) => {
-    //       for (let tag of product.tag_list) {
-    //         if (tag === selectedTag) return product
-    //       }
-    //     })
-    //   : products
-
-    return (
+    return this.state.isLoading ? (
+      <Loader />
+    ) : (
       <div className="row">
         <div className="col-3">
           <ListGroup
@@ -96,33 +103,43 @@ class Products extends React.Component {
           />
         </div>
         <div className="col">
-          <p> {filtered.length} items</p>
+          <p style={{ textAlign: 'center' }}> {filtered.length} items</p>
           <div className="container">
             <ul className="list-inline">
-              {filtered.map((product) => (
-                <li
-                  className="list-inline-item m-2"
-                  style={{ cursor: 'pointer' }}
-                  key={product.id}
-                >
-                  <div className="container">
-                    <img
-                      className="m-2"
-                      style={{ maxWidth: '150px', maxHeight: '150px' }}
-                      src={product.api_featured_image}
-                      alt={product.name}
-                    />
-                    <div>
-                      <div className="m-2">
-                        <span className="m-1">{product.brand}</span>
-                        <span className="m-1">{product.category}</span>
-                        <span>{product.product_type}</span>
+              {productsPagination.length === 0 ? (
+                <p> Sorry, no item is found.</p>
+              ) : (
+                productsPagination.map((product) => (
+                  <li
+                    className="list-inline-item m-2"
+                    style={{ cursor: 'pointer' }}
+                    key={product.id}
+                  >
+                    <div className="container">
+                      <img
+                        className="m-2"
+                        style={{ maxWidth: '125px', maxHeight: '125px' }}
+                        src={product.api_featured_image}
+                        alt={product.name}
+                      />
+                      <div>
+                        <div className="m-2">
+                          <span className="m-1">{product.brand}</span>
+                          <span className="m-1">{product.category}</span>
+                          <span>{product.product_type}</span>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </li>
-              ))}
+                  </li>
+                ))
+              )}
             </ul>
+            <Pagination
+              productsCount={filtered.length}
+              pageSize={pageSize}
+              currentPage={currentPage}
+              onPageChange={this.handlePageChange}
+            />
           </div>
         </div>
       </div>

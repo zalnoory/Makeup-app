@@ -1,6 +1,11 @@
 body {
   font-size: 8px;
-  font-family: sans-serif;
+  font-weight: 400;
+  font-family: Brandon Text;
+}
+
+p {
+  text-align: center;
 }
 
 input {
@@ -12,9 +17,9 @@ label {
   padding: 8px 45px;
   margin: 0 0 1px 0;
   cursor: pointer;
-  background: white;
+  background: #2bbbad;
   border-radius: 3px;
-  color: black;
+  color: #fff;
   transition: ease 0.5s;
   font-size: 10px;
 }
@@ -28,7 +33,7 @@ label::after {
   top: 7px;
 }
 label:hover {
-  background: rgb(173, 172, 172);
+  background: #2bbbad;
 }
 
 input:checked + label::after {

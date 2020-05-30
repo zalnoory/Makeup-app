@@ -1,10 +1,12 @@
 import React from 'react'
+import '../../style/list.css'
+
 const List = (props) => {
   const { items, selectedItem, onItemSelect } = props
   return (
-    <div className="content">
-      <ul className="list-group">
-        {items.map((item) => (
+    <div className="content ">
+      <ul className="list-group list-group-flush">
+        {items.sort().map((item) => (
           <li
             key={item}
             className={
@@ -14,7 +16,12 @@ const List = (props) => {
             }
             onClick={() => onItemSelect(item)}
           >
-            {`${item.charAt(0).toUpperCase() + item.slice(1)}`}
+            {`${item
+              .toLowerCase()
+              .split(' ')
+              .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
+              .join(' ')}`}
+            {/* {`${item.charAt(0).toUpperCase() + item.slice(1)}`} */}
           </li>
         ))}
       </ul>
