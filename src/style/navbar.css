@@ -1,0 +1,17 @@
+ul {
+  text-align: center;
+  font-size: 8px;
+  font-weight: 400;
+  font-family: Brandon Text;
+}
+
+li {
+  margin-right: 1px;
+  text-align: center;
+}
+
+img {
+  max-height: 175px;
+  max-width: 175px;
+  display: block;
+}
