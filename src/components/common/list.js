@@ -21,7 +21,6 @@ const List = (props) => {
               .split(' ')
               .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
               .join(' ')}`}
-            {/* {`${item.charAt(0).toUpperCase() + item.slice(1)}`} */}
           </li>
         ))}
       </ul>
