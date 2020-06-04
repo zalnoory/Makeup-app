@@ -1,6 +1,9 @@
-.list-group-item.active {
-  z-index: 2;
+.list-group-flush .list-group-item.active {
   color: #fff;
   background-color: #2bbbad;
   border-color: #2bbbad;
+  background: #2bbbad;
+  z-index: 2;
+  border-radius: 3px;
+  transition: ease 0.5s;
 }
