@@ -4,11 +4,11 @@ import { getBrands, getProductTag } from '../services/productsService'
 import imageLoader from '../services/images'
 import ListGroup from './common/listGroup'
 import Pagination from './common/page-pagination'
-import ProductsPagination from './common/products-pagination'
+import Product from './common/product'
 import Loader from './common/loader'
 import Navbar from './navbar'
 import dataPagination from '../utils/data-pagination'
-import './../style/products-component.css'
+import './../style/products.css'
 
 class Products extends React.Component {
   state = {
@@ -19,7 +19,7 @@ class Products extends React.Component {
     images: [],
     selectedBrand: 'All Brands',
     selectedTag: 'All Tags',
-    pageSize: 40,
+    pageSize: 42,
     currentPage: 1,
   }
 
@@ -127,7 +127,7 @@ class Products extends React.Component {
                 {filtered.length} items
               </p>
               <div className="container">
-                <ProductsPagination productsPagination={productsPagination} />
+                <Product productsData={productsPagination} />
                 {/* <ul className="list-inline">
                   {productsPagination.length === 0 ? (
                     <p> Sorry, no item is found.</p>

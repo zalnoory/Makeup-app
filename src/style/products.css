@@ -1,0 +1,13 @@
+body {
+  font-size: 8px;
+  font-weight: 400;
+  font-family: Brandon Text;
+}
+
+.row {
+  margin: 25px;
+}
+
+/* .col-3 {
+  margin-left: 2px;
+} */
