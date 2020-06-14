@@ -1,0 +1,49 @@
+html,
+* {
+  box-sizing: border-box;
+}
+
+ul {
+  line-height: 400%;
+}
+
+.p1 {
+  text-align: center;
+  padding-top: 0px;
+  margin-top: -15px;
+}
+
+.image-container {
+  position: relative;
+  width: 90%;
+  max-width: 150px;
+  max-height: 175px;
+}
+
+/* Make the image to responsive */
+.image {
+  display: block;
+  height: auto;
+  width: 100%;
+}
+
+/* The overlay effect - lays on top of the container and over the image */
+.overlay {
+  position: absolute;
+  bottom: 0;
+  background: rgb(0, 0, 0);
+  background: rgba(0, 0, 0, 0.5);
+  color: #f1f1f1;
+  transition: 0.5s ease;
+  opacity: 0;
+  color: white;
+  font-size: 8px;
+  text-align: center;
+  width: 100px;
+  margin-left: 33px;
+}
+
+/* When you mouse over the container, fade in the overlay title */
+.image-container:hover .overlay {
+  opacity: 1;
+}
