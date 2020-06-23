@@ -16,19 +16,23 @@ const ListGroup = (props) => {
     <React.Fragment>
       <input type="checkbox" id="brands" />
       <label htmlFor="brands">Brands</label>
-      <List
-        items={brands}
-        onItemSelect={onBrandSelect}
-        selectedItem={selectedBrand}
-      />
 
+      <div class="content">
+        <List
+          items={brands}
+          onItemSelect={onBrandSelect}
+          selectedItem={selectedBrand}
+        />
+      </div>
       <input type="checkbox" id="byTag" />
       <label htmlFor="byTag">By Tag</label>
-      <List
-        items={tags}
-        onItemSelect={onTagSelect}
-        selectedItem={selectedTag}
-      />
+      <div class="content">
+        <List
+          items={tags}
+          onItemSelect={onTagSelect}
+          selectedItem={selectedTag}
+        />
+      </div>
     </React.Fragment>
   )
 }

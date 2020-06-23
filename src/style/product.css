@@ -3,20 +3,30 @@ html,
   box-sizing: border-box;
 }
 
-ul {
+.list-inline {
   line-height: 400%;
+  text-align: center;
+  font-size: 8px;
+  font-weight: 400;
+  font-family: Brandon Text;
+  margin-right: 50px;
+  margin-left: -40px;
+}
+
+li {
+  margin-right: 5px;
+  text-align: center;
 }
 
 .p1 {
   text-align: center;
   padding-top: 0px;
-  margin-top: -15px;
 }
 
 .image-container {
   position: relative;
   width: 90%;
-  max-width: 150px;
+  max-width: 175px;
   max-height: 175px;
 }
 

@@ -6,7 +6,19 @@
   z-index: 2;
   border-radius: 3px;
   transition: ease 0.5s;
+  padding-top: 0px;
+  padding-bottom: 0px;
 }
 
-.list-group.list-group-flush {
+.list-group-item {
+  float: right;
+  white-space: nowrap;
+  margin-left: 45px;
+  margin-right: -20px;
+  text-align: center;
+  font-size: 8px;
+  font-weight: 400;
+  font-family: Brandon Text;
+  padding-top: 3px;
+  padding-bottom: 3px;
 }

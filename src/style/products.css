@@ -1,13 +1,16 @@
-body {
-  font-size: 8px;
+#wrapper {
+  margin-left: auto;
+  margin-right: auto;
+  width: 960px;
+}
+
+.styled-p {
+  text-align: center;
+  font-size: 10px;
   font-weight: 400;
   font-family: Brandon Text;
+  margin-top: 70px;
+  margin-bottom: 30px;
+  margin-right: 135px;
+  float: center;
 }
-
-.row {
-  margin: 25px;
-}
-
-/* .col-3 {
-  margin-left: 2px;
-} */

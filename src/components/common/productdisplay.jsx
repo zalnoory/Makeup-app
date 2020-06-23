@@ -1,7 +1,8 @@
 import React from 'react'
-import { ProductColors } from './product-colors'
 import { Link } from 'react-router-dom'
+import { ProductColors } from './product-colors'
 import Modal from './modal'
+import '../../style/productdisplay.css'
 
 class Productdisplay extends React.Component {
   constructor(props) {
@@ -20,14 +21,13 @@ class Productdisplay extends React.Component {
     const { product } = this.props
     return (
       <li
-        className="list-inline-item m-2"
+        className="list-inline-item  m-3"
         style={{
           cursor: 'pointer',
         }}
       >
-        {/* <div className="container"> */}
         <div className="image-container">
-          <Link to={`/product_details/${product.id}`}>
+          <Link to={`/product-details/${product.id}`}>
             <img
               className="image m-3"
               src={product.api_featured_image}
@@ -39,9 +39,9 @@ class Productdisplay extends React.Component {
             Quick View
           </div>
         </div>
-        <div>
-          <Link to={`/product_details/${product.id}`}>
-            <div className="container">
+        <div className="container-m">
+          <Link to={`/productdetails/${product.id}`}>
+            <div className="container m-2">
               {product.product_colors.slice(0, 5).map((color) => (
                 <ProductColors
                   key={color.hex_value}

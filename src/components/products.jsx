@@ -44,12 +44,12 @@ class Products extends React.Component {
 
   handleBrandSelect = (brand) => {
     const state = this.state
-    this.setState({ ...state, selectedBrand: brand })
+    this.setState({ ...state, selectedBrand: brand, currentPage: 1 })
   }
 
   handleTagSelect = (tag) => {
     const state = this.state
-    this.setState({ ...state, selectedTag: tag })
+    this.setState({ ...state, selectedTag: tag, currentPage: 1 })
   }
 
   handlePageChange = (page) => {
@@ -81,7 +81,7 @@ class Products extends React.Component {
 
   render() {
     const {
-      products,
+      // products,
       brands,
       tags,
       images,
@@ -97,144 +97,117 @@ class Products extends React.Component {
     const productsPagination = dataPagination(filtered, pageSize, currentPage)
 
     return (
-      <React.Fragment>
+      <div id="wrapper">
         {isLoading ? (
           <Loader />
         ) : (
           <div className="row">
-            <div className="col-3">
-              <ListGroup
-                brands={brands}
-                tags={tags}
-                selectedBrand={selectedBrand}
-                selectedTag={selectedTag}
-                onBrandSelect={this.handleBrandSelect}
-                onTagSelect={this.handleTagSelect}
-              />
-            </div>
-            <div className="col">
-              <Navbar images={images} />
-              <p
-                style={{
-                  textAlign: 'center',
-                  fontSize: '10px',
-                  fontWeight: '500',
-                  fontFamily: 'Brandon Text',
-                  marginTop: '50px',
-                }}
-              >
-                {' '}
-                {filtered.length} items
-              </p>
-              <div className="container">
-                <Product productsData={productsPagination} />
-                {/* <ul className="list-inline">
-                  {productsPagination.length === 0 ? (
-                    <p> Sorry, no item is found.</p>
-                  ) : (
-                    productsPagination.map((product) => (
-                      <li
-                        className="list-inline-item m-2"
-                        style={{ cursor: 'pointer' }}
-                        key={product.id}
-                      >
-                        <div className="container">
-                          <img
-                            className="m-2"
-                            style={{ maxWidth: '125px', maxHeight: '125px' }}
-                            src={product.api_featured_image}
-                            alt={product.name}
-                          />
-                          <div>
-                            <div className="m-2">
-                              <span className="m-1">{product.brand}</span>
-                              <span>{product.product_type}</span>
-                              <div style={{textAlign:'center'}}>
-                                <span class="dot"></span>
-                                <span class="dot"></span>
-                                <span class="dot"></span>
-                                <span class="dot"></span>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </li>
-                    ))
-                  )}
-                </ul> */}
-                <Pagination
-                  productsCount={filtered.length}
-                  pageSize={pageSize}
-                  currentPage={currentPage}
-                  onPageChange={this.handlePageChange}
+            <div className="col-2">
+              {/* <div className="col-3 mr-0 pr-0"> */}
+              <div className="container" style={{ paddingTop: '20px' }}>
+                <ListGroup
+                  brands={brands}
+                  tags={tags}
+                  selectedBrand={selectedBrand}
+                  selectedTag={selectedTag}
+                  onBrandSelect={this.handleBrandSelect}
+                  onTagSelect={this.handleTagSelect}
                 />
               </div>
             </div>
+            <div className="col">
+              {/* <div className="col pl-0 ml-0"> */}
+              <Navbar images={images} />
+
+              <p className="styled-p"> {filtered.length} items</p>
+
+              <Product productsData={productsPagination} />
+
+              <Pagination
+                productsCount={filtered.length}
+                pageSize={pageSize}
+                currentPage={currentPage}
+                onPageChange={this.handlePageChange}
+              />
+            </div>
           </div>
         )}
-      </React.Fragment>
+      </div>
     )
   }
 }
 
 export default Products
 
+// {isLoading ? (
+//   <Loader />
+// ) : (
+//   <div className="row">
+//     <div className="col-sm-3">
+//       {/* <div className="col-3 mr-0 pr-0"> */}
+//       <ListGroup
+//         brands={brands}
+//         tags={tags}
+//         selectedBrand={selectedBrand}
+//         selectedTag={selectedTag}
+//         onBrandSelect={this.handleBrandSelect}
+//         onTagSelect={this.handleTagSelect}
+//       />
+//     </div>
+//     <div className="col-sm-9">
+//       {/* <div className="col pl-0 ml-0"> */}
+//       <Navbar images={images} />
+//       <div className="container">
+//         <p className="styled-p"> {filtered.length} items</p>
+//       </div>
+//       <div className="container">
+//         <Product productsData={productsPagination} />
+
+//         <Pagination
+//           productsCount={filtered.length}
+//           pageSize={pageSize}
+//           currentPage={currentPage}
+//           onPageChange={this.handlePageChange}
+//         />
+//       </div>
+//     </div>
+//   </div>
+// )}
+
 // return (
 //   <React.Fragment>
 //     {isLoading ? (
 //       <Loader />
 //     ) : (
-//       <div className="row">
-//         <div className="col-3">
-//           <ListGroup
-//             brands={brands}
-//             tags={tags}
-//             selectedBrand={selectedBrand}
-//             selectedTag={selectedTag}
-//             onBrandSelect={this.handleBrandSelect}
-//             onTagSelect={this.handleTagSelect}
-//           />
-//         </div>
-//         <div className="col">
-
-//           <Navbar images={images} />
-//           <p style={{ textAlign: 'center' }}> {filtered.length} items</p>
-//           <div className="container">
-//             <ul className="list-inline">
-//               {productsPagination.length === 0 ? (
-//                 <p> Sorry, no item is found.</p>
-//               ) : (
-//                 productsPagination.map((product) => (
-//                   <li
-//                     className="list-inline-item m-2"
-//                     style={{ cursor: 'pointer' }}
-//                     key={product.id}
-//                   >
-//                     <div className="container">
-//                       <img
-//                         className="m-2"
-//                         style={{ maxWidth: '125px', maxHeight: '125px' }}
-//                         src={product.api_featured_image}
-//                         alt={product.name}
-//                       />
-//                       <div>
-//                         <div className="m-2">
-//                           <span className="m-1">{product.brand}</span>
-//                           {/* <span className="m-1">{product.category}</span> */}
-//                           <span>{product.product_type}</span>
-//                         </div>
-//                       </div>
-//                     </div>
-//                   </li>
-//                 ))
-//               )}
-//             </ul>
-//             <Pagination
-//               productsCount={filtered.length}
-//               pageSize={pageSize}
-//               currentPage={currentPage}
-//               onPageChange={this.handlePageChange}
+//       <div className="container-fluid">
+//         <div className="row">
+//           <div className="col-2">
+//             {/* <div className="col-3 mr-0 pr-0"> */}
+//             <ListGroup
+//               brands={brands}
+//               tags={tags}
+//               selectedBrand={selectedBrand}
+//               selectedTag={selectedTag}
+//               onBrandSelect={this.handleBrandSelect}
+//               onTagSelect={this.handleTagSelect}
 //             />
+//           </div>
+//           <div className="col">
+//             {/* <div className="col pl-0 ml-0"> */}
+//             <Navbar images={images} />
+//             <div className="container">
+//               <p className="styled-p"> {filtered.length} items</p>
+//             </div>
+//             <div className="container">
+//               <Product productsData={productsPagination} />
+
+//               <Pagination
+//                 productsCount={filtered.length}
+//                 pageSize={pageSize}
+//                 currentPage={currentPage}
+//                 onPageChange={this.handlePageChange}
+//               />
+//             </div>
 //           </div>
 //         </div>
 //       </div>
