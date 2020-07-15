@@ -10,7 +10,7 @@ const Loader = () => {
     </div>
   )
 
-  const icons = Array.from({ length: 4 }).map((i) => icon)
+  const icons = Array.from({ length: 8 }).map((i) => icon)
 
   return <div className="d-flex justify-content-center"> {icons}</div>
 }
