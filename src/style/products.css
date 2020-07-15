@@ -1,7 +1,9 @@
-#wrapper {
-  margin-left: auto;
-  margin-right: auto;
-  width: 960px;
+.products-container {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  grid-gap: 10px;
+  overflow-x: hidden;
+  margin: 1em;
 }
 
 .styled-p {
@@ -9,8 +11,30 @@
   font-size: 10px;
   font-weight: 400;
   font-family: Brandon Text;
-  margin-top: 70px;
-  margin-bottom: 30px;
-  margin-right: 135px;
-  float: center;
+  margin-top: 35px;
+  margin-left: 8em;
+}
+
+.listgrp-nav-container {
+  display: flex;
+  flex-direction: row;
+}
+.productlist-container {
+  justify-content: end;
+  display: grid;
+  grid-template-columns: 100px 100px;
+  grid-template-rows: 200px;
+  height: 300px;
+  grid-gap: 20px;
+  line-height: 400%;
+  font-size: 6px;
+  font-weight: 400;
+  font-family: Brandon Text;
+  margin-right: 40px;
+}
+
+@media (min-width: 450px) {
+  .styled-p {
+    margin-top: 75px;
+  }
 }
