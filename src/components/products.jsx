@@ -97,14 +97,13 @@ class Products extends React.Component {
     const productsPagination = dataPagination(filtered, pageSize, currentPage)
 
     return (
-      <div id="wrapper">
+      <React.Fragment>
         {isLoading ? (
           <Loader />
         ) : (
-          <div className="row">
-            <div className="col-2">
-              {/* <div className="col-3 mr-0 pr-0"> */}
-              <div className="container" style={{ paddingTop: '20px' }}>
+          <div>
+            <div className="products-container">
+              <div className="listgrp-nav-container">
                 <ListGroup
                   brands={brands}
                   tags={tags}
@@ -113,104 +112,22 @@ class Products extends React.Component {
                   onBrandSelect={this.handleBrandSelect}
                   onTagSelect={this.handleTagSelect}
                 />
+                <Navbar images={images} />
               </div>
-            </div>
-            <div className="col">
-              {/* <div className="col pl-0 ml-0"> */}
-              <Navbar images={images} />
-
               <p className="styled-p"> {filtered.length} items</p>
-
               <Product productsData={productsPagination} />
-
-              <Pagination
-                productsCount={filtered.length}
-                pageSize={pageSize}
-                currentPage={currentPage}
-                onPageChange={this.handlePageChange}
-              />
             </div>
+            <Pagination
+              productsCount={filtered.length}
+              pageSize={pageSize}
+              currentPage={currentPage}
+              onPageChange={this.handlePageChange}
+            />
           </div>
         )}
-      </div>
+      </React.Fragment>
     )
   }
 }
 
 export default Products
-
-// {isLoading ? (
-//   <Loader />
-// ) : (
-//   <div className="row">
-//     <div className="col-sm-3">
-//       {/* <div className="col-3 mr-0 pr-0"> */}
-//       <ListGroup
-//         brands={brands}
-//         tags={tags}
-//         selectedBrand={selectedBrand}
-//         selectedTag={selectedTag}
-//         onBrandSelect={this.handleBrandSelect}
-//         onTagSelect={this.handleTagSelect}
-//       />
-//     </div>
-//     <div className="col-sm-9">
-//       {/* <div className="col pl-0 ml-0"> */}
-//       <Navbar images={images} />
-//       <div className="container">
-//         <p className="styled-p"> {filtered.length} items</p>
-//       </div>
-//       <div className="container">
-//         <Product productsData={productsPagination} />
-
-//         <Pagination
-//           productsCount={filtered.length}
-//           pageSize={pageSize}
-//           currentPage={currentPage}
-//           onPageChange={this.handlePageChange}
-//         />
-//       </div>
-//     </div>
-//   </div>
-// )}
-
-// return (
-//   <React.Fragment>
-//     {isLoading ? (
-//       <Loader />
-//     ) : (
-//       <div className="container-fluid">
-//         <div className="row">
-//           <div className="col-2">
-//             {/* <div className="col-3 mr-0 pr-0"> */}
-//             <ListGroup
-//               brands={brands}
-//               tags={tags}
-//               selectedBrand={selectedBrand}
-//               selectedTag={selectedTag}
-//               onBrandSelect={this.handleBrandSelect}
-//               onTagSelect={this.handleTagSelect}
-//             />
-//           </div>
-//           <div className="col">
-//             {/* <div className="col pl-0 ml-0"> */}
-//             <Navbar images={images} />
-//             <div className="container">
-//               <p className="styled-p"> {filtered.length} items</p>
-//             </div>
-//             <div className="container">
-//               <Product productsData={productsPagination} />
-
-//               <Pagination
-//                 productsCount={filtered.length}
-//                 pageSize={pageSize}
-//                 currentPage={currentPage}
-//                 onPageChange={this.handlePageChange}
-//               />
-//             </div>
-//           </div>
-//         </div>
-//       </div>
-//     )}
-//   </React.Fragment>
-// )
