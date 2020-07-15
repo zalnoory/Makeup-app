@@ -1,0 +1,205 @@
+.productlist-container {
+  justify-content: end;
+  display: grid;
+  grid-template-columns: 100px 100px;
+  grid-template-rows: 200px;
+  height: 300px;
+  grid-gap: 20px;
+  line-height: 20px;
+  font-size: 6px;
+  font-weight: 400;
+  font-family: Brandon Text;
+  margin-right: 20px;
+}
+#container-m {
+  margin-top: -1em;
+}
+
+#container-m-link {
+  color: black;
+  text-decoration: none;
+}
+
+.productlist-container p {
+  text-align: center;
+  padding-top: 0px;
+  margin-top: -4em;
+  margin-left: -24px;
+  white-space: nowrap;
+}
+
+.p-result {
+  text-align: center;
+  font-size: 14px;
+  font-weight: 400;
+  font-family: Brandon Text;
+  margin-top: 70px;
+  margin-right: 100px;
+}
+
+.image-container {
+  list-style-type: none;
+  position: relative;
+  width: 100%;
+  max-width: 200px;
+}
+
+/* Make the image to responsive */
+.image {
+  max-width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+
+/* The overlay effect - lays on top of the container and over the image */
+.overlay {
+  position: absolute;
+  bottom: 0px;
+  background: rgb(0, 0, 0);
+  background: rgba(0, 0, 0, 0.5);
+  color: #f1f1f1;
+  transition: 0.5s ease;
+  opacity: 0;
+  color: white;
+  font-size: 8px;
+  text-align: center;
+  width: 100px;
+}
+
+/* When you mouse over the container, fade in the overlay title */
+.image-container:hover .overlay {
+  opacity: 1;
+}
+
+@media screen and (min-width: 450px) {
+  .productlist-container {
+    align-items: center;
+    display: grid;
+    grid-template-columns: 150px 150px 150px;
+    grid-template-rows: 250px;
+    height: 300px;
+    grid-gap: 40px;
+    line-height: 30px;
+    font-size: 6px;
+    font-weight: 400;
+    font-family: Brandon Text;
+    margin-top: 75px;
+    max-width: 80%;
+    margin-left: 20em;
+    margin-right: 1em;
+  }
+  .image {
+    max-width: 100%;
+    height: 220px;
+    object-fit: cover;
+  }
+
+  #container-m {
+    margin-left: 3em;
+    margin-top: -1em;
+  }
+
+  #container-m-link {
+    color: black;
+    text-decoration: none;
+  }
+
+  .productlist-container p {
+    text-align: center;
+    padding-top: 0px;
+
+    font-size: 8px;
+    margin-right: 10px;
+  }
+  .overlay {
+    width: 130px;
+    margin-left: 10px;
+  }
+}
+/* 
+.productlist-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 1px;
+}
+
+.list-inline {
+  line-height: 400%;
+  font-size: 8px;
+  font-weight: 400;
+  font-family: Brandon Text; */
+
+/* set the parent container*/
+/* display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
+  grid-gap: 1px;
+} */
+
+/* 
+
+.productlist-container li {
+  text-align: center;
+  margin-top: 5em;
+}
+
+#container-m {
+  margin-left: -2em;
+  margin-top: -1em;
+}
+
+#container-m-link {
+  color: black;
+  text-decoration: none;
+}
+
+.productlist-container p {
+  text-align: center;
+  padding-top: 0px;
+  margin-top: -2em;
+}
+
+.image-container {
+  list-style-type: none;
+  position: relative;
+  width: 100%;
+  max-width: 200px;
+} */
+
+/* Make the image to responsive */
+/* .image {
+  max-width: 100%;
+  height: 200px;
+  object-fit: cover;
+} */
+
+/*  The overlay effect - lays on top of the container and over the image */
+/* .overlay {
+  position: absolute;
+  bottom: 0px;
+  background: rgb(0, 0, 0);
+  background: rgba(0, 0, 0, 0.5);
+  color: #f1f1f1;
+  transition: 0.5s ease;
+  opacity: 0;
+  color: white;
+  font-size: 8px;
+  text-align: center;
+  width: 100px;
+  margin-left: 50px;
+} */
+
+/* When you mouse over the container, fade in the overlay title */
+/* .image-container:hover .overlay {
+  opacity: 1;
+} */
+
+/* 
+.styled-para {
+  text-align: center;
+  font-size: 14px;
+  font-weight: 400;
+  font-family: Brandon Text;
+  margin-top: 70px; */
+/* margin-bottom: 10px; */
+/* margin-right: 100px;
+} */

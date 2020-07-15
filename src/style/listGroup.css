@@ -1,3 +1,12 @@
+.list_grp_container {
+  width: 15%;
+  margin-top: 2em;
+  margin-left: 0em;
+  position: absolute;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+}
+
 input {
   display: none;
 }
@@ -6,24 +15,25 @@ label {
   font-weight: 500;
   position: relative;
   display: block;
-  padding: 6px 40px;
-  margin: 0 0 1px 20px;
+  margin: 0 0 1px 1px;
+  padding: 2px 20px;
+  padding-left: 20px;
   cursor: pointer;
   background: #2699b6;
   border-radius: 3px;
   color: #fff;
   transition: ease 0.5s;
-  font-size: 10px;
+  font-size: 8px;
   white-space: nowrap;
 }
 
 label::after {
   content: '+';
-  font-size: 12px;
+  font-size: 8px;
   font-weight: bold;
   position: absolute;
   right: 10px;
-  top: 5px;
+  top: 2px;
 }
 label:hover {
   background: #2bbbad;
@@ -31,17 +41,18 @@ label:hover {
 
 input:checked + label::after {
   content: '-';
-  right: 9px;
-  top: 5px;
+  right: 12px;
+  top: 2px;
 }
 
 .content {
   background: white;
-  padding: 10px 10px;
+  padding: 5px 5px;
   border: 0px;
   margin: 0 0 1px 0;
   border-radius: 3px;
-  margin-left: -30px;
+  margin-left: 1em;
+  margin-right: 1em;
 }
 
 input + label + .content {
@@ -50,4 +61,26 @@ input + label + .content {
 
 input:checked + label + .content {
   display: block;
+}
+
+@media screen and (min-width: 450px) {
+  .list_grp_container {
+    width: 10%;
+    margin-left: 1em;
+  }
+
+  label {
+    padding: 6px 50px;
+    font-size: 10px;
+  }
+
+  label::after {
+    top: 5px;
+    font-size: 12px;
+  }
+
+  input:checked + label::after {
+    right: 14px;
+    top: 5px;
+  }
 }

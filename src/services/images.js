@@ -8,7 +8,7 @@ const images = [
   {
     id: 2,
     src: 'karly-jones-K3p8QlzBf7M-unsplash.jpg',
-    title: 'Lipstick',
+    title: 'Blush',
     description: 'Makeup-lip',
   },
   {
@@ -20,7 +20,7 @@ const images = [
   {
     id: 4,
     src: 'caroline-attwood-E1rH__X9SA0-unsplash.jpg',
-    title: 'Blush',
+    title: 'Lipstick',
     description: 'makeup-blush',
   },
 ]
