@@ -13,7 +13,7 @@ const ListGroup = (props) => {
   } = props
 
   return (
-    <React.Fragment>
+    <div className="list_grp_container">
       <input type="checkbox" id="brands" />
       <label htmlFor="brands">Brands</label>
 
@@ -33,7 +33,7 @@ const ListGroup = (props) => {
           selectedItem={selectedTag}
         />
       </div>
-    </React.Fragment>
+    </div>
   )
 }
 
