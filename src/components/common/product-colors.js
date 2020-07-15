@@ -2,11 +2,16 @@ import React from 'react'
 import styled from 'styled-components'
 
 export const ProductColors = styled.span`
-  height: 15px;
-  width: 15px;
-  margin: 1px;
+  height: 8px;
+  width: 8px;
+  margin: 0.5px;
   background-color: ${(props) => props.color};
-  border-radius: 75%;
-  border: 0.5px solid black;
+  /*border-radius: 50%;*/
+  border: 1px solid rgba(0, 0, 0, 0.3);
   display: inline-block;
+  text-align: center;
+  @media (min-width: 450px) {
+    height: 12px;
+    width: 12px;
+  }
 `
