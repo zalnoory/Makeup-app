@@ -5,9 +5,10 @@
   grid-auto-flow: column;
   grid-template-rows: 150px;
   grid-gap: 1px;
-  margin-left: 5em;
+  margin-left: 4em;
   margin-top: 2em;
-  margin-right: 2em;
+  margin-right: 1em;
+  z-index: 1;
 }
 
 /* Make the image to responsive */

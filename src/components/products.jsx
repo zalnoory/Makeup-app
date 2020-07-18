@@ -117,12 +117,12 @@ class Products extends React.Component {
               <p className="styled-p"> {filtered.length} items</p>
               <Product productsData={productsPagination} />
             </div>
-            <Pagination
+            {/* <Pagination
               productsCount={filtered.length}
               pageSize={pageSize}
               currentPage={currentPage}
               onPageChange={this.handlePageChange}
-            />
+            /> */}
           </div>
         )}
       </React.Fragment>

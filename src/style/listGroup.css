@@ -25,6 +25,7 @@ label {
   transition: ease 0.5s;
   font-size: 8px;
   white-space: nowrap;
+  margin-right: 50px;
 }
 
 label::after {

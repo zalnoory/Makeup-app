@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { ProductColors } from './product-colors'
 import Modal from './modal'
-import '../../style/productdisplay.css'
+// import '../../style/productdisplay.css'
 
 class Productdisplay extends React.Component {
   constructor(props) {
@@ -20,16 +20,11 @@ class Productdisplay extends React.Component {
     const { showModal } = this.state
     const { product } = this.props
     return (
-      <li
-        className="list-inline-item  m-3"
-        style={{
-          cursor: 'pointer',
-        }}
-      >
+      <div className="discrip">
         <div className="image-container">
-          <Link to={`/product-details/${product.id}`}>
+          <Link to={`/product-details/${product.id}`} className="details-link">
             <img
-              className="image m-3"
+              className="image"
               src={product.api_featured_image}
               alt={product.name}
             />
@@ -39,17 +34,17 @@ class Productdisplay extends React.Component {
             Quick View
           </div>
         </div>
-        <div className="container-m">
-          <Link to={`/productdetails/${product.id}`}>
+        <div id="container-m">
+          <Link to={`/product-details/${product.id}`} id="container-m-link">
             <div className="container m-2">
               {product.product_colors.slice(0, 5).map((color) => (
                 <ProductColors
-                  key={color.hex_value}
                   className="page-item"
+                  key={color.hex_value}
                   color={color.hex_value}
                 />
               ))}
-              <p className="p1">
+              <p className="p-3">
                 {(product.brand || '')
                   .toLowerCase()
                   .split(' ')
@@ -66,7 +61,7 @@ class Productdisplay extends React.Component {
           onModalClick={this.toggleModal}
           product={product}
         />
-      </li>
+      </div>
     )
   }
 }
