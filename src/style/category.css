@@ -1,73 +1,89 @@
+.catProducts-container {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  grid-gap: 10px;
+  /* overflow-x: hidden; */
+  margin: 1em;
+  margin-top: 20px;
+}
+
 .productlist-container {
-  /* justify-content: end; */
-  /* display: grid;
+  justify-content: end;
+  display: grid;
   grid-template-columns: 100px 100px;
   grid-template-rows: 200px;
-  grid-gap: 20px; */
-
-  /* line-height: 20px; */
-  /* font-size: 6px;
+  height: 300px;
+  grid-gap: 20px;
+  line-height: 20px;
+  font-size: 6px;
   font-weight: 400;
   font-family: Brandon Text;
-  margin-right: 5px; */
+  /* margin-right: 20px; */
+  margin-left: 120px;
+}
 
-  /* border: 1px solid red;
+.listgrp2-container {
   display: flex;
-  flex-direction: column;
-  padding: 0px;
-  height: auto; */
+  flex-direction: row;
+  margin-left: 20px;
+  margin-top: -20px;
 }
 
-.pagination-container {
-  border: 1px solid black;
-  margin-left: -120px;
-  /* display: flex;
-  flex-direction: row; */
-  width: 350px;
+.listGroup2-container {
+  margin-top: -24px;
+  margin-right: 15px;
 }
 
-#container-m {
+.products-pagin2 {
+  margin-top: 40px;
+  margin-left: -10px;
+}
+
+.styled-p4 {
+  text-align: center;
+  font-size: 10px;
+  font-weight: 400;
+  font-family: Brandon Text;
+  /* margin-top: 35px; */
+  margin-top: 18px;
+  margin-left: -6em;
+  margin-bottom: -1.4em;
+}
+
+/* #container-m {
   margin-top: -1em;
 }
 
 #container-m-link {
   color: black;
   text-decoration: none;
-}
+} */
 
-/* .productlist-container p { */
-.p-3 {
-  text-align: left;
-  padding-top: 0px;
-  /* margin-top: -4em; */
-  /* margin-left: -24px; */
-  white-space: nowrap;
-}
-
-.p-result {
+/* .p-result {
   text-align: center;
   font-size: 14px;
   font-weight: 400;
   font-family: Brandon Text;
   margin-top: 3px;
   margin-left: 100px;
-}
+} */
 
-.image-container {
-  margin-bottom: 0.5em;
+/* .image-container {
+  list-style-type: none;
+  position: relative;
   width: 100%;
-  max-width: 100%;
-}
+  max-width: 200px;
+} */
 
 /* Make the image to responsive */
-.image {
+/* .image {
   max-width: 100%;
   height: 150px;
   object-fit: cover;
-}
+} */
 
 /* The overlay effect - lays on top of the container and over the image */
-.overlay {
+/* .overlay {
   position: absolute;
   bottom: 0px;
   background: rgb(0, 0, 0);
@@ -79,12 +95,12 @@
   font-size: 8px;
   text-align: center;
   width: 100px;
-}
+} */
 
 /* When you mouse over the container, fade in the overlay title */
-.image-container:hover .overlay {
+/* .image-container:hover .overlay {
   opacity: 1;
-}
+} */
 
 @media screen and (min-width: 450px) {
   .productlist-container {
@@ -103,7 +119,21 @@
     margin-left: 20em;
     margin-right: 1em;
   }
-  .image {
+
+  .products-pagin2 {
+    margin-left: 90px;
+    margin-top: 35px;
+  }
+
+  .styled-p4 {
+    margin-left: -29em;
+  }
+
+  /* .listGroup2-container {
+    margin-right: 35px;
+  } */
+
+  /* .image {
     max-width: 100%;
     height: 200px;
     object-fit: cover;
@@ -130,5 +160,5 @@
     width: 100px;
     margin-left: 20px;
     margin-right: -20px;
-  }
+  } */
 }

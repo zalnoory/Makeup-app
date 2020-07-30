@@ -17,7 +17,7 @@ const ListGroup = (props) => {
       <input type="checkbox" id="brands" />
       <label htmlFor="brands">Brands</label>
 
-      <div className="content">
+      <div class="content">
         <List
           items={brands}
           onItemSelect={onBrandSelect}
@@ -26,7 +26,7 @@ const ListGroup = (props) => {
       </div>
       <input type="checkbox" id="byTag" />
       <label htmlFor="byTag">By Tag</label>
-      <div className="content">
+      <div class="content">
         <List
           items={tags}
           onItemSelect={onTagSelect}
@@ -38,3 +38,27 @@ const ListGroup = (props) => {
 }
 
 export default ListGroup
+
+// return (
+//   <React.Fragment>
+//     <input type="checkbox" id="brands" />
+//     <label htmlFor="brands">Brands</label>
+
+//     <div class="content">
+//       <List
+//         items={brands}
+//         onItemSelect={onBrandSelect}
+//         selectedItem={selectedBrand}
+//       />
+//     </div>
+//     <input type="checkbox" id="byTag" />
+//     <label htmlFor="byTag">By Tag</label>
+//     <div class="content">
+//       <List
+//         items={tags}
+//         onItemSelect={onTagSelect}
+//         selectedItem={selectedTag}
+//       />
+//     </div>
+//   </React.Fragment>
+// )

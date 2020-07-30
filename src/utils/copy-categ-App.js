@@ -29,12 +29,20 @@ class App extends React.Component {
 
   /*connect to backend*/
   async componentDidMount() {
+    const { productCategory } = this.props.match.params
     const { data } = await axios.get(
       'https://zahrah-products.s3.us-east-2.amazonaws.com/products.json'
     )
 
     /*adding *all Beauty Brands' to brands[]*/
     const brands = ['All Brands', ...getBrands()]
+
+    const categoryItems = data.products.filter((product) => {
+      if (product.product_type == productCategory) {
+        return product
+      }
+    })
+    console.log('categoryItems', categoryItems)
 
     this.setState({
       ...this.state,
@@ -61,10 +69,10 @@ class App extends React.Component {
     this.setState({ ...state, currentPage: page })
   }
 
-  filterLists = (selectedProducts) => {
-    const { selectedBrand, selectedTag } = this.state
+  filterLists = () => {
+    const { selectedBrand, selectedTag, products } = this.state
 
-    const filtered = selectedProducts
+    const filtered = products
       .filter((product) => {
         if (selectedBrand !== 'All Brands') {
           return product.brand === selectedBrand
@@ -83,27 +91,17 @@ class App extends React.Component {
     return filtered
   }
 
-  // filterLists = () => {
-  //   const { selectedBrand, selectedTag, products } = this.state
-
-  //   const filtered = products
-  //     .filter((product) => {
-  //       if (selectedBrand !== 'All Brands') {
-  //         return product.brand === selectedBrand
-  //       } else {
-  //         return product
-  //       }
-  //     })
-  //     .filter((product) => {
-  //       if (selectedTag !== 'All Tags') {
-  //         return product.tag_list.includes(selectedTag)
-  //       } else {
-  //         return product
-  //       }
-  //     })
-
-  //   return filtered
-  // }
+  getCategoryItem = () => {
+    const { products } = this.state
+    const { productCategory } = this.props.match.params
+    console.log('productCategory')
+    const categoryItems = products.filter((product) => {
+      if (product.product_type == productCategory) {
+        return product
+      }
+    })
+    console.log(categoryItems)
+  }
 
   render() {
     const {
@@ -118,7 +116,7 @@ class App extends React.Component {
       isLoading,
     } = this.state
 
-    const filtered = this.filterLists(this.state.products)
+    const filtered = this.filterLists()
 
     const productsPagination = dataPagination(filtered, pageSize, currentPage)
 
@@ -135,21 +133,17 @@ class App extends React.Component {
                 {/* <Route path="/category/:productCategory" component={Category} /> */}
                 <Route
                   path="/category/:productCategory"
+                  location={this.props.location}
+                  key={this.props.location.key}
                   render={(props) => (
                     <Category
                       {...props}
-                      pageSize={pageSize}
-                      currentPage={currentPage}
-                      filterLists={this.filterLists}
-                      brands={brands}
-                      tags={tags}
-                      selectedBrand={selectedBrand}
-                      selectedTag={selectedTag}
-                      onBrandSelect={this.handleBrandSelect}
-                      onTagSelect={this.handleTagSelect}
+                      key={this.props.location.key}
+                      productCategory={this.props.match.params}
                     />
                   )}
                 />
+
                 <Route
                   path="/product-details/:productId"
                   component={ProductDetails}
@@ -161,15 +155,12 @@ class App extends React.Component {
                     <Products
                       productsData={productsPagination}
                       filtered={filtered}
-                      pageSize={pageSize}
-                      currentPage={currentPage}
                       brands={brands}
                       tags={tags}
                       selectedBrand={selectedBrand}
                       selectedTag={selectedTag}
                       onBrandSelect={this.handleBrandSelect}
                       onTagSelect={this.handleTagSelect}
-                      onPageChange={this.handlePageChange}
                       images={images}
                     />
                   )}
