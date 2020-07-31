@@ -112,7 +112,7 @@ class Products extends React.Component {
     } = this.props
 
     return (
-      <section className="products-container">
+      <div className="products-container">
         <div className="listgrp-nav-container">
           <ListGroup
             brands={brands}
@@ -136,59 +136,20 @@ class Products extends React.Component {
             onPageChange={onPageChange}
           />
           {/* <h1>Hellllllllooooo</h1> */}
-          {/* <div className="pagination-container"> */}
-          <Pagination
-            productsCount={filtered.length}
-            pageSize={pageSize}
-            currentPage={currentPage}
-            onPageChange={onPageChange}
-          />
-          {/* </div> */}
+          <div className="pagination-container">
+            <Pagination
+              productsCount={filtered.length}
+              pageSize={pageSize}
+              currentPage={currentPage}
+              onPageChange={onPageChange}
+            />
+          </div>
         </div>
 
         {/* <Product productsData={productsData}  /> */}
-      </section>
+      </div>
     )
   }
 }
 
 export default Products
-
-// return (
-//   <div className="products-container">
-//     <div className="listgrp-nav-container">
-//       <ListGroup
-//         brands={brands}
-//         tags={tags}
-//         selectedBrand={selectedBrand}
-//         selectedTag={selectedTag}
-//         onBrandSelect={onBrandSelect}
-//         onTagSelect={onTagSelect}
-//       />
-//       <Navbar images={images} />
-//     </div>
-//     <div className="paragraph-container">
-//       {/* <div className="productlist-container"> */}
-//       <p className="styled-p"> {filtered.length} items</p>
-
-//       <Product
-//         productsData={productsData}
-//         productsCount={filtered.length}
-//         pageSize={pageSize}
-//         currentPage={currentPage}
-//         onPageChange={onPageChange}
-//       />
-//       {/* <h1>Hellllllllooooo</h1> */}
-//       <div className="pagination-container">
-//         <Pagination
-//           productsCount={filtered.length}
-//           pageSize={pageSize}
-//           currentPage={currentPage}
-//           onPageChange={onPageChange}
-//         />
-//       </div>
-//     </div>
-
-//     {/* <Product productsData={productsData}  /> */}
-//   </div>
-// )

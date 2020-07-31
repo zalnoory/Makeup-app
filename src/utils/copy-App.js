@@ -1,18 +1,21 @@
 import React from 'react'
-import axios from 'axios'
 import { Route, Switch } from 'react-router-dom'
 import Products from './components/products'
 import ProductDetails from './components/product-details'
 import Category from './components/category'
+import './App.css'
+
+import Navbar from './components/navbar'
 import imageLoader from './services/images'
 import Loader from './components/common/loader'
+import Product from './components/common/product'
+import ListGroup from './components/common/listGroup'
 import { getBrands, getProductTag } from './services/productsService'
 import dataPagination from './utils/data-pagination'
+
 import '././style/products.css'
-import './App.css'
-// import Navbar from './components/navbar'
-// import Product from './components/common/product'
-// import ListGroup from './components/common/listGroup'
+
+import axios from 'axios'
 
 class App extends React.Component {
   state = {
@@ -61,10 +64,10 @@ class App extends React.Component {
     this.setState({ ...state, currentPage: page })
   }
 
-  filterLists = (selectedProducts) => {
-    const { selectedBrand, selectedTag } = this.state
+  filterLists = () => {
+    const { selectedBrand, selectedTag, products } = this.state
 
-    const filtered = selectedProducts
+    const filtered = products
       .filter((product) => {
         if (selectedBrand !== 'All Brands') {
           return product.brand === selectedBrand
@@ -83,31 +86,9 @@ class App extends React.Component {
     return filtered
   }
 
-  // filterLists = () => {
-  //   const { selectedBrand, selectedTag, products } = this.state
-
-  //   const filtered = products
-  //     .filter((product) => {
-  //       if (selectedBrand !== 'All Brands') {
-  //         return product.brand === selectedBrand
-  //       } else {
-  //         return product
-  //       }
-  //     })
-  //     .filter((product) => {
-  //       if (selectedTag !== 'All Tags') {
-  //         return product.tag_list.includes(selectedTag)
-  //       } else {
-  //         return product
-  //       }
-  //     })
-
-  //   return filtered
-  // }
-
   render() {
     const {
-      products,
+      // products,
       brands,
       tags,
       images,
@@ -118,7 +99,7 @@ class App extends React.Component {
       isLoading,
     } = this.state
 
-    const filtered = this.filterLists(this.state.products)
+    const filtered = this.filterLists()
 
     const productsPagination = dataPagination(filtered, pageSize, currentPage)
 
@@ -129,18 +110,16 @@ class App extends React.Component {
         ) : (
           <div className="main-wrapper">
             <header className="header"></header>
+            <Route
+              path="/product-details/:productId"
+              component={ProductDetails}
+            />
+
             <main className="main">
               <Switch>
-                {/* <div className="App"> */}
-                {/* <Route path="/category/:productCategory" component={Category} /> */}
-                <Route
-                  path="/category/:productCategory"
-                  render={(props) => (
-                    <Category
-                      {...props}
-                      pageSize={pageSize}
-                      currentPage={currentPage}
-                      filterLists={this.filterLists}
+                <div className="products-container">
+                  <div className="listgrp-nav-container">
+                    <ListGroup
                       brands={brands}
                       tags={tags}
                       selectedBrand={selectedBrand}
@@ -148,12 +127,9 @@ class App extends React.Component {
                       onBrandSelect={this.handleBrandSelect}
                       onTagSelect={this.handleTagSelect}
                     />
-                  )}
-                />
-                <Route
-                  path="/product-details/:productId"
-                  component={ProductDetails}
-                />
+                    <Navbar images={images} />
+                  </div>
+                </div>
                 <Route
                   exact
                   path="/"
@@ -161,24 +137,11 @@ class App extends React.Component {
                     <Products
                       productsData={productsPagination}
                       filtered={filtered}
-                      pageSize={pageSize}
-                      currentPage={currentPage}
-                      brands={brands}
-                      tags={tags}
-                      selectedBrand={selectedBrand}
-                      selectedTag={selectedTag}
-                      onBrandSelect={this.handleBrandSelect}
-                      onTagSelect={this.handleTagSelect}
-                      onPageChange={this.handlePageChange}
-                      images={images}
                     />
                   )}
                 />
-                {/* <Route path="/product_details/:id" component={ProductDetails} /> */}
-                {/* <Route exact path="/" component={Products} /> */}
-                {/* <Products /> */}
-                {/* <ProductDetails /> */}
-                {/* </div> */}
+
+                <Route path="/category/:productCategory" component={Category} />
               </Switch>
             </main>
             <footer className="footer"></footer>
@@ -191,13 +154,35 @@ class App extends React.Component {
 
 export default App
 
-// import React from 'react'
-// import { Route, Switch } from 'react-router-dom'
-// import Products from './components/products'
-// import ProductDetails from './components/product-details'
-// import Category from './components/category'
-// import './App.css'
+// function App() {
+//   return (
+//     <div className="main-wrapper">
+//       <header className="header"></header>
+//       <main className="main">
+//        {/* <Navbar /> */}
+//         <Switch>
+//           {/* <div className="App"> */}
 
+//           {/* <Route path="/product_details/:id" component={ProductDetails} /> */}
+//           <Route exact path="/" component={Products} />
+//           <Route
+//             path="/product-details/:productId"
+//             component={ProductDetails}
+//           />
+//           <Route path="/category/:productCategory" component={Category} />
+//           {/* <Products /> */}
+//           {/* <ProductDetails /> */}
+//           {/* </div> */}
+//         </Switch>
+//       </main>
+//       <footer className="footer"></footer>
+//     </div>
+//   )
+// }
+
+// export default App
+
+/**original */
 // function App() {
 //   return (
 //     <div className="main-wrapper">
@@ -205,21 +190,12 @@ export default App
 //       <main className="main">
 //         <Switch>
 //           {/* <div className="App"> */}
-//           <Route path="/category/:productCategory" component={Category} />
-
 //           <Route
 //             path="/product-details/:productId"
 //             component={ProductDetails}
 //           />
-//           <Route
-//             exact
-//             path="/"
-//             render={() => (
-//               <Products productsData={productsPagination} filtered={filtered} />
-//             )}
-//           />
 //           {/* <Route path="/product_details/:id" component={ProductDetails} /> */}
-//           {/* <Route exact path="/" component={Products} /> */}
+//           <Route exact path="/" component={Products} />
 //           {/* <Products /> */}
 //           {/* <ProductDetails /> */}
 //           {/* </div> */}

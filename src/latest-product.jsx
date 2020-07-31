@@ -17,7 +17,7 @@ class Product extends React.Component {
       return <p className="p-result"> Sorry, no item is found.</p>
     }
     return (
-      <div className="ahmed-grid">
+      <div className="productlist-container">
         {productsData.map((product) => (
           <Productdisplay key={product.id} product={product} />
         ))}
