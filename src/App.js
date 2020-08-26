@@ -16,15 +16,17 @@ import './App.css'
 
 class App extends React.Component {
   state = {
-    isLoading: true,
-    products: [],
     brands: [],
-    tags: [],
-    images: [],
-    selectedBrand: 'All Brands',
-    selectedTag: 'All Tags',
-    pageSize: 42,
     currentPage: 1,
+    images: [],
+    isLoading: true,
+    pageSize: 42,
+    products: [],
+    selectedBrand: 'All Brands',
+    selectedCategory: '',
+    selectedTag: 'All Tags',
+    tags: [],
+    searchTerm: '',
   }
 
   /*connect to backend*/
@@ -48,7 +50,12 @@ class App extends React.Component {
 
   handleBrandSelect = (brand) => {
     const state = this.state
-    this.setState({ ...state, selectedBrand: brand, currentPage: 1 })
+    this.setState({
+      ...state,
+      selectedBrand: brand,
+      searchTerm: '',
+      currentPage: 1,
+    })
   }
 
   handleTagSelect = (tag) => {
@@ -61,10 +68,35 @@ class App extends React.Component {
     this.setState({ ...state, currentPage: page })
   }
 
-  filterLists = (selectedProducts) => {
-    const { selectedBrand, selectedTag } = this.state
+  // handleSelectedCategory = (category) => {
+  //   const state = this.state
 
-    const filtered = selectedProducts
+  //   this.setState({ ...state, selectedCategory: category })
+  // }
+
+  handleSelectedCategory = (category) => {
+    if (category !== this.state.category) {
+      this.setState({
+        ...this.state,
+        selectedCategory: category,
+        searchTerm: '',
+      })
+    }
+  }
+
+  handleSearchTerm = (e) => {
+    this.setState({
+      ...this.state,
+      searchTerm: e.target.value,
+      currentPage: 1,
+      selectedBrand: 'All Brands',
+      selectedTag: 'All Tags',
+    })
+  }
+
+  filterLists = (products = [], selectedBrand, selectedTag, searchTerm) => {
+    const filtered = products
+
       .filter((product) => {
         if (selectedBrand !== 'All Brands') {
           return product.brand === selectedBrand
@@ -79,113 +111,107 @@ class App extends React.Component {
           return product
         }
       })
+      .filter((product) => {
+        if (searchTerm !== '') {
+          return (
+            (product.brand &&
+              product.brand.toLowerCase().includes(searchTerm.toLowerCase())) ||
+            (product.product_type &&
+              product.product_type.includes(searchTerm.toLowerCase()))
+          )
+        } else {
+          return product
+        }
+      })
 
     return filtered
   }
 
-  // filterLists = () => {
-  //   const { selectedBrand, selectedTag, products } = this.state
-
-  //   const filtered = products
-  //     .filter((product) => {
-  //       if (selectedBrand !== 'All Brands') {
-  //         return product.brand === selectedBrand
-  //       } else {
-  //         return product
-  //       }
-  //     })
-  //     .filter((product) => {
-  //       if (selectedTag !== 'All Tags') {
-  //         return product.tag_list.includes(selectedTag)
-  //       } else {
-  //         return product
-  //       }
-  //     })
-
-  //   return filtered
-  // }
-
   render() {
     const {
-      products,
       brands,
-      tags,
+      currentPage,
       images,
+      isLoading,
+      pageSize,
+      products,
       selectedBrand,
       selectedTag,
-      pageSize,
-      currentPage,
-      isLoading,
+      tags,
+      searchTerm,
     } = this.state
 
-    const filtered = this.filterLists(this.state.products)
+    const filtered = this.filterLists(
+      products,
+      selectedBrand,
+      selectedTag,
+      searchTerm
+    )
 
     const productsPagination = dataPagination(filtered, pageSize, currentPage)
 
-    return (
-      <React.Fragment>
-        {isLoading ? (
-          <Loader />
-        ) : (
-          <div className="main-wrapper">
-            <header className="header"></header>
-            <main className="main">
-              <Switch>
-                {/* <div className="App"> */}
-                {/* <Route path="/category/:productCategory" component={Category} /> */}
-                <Route
-                  path="/category/:productCategory"
-                  render={(props) => (
-                    <Category
-                      {...props}
-                      pageSize={pageSize}
-                      currentPage={currentPage}
-                      filterLists={this.filterLists}
-                      brands={brands}
-                      tags={tags}
-                      selectedBrand={selectedBrand}
-                      selectedTag={selectedTag}
-                      onBrandSelect={this.handleBrandSelect}
-                      onTagSelect={this.handleTagSelect}
-                    />
-                  )}
-                />
-                <Route
-                  path="/product-details/:productId"
-                  component={ProductDetails}
-                />
-                <Route
-                  exact
-                  path="/"
-                  render={() => (
-                    <Products
-                      productsData={productsPagination}
-                      filtered={filtered}
-                      pageSize={pageSize}
-                      currentPage={currentPage}
-                      brands={brands}
-                      tags={tags}
-                      selectedBrand={selectedBrand}
-                      selectedTag={selectedTag}
-                      onBrandSelect={this.handleBrandSelect}
-                      onTagSelect={this.handleTagSelect}
-                      onPageChange={this.handlePageChange}
-                      images={images}
-                    />
-                  )}
-                />
-                {/* <Route path="/product_details/:id" component={ProductDetails} /> */}
-                {/* <Route exact path="/" component={Products} /> */}
-                {/* <Products /> */}
-                {/* <ProductDetails /> */}
-                {/* </div> */}
-              </Switch>
-            </main>
-            <footer className="footer"></footer>
-          </div>
-        )}
-      </React.Fragment>
-    )
+    if (!isLoading) {
+      return (
+        <div className="main-wrapper">
+          <header className="header"></header>
+          <main className="main">
+            <Switch>
+              <Route
+                path="/category/:productCategory"
+                render={(props) => (
+                  <Category
+                    {...props}
+                    brands={brands}
+                    currentPage={currentPage}
+                    onBrandSelect={this.handleBrandSelect}
+                    onPageChange={this.handlePageChange}
+                    onTagSelect={this.handleTagSelect}
+                    pageSize={pageSize}
+                    allProducts={products}
+                    selectedBrand={selectedBrand}
+                    selectedTag={selectedTag}
+                    tags={tags}
+                    filterLists={this.filterLists}
+                    searchTerm={searchTerm}
+                    handleSearchTerm={this.handleSearchTerm}
+                  />
+                )}
+              />
+              <Route
+                path="/product-details/:productId"
+                component={ProductDetails}
+              />
+              <Route
+                render={() => (
+                  <Products
+                    exact
+                    path="/"
+                    productsData={productsPagination}
+                    filtered={filtered}
+                    pageSize={pageSize}
+                    currentPage={currentPage}
+                    brands={brands}
+                    tags={tags}
+                    selectedBrand={selectedBrand}
+                    selectedTag={selectedTag}
+                    onBrandSelect={this.handleBrandSelect}
+                    onTagSelect={this.handleTagSelect}
+                    onPageChange={this.handlePageChange}
+                    images={images}
+                    onCategorySelect={this.handleSelectedCategory}
+                    handleSearchTerm={this.handleSearchTerm}
+                    searchTerm={searchTerm}
+                  />
+                )}
+              />
+            </Switch>
+          </main>
+          <footer className="footer"></footer>
+        </div>
+      )
+    }
+
+    return <Loader />
   }
 }
 
