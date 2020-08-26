@@ -1,0 +1,10 @@
+#search {
+  display: initial;
+  width: 250px;
+  height: 25px;
+  align-self: flex-end;
+  margin-right: 12px;
+  font-family: Brandon Text;
+  font-weight: 500;
+  font-size: 10px;
+}
