@@ -1,13 +1,12 @@
 .list_grp_container {
   width: 20%;
-  margin-top: 2em;
+  margin-top: 1em;
   margin-left: 0.75em;
   margin-bottom: 0;
   position: absolute;
   display: grid;
   grid-template-columns: repeat(1, 1fr);
-  border: 1px solid red;
-  margin-right: 1em;
+  margin-right: 2em;
 }
 
 input {
@@ -28,7 +27,8 @@ label {
   transition: ease 0.5s;
   font-size: 8px;
   white-space: nowrap;
-  margin-right: 50px;
+  margin-right: 35px;
+  margin-left: 2px;
 }
 
 label::after {
@@ -79,17 +79,19 @@ input:checked + label + .content {
 
 @media screen and (min-width: 450px) {
   .list_grp_container {
-    /* width: 10%; */
+    width: 12%;
     margin-left: 1em;
+    margin-top: 2px;
   }
 
   label {
-    padding: 6px 50px;
+    /* padding: 6px 50px; */
     font-size: 10px;
+    margin-top: 1px;
   }
 
   label::after {
-    top: 5px;
+    top: 2px;
     font-size: 12px;
   }
 
