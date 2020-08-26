@@ -23,6 +23,12 @@
   margin-left: -12px;
 }
 
+@media screen and (min-width: 450px) {
+  .pagination {
+    margin-left: 325px;
+  }
+}
+
 /* #page-pagination {
   text-align: center;
   margin-left: -15px;

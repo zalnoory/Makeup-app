@@ -11,7 +11,7 @@
 .listgrp-nav-container {
   /* display: flex;
   flex-direction: row; */
-  border: 2px solid red;
+
   padding-right: 1em;
 }
 
@@ -35,17 +35,10 @@
   border: 1px solid red; */
 }
 
-.pagination-container {
-  border: 1px solid black;
-  margin-left: -120px;
-  /* display: flex;
-  flex-direction: row; */
-}
-
-.paragraph-container {
+/* .paragraph-container {
   border: 1px solid black;
   margin-bottom: 2px;
-}
+} */
 
 .styled-p {
   text-align: center;
@@ -76,35 +69,11 @@
 } */
 
 @media (min-width: 450px) {
-  .productlist-container {
-    /* grid-template-columns: (3, 1fr); */
-  }
   .styled-p {
-    margin-top: 100px;
     margin-left: 17em;
   }
-}
 
-.ahmed-grid {
-  /* Grid Fallback */
-  display: flex;
-  flex-wrap: wrap;
-  max-width: 800px;
-  /* Supports Grid */
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  grid-auto-rows: minmax(100px, auto);
-  grid-gap: 1.5em;
-}
-
-.ahmed-grid-item {
-  /* Demo-Specific Styles */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  /* Flex Fallback */
-  margin-left: 5px;
-  margin-right: 5px;
-  flex: 1 1 125px;
+  .products-items-main {
+    float: right;
+  }
 }
