@@ -17,7 +17,7 @@ class Product extends React.Component {
       return <p className="p-result"> Sorry, no item is found.</p>
     }
     return (
-      <div className="ahmed-grid">
+      <div className="productDisplay-grid">
         {productsData.map((product) => (
           <Productdisplay key={product.id} product={product} />
         ))}
@@ -26,19 +26,3 @@ class Product extends React.Component {
   }
 }
 export default Product
-
-// class Product extends React.Component {
-//   render() {
-//     const { productsData } = this.props
-//     if (productsData.length === 0) {
-//       return <p className="p-result"> Sorry, no item is found.</p>
-//     }
-//     return (
-//       <div className="productlist-container">
-//         {productsData.map((product) => (
-//           <Productdisplay key={product.id} product={product} />
-//         ))}
-//       </div>
-//     )
-//   }
-// }

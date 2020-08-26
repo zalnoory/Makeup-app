@@ -38,7 +38,7 @@ class Modal extends React.Component {
           </div>
           <small>
             <Link to={`/product-details/${product.id}`} id="modal-link">
-              See full details.
+              See Full Details.
             </Link>
           </small>
         </div>

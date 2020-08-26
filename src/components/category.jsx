@@ -1,96 +1,164 @@
 import React from 'react'
-import axios from 'axios'
 import Product from './common/product'
-import Loader from './common/loader'
 import ListGroup from './common/listGroup'
 import dataPagination from '../utils/data-pagination'
+import Pagination from './common/page-pagination'
 import './../style/category.css'
-class Category extends React.Component {
-  constructor(props) {
-    super(props)
+import SearchBox from './common/searchBox'
 
-    this.state = {
-      isLoading: true,
-      categoryItems: [],
-    }
-  }
+const Category = (props) => {
+  const {
+    brands,
+    currentPage,
+    onBrandSelect,
+    onTagSelect,
+    pageSize,
+    allProducts,
+    match,
+    selectedBrand,
+    selectedTag,
+    tags,
+    filterLists,
+    onPageChange,
+    searchTerm,
+    handleSearchTerm,
+  } = props
+  console.log('searchTerm', searchTerm)
+  const [categoryItems, setCategoryItems] = React.useState([])
 
-  async componentDidMount() {
-    const { productCategory } = this.props.match.params
-    console.log(productCategory)
-    await axios(
-      `https://zahrah-products.s3.us-east-2.amazonaws.com/products.json`
-    ).then((res) => {
-      const categoryItems = res.data.products.filter((product) => {
+  React.useEffect(() => {
+    console.log(allProducts)
+    const { productCategory } = (match.params && match.params) || ''
+    if (allProducts.length > 0 && categoryItems.length === 0) {
+      const catItems = allProducts.filter((product) => {
         if (product.product_type == productCategory) {
           return product
         }
       })
+      // setCategoryItems((categoryItems) => [...categoryItems, catItems])
+      setCategoryItems(catItems)
+    }
+  }, [allProducts])
 
-      this.setState({ categoryItems, isLoading: false })
-      // console.log('HI', this.state.categoryItems)
-    })
-  }
+  const products = categoryItems
+  console.log('renamed', products)
+  const filteredCategory = filterLists(
+    products,
+    selectedBrand,
+    selectedTag,
+    searchTerm
+  )
+  console.log('WOW filteredCategory', filteredCategory)
 
-  render() {
-    const {
-      pageSize,
-      currentPage,
-      filterLists,
-      brands,
-      tags,
-      selectedBrand,
-      selectedTag,
-      onBrandSelect,
-      onTagSelect,
-    } = this.props
-    // console.log('filterLists', filterLists)
-    const { categoryItems, isLoading } = this.state
-    console.log('HI Hello', this.state.categoryItems.length)
-    const filteredCategory = filterLists(categoryItems)
-    console.log('filteredCategory', filteredCategory)
+  const productsPagination = dataPagination(
+    filteredCategory,
+    pageSize,
+    currentPage
+  )
 
-    const productsPagination = dataPagination(
-      filteredCategory,
-      pageSize,
-      currentPage
-    )
-    console.log('productsPagination', productsPagination)
+  console.log('productsPagination', productsPagination)
 
-    return (
-      <React.Fragment>
-        {isLoading ? (
-          <Loader />
-        ) : (
-          <div className="catProducts-container">
-            <p className="styled-p4"> {filteredCategory.length} items</p>
-            <div className="listgrp2-container">
-              <div className="listGroup2-container">
-                <ListGroup
-                  brands={brands}
-                  tags={tags}
-                  selectedBrand={selectedBrand}
-                  selectedTag={selectedTag}
-                  onBrandSelect={onBrandSelect}
-                  onTagSelect={onTagSelect}
-                />
-              </div>
+  return (
+    <div className="catProducts-container">
+      <SearchBox searchTerm={searchTerm} handleSearchTerm={handleSearchTerm} />
+      <p className="styled-p4"> {filteredCategory.length} items </p>
+      {/* <div className="listgrp2-container"> */}
+      <div className="listGroup2-container">
+        <ListGroup
+          brands={brands}
+          tags={tags}
+          selectedBrand={selectedBrand}
+          selectedTag={selectedTag}
+          onBrandSelect={onBrandSelect}
+          onTagSelect={onTagSelect}
+        />
+      </div>
 
-              <div className="products-pagin2">
-                <Product productsData={productsPagination} />
-              </div>
+      <div className="products-pagin2">
+        <Product productsData={productsPagination} />
 
-              {/* <div>
-            {categoryItems.map((item) => (
-              <span>{item}</span>
-            ))}
-          </div> */}
-            </div>
-          </div>
-        )}
-      </React.Fragment>
-    )
-  }
+        <Pagination
+          productsCount={filteredCategory.length}
+          pageSize={pageSize}
+          currentPage={currentPage}
+          onPageChange={onPageChange}
+        />
+      </div>
+      {/* </div> */}
+    </div>
+  )
 }
 
 export default Category
+
+// class Category extends React.Component {
+//   constructor(props) {
+//     super(props)
+//     this.state = {
+//       categoryItems: [],
+//     }
+//   }
+//   componentDidMount = () => {
+//     const { productCategory } = this.props.match.params
+//     const { products } = this.props
+
+//     const catItems = products.filter((product) => {
+//       if (product.product_type == productCategory) {
+//         return product
+//       }
+//     })
+//     console.log('Please print  catItems', catItems)
+//     this.setState(
+//       { categoryItems: catItems }
+//       // console.log('categoryItems', this.state.categoryItems)
+//     )
+//     // console.log('categoryItems', this.state.categoryItems)
+//   }
+
+//   render() {
+//     const {
+//       currentPage,
+//       pageSize,
+//       selectedCategory,
+//       onPageChange,
+//       brands,
+//       tags,
+//       selectedBrand,
+//       selectedTag,
+//       onBrandSelect,
+//       onTagSelect,
+//     } = this.props
+//     const { categoryItems } = this.state
+
+//     const productsPagination = dataPagination(
+//       categoryItems,
+//       pageSize,
+//       currentPage
+//     )
+//     // console.log('productsPagination', productsPagination)
+
+//     return (
+//       <div className="catProducts-container">
+//         <p className="styled-p4"> {categoryItems.length} items</p>
+//         <div className="listgrp2-container">
+//           <div className="listGroup2-container">
+//             <ListGroup
+//               brands={brands}
+//               tags={tags}
+//               selectedBrand={selectedBrand}
+//               selectedTag={selectedTag}
+//               onBrandSelect={onBrandSelect}
+//               onTagSelect={onTagSelect}
+//             />
+//           </div>
+
+//           <div className="products-pagin2">
+//             <Product productsData={productsPagination} />
+//           </div>
+//         </div>
+//       </div>
+//     )
+//   }
+// }
+
+// export default Category
