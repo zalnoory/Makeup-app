@@ -9,6 +9,7 @@ import Loader from './common/loader'
 import Navbar from './navbar'
 import dataPagination from '../utils/data-pagination'
 import './../style/products.css'
+import SearchBox from './common/searchBox'
 
 class Products extends React.Component {
   // state = {
@@ -109,10 +110,17 @@ class Products extends React.Component {
       images,
       pageSize,
       currentPage,
+      onCategorySelect,
+      handleSearchTerm,
+      searchTerm,
     } = this.props
 
     return (
       <section className="products-container">
+        <SearchBox
+          searchTerm={searchTerm}
+          handleSearchTerm={handleSearchTerm}
+        />
         <div className="listgrp-nav-container">
           <ListGroup
             brands={brands}
@@ -122,10 +130,9 @@ class Products extends React.Component {
             onBrandSelect={onBrandSelect}
             onTagSelect={onTagSelect}
           />
-          <Navbar images={images} />
+          <Navbar images={images} onCategorySelect={onCategorySelect} />
         </div>
-        <div className="paragraph-container">
-          {/* <div className="productlist-container"> */}
+        <div className="products-items-main">
           <p className="styled-p"> {filtered.length} items</p>
 
           <Product
@@ -135,18 +142,14 @@ class Products extends React.Component {
             currentPage={currentPage}
             onPageChange={onPageChange}
           />
-          {/* <h1>Hellllllllooooo</h1> */}
-          {/* <div className="pagination-container"> */}
+
           <Pagination
             productsCount={filtered.length}
             pageSize={pageSize}
             currentPage={currentPage}
             onPageChange={onPageChange}
           />
-          {/* </div> */}
         </div>
-
-        {/* <Product productsData={productsData}  /> */}
       </section>
     )
   }

@@ -3,12 +3,20 @@ import { Link } from 'react-router-dom'
 import './../style/navbar.css'
 
 const Navbar = (props) => {
-  const { images } = props
+  const { images, onCategorySelect } = props
 
   return (
     <div className="top-nav-container">
       {images.map((image) => (
-        <div key={image.id} className=" div-item">
+        <div
+          key={image.id}
+          className=" div-item"
+          onClick={(e) => {
+            e.stopPropagation()
+            e.preventDefault()
+            onCategorySelect(image.title)
+          }}
+        >
           <Link to={`/category/${image.title}`} className="top-nav-link">
             <img
               className="nav-images"

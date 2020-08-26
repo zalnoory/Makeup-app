@@ -9,7 +9,9 @@ class ProductDetails extends React.Component {
     super(props)
 
     this.state = {
-      product: null,
+      product: {
+        product_colors: [],
+      },
     }
   }
 
@@ -35,7 +37,7 @@ class ProductDetails extends React.Component {
   }
 
   render() {
-    if (this.state.product === null) {
+    if (this.state.product === {}) {
       return <Loader />
       // return <div>waiting...</div>
     }

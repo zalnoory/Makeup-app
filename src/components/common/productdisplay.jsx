@@ -21,7 +21,7 @@ class Productdisplay extends React.Component {
     const { product } = this.props
     return (
       <React.Fragment>
-        <div className="ahmed-grid-item">
+        <div className="productDisplay-item">
           <div className="image-container">
             <Link
               to={`/product-details/${product.id}`}
@@ -40,10 +40,9 @@ class Productdisplay extends React.Component {
           </div>
           <div id="container-m">
             <Link to={`/product-details/${product.id}`} id="container-m-link">
-              <div className="container m-2">
+              <div className="container-m2">
                 {product.product_colors.slice(0, 5).map((color) => (
                   <ProductColors
-                    className="page-item"
                     key={color.hex_value}
                     color={color.hex_value}
                   />
@@ -60,6 +59,7 @@ class Productdisplay extends React.Component {
               </div>
             </Link>
           </div>
+          {/* Modal Component */}
           <Modal
             showModal={showModal}
             onModalClick={this.toggleModal}
@@ -72,48 +72,3 @@ class Productdisplay extends React.Component {
 }
 
 export default Productdisplay
-
-// return (
-//   <div className="indivisual-container">
-//     <div className="image-container">
-//       <Link to={`/product-details/${product.id}`} className="details-link">
-//         <img
-//           className="image"
-//           src={product.api_featured_image}
-//           alt={product.name}
-//         />
-//       </Link>
-//       <div className="overlay" onClick={this.toggleModal}>
-//         {' '}
-//         Quick View
-//       </div>
-//     </div>
-//     <div id="container-m">
-//       <Link to={`/product-details/${product.id}`} id="container-m-link">
-//         <div className="container m-2">
-//           {product.product_colors.slice(0, 5).map((color) => (
-//             <ProductColors
-//               className="page-item"
-//               key={color.hex_value}
-//               color={color.hex_value}
-//             />
-//           ))}
-//           <p className="p-3">
-//             {(product.brand || '')
-//               .toLowerCase()
-//               .split(' ')
-//               .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
-//               .join(' ')}{' '}
-//             {product.product_type.charAt(0).toUpperCase() +
-//               product.product_type.slice(1)}
-//           </p>
-//         </div>
-//       </Link>
-//     </div>
-//     <Modal
-//       showModal={showModal}
-//       onModalClick={this.toggleModal}
-//       product={product}
-//     />
-//   </div>
-// )
