@@ -1,6 +1,5 @@
 #productDetails-cont {
   font-family: Brandon Text;
-  font-size: 10px;
   display: flex;
   flex-direction: column;
 }
@@ -16,8 +15,8 @@
 
 .prod-image {
   width: 100%;
-  max-width: 250px;
-  max-height: 250px;
+  max-width: 350px;
+  max-height: 350px;
   margin-right: 150px;
 }
 
@@ -31,7 +30,6 @@
 } */
 
 .product-detail {
-  font-size: 12px;
   font-weight: bold;
   display: inline-block;
   *display: inline;
@@ -41,7 +39,7 @@
 }
 
 .name {
-  font-size: 10px;
+  font-size: 18px;
   margin-top: -10px;
   margin-bottom: 2px;
   margin-left: 0px;
@@ -66,27 +64,25 @@
 
 .description-a {
   margin-top: -40px;
+  font-size: 14px;
 }
 
 .description {
   margin-top: -15px;
+  font-size: 16px;
 }
 
 .price {
-  font-size: 12px;
+  font-size: 16px;
 }
 
 @media screen and (min-width: 450px) {
-  /* .product-detail {
-    font-size: 10px;
-  } */
-
-  #page1-item {
-    height: 14px;
-    width: 14px;
+  .product-detail {
+    font-size: 16px;
   }
 
-  /* .container-c {
-    font-size: 10px;
-  } */
+  .prod-image {
+    max-width: 450px;
+    max-height: 450px;
+  }
 }
