@@ -12,90 +12,6 @@ import './../style/products.css'
 import SearchBox from './common/searchBox'
 
 class Products extends React.Component {
-  // state = {
-  //   isLoading: true,
-  //   products: [],
-  //   brands: [],
-  //   tags: [],
-  //   images: [],
-  //   selectedBrand: 'All Brands',
-  //   selectedTag: 'All Tags',
-  //   pageSize: 42,
-  //   currentPage: 1,
-  // }
-
-  // /*connect to backend*/
-  // async componentDidMount() {
-  //   const { data } = await axios.get(
-  //     'https://zahrah-products.s3.us-east-2.amazonaws.com/products.json'
-  //   )
-
-  //   /*adding *all Beauty Brands' to brands[]*/
-  //   const brands = ['All Brands', ...getBrands()]
-
-  //   this.setState({
-  //     ...this.state,
-  //     products: data.products,
-  //     brands,
-  //     tags: getProductTag(),
-  //     images: imageLoader(),
-  //     isLoading: false,
-  //   })
-  // }
-
-  // handleBrandSelect = (brand) => {
-  //   const state = this.state
-  //   this.setState({ ...state, selectedBrand: brand, currentPage: 1 })
-  // }
-
-  // handleTagSelect = (tag) => {
-  //   const state = this.state
-  //   this.setState({ ...state, selectedTag: tag, currentPage: 1 })
-  // }
-
-  // handlePageChange = (page) => {
-  //   const state = this.state
-  //   this.setState({ ...state, currentPage: page })
-  // }
-
-  // filterLists = () => {
-  //   const { selectedBrand, selectedTag, products } = this.state
-
-  //   const filtered = products
-  //     .filter((product) => {
-  //       if (selectedBrand !== 'All Brands') {
-  //         return product.brand === selectedBrand
-  //       } else {
-  //         return product
-  //       }
-  //     })
-  //     .filter((product) => {
-  //       if (selectedTag !== 'All Tags') {
-  //         return product.tag_list.includes(selectedTag)
-  //       } else {
-  //         return product
-  //       }
-  //     })
-
-  //   return filtered
-  // }
-
-  // render() {
-  //   const {
-  //     // products,
-  //     brands,
-  //     tags,
-  //     images,
-  //     selectedBrand,
-  //     selectedTag,
-  //     pageSize,
-  //     currentPage,
-  //     isLoading,
-  //   } = this.state
-
-  //   const filtered = this.filterLists()
-
-  //   const productsPagination = dataPagination(filtered, pageSize, currentPage)
   render() {
     const {
       productsData,
@@ -117,10 +33,12 @@ class Products extends React.Component {
 
     return (
       <section className="products-container">
-        <SearchBox
-          searchTerm={searchTerm}
-          handleSearchTerm={handleSearchTerm}
-        />
+        <div className="search-container">
+          <SearchBox
+            searchTerm={searchTerm}
+            handleSearchTerm={handleSearchTerm}
+          />
+        </div>
         <div className="listgrp-nav-container">
           <ListGroup
             brands={brands}
@@ -133,7 +51,7 @@ class Products extends React.Component {
           <Navbar images={images} onCategorySelect={onCategorySelect} />
         </div>
         <div className="products-items-main">
-          <p className="styled-p"> {filtered.length} items</p>
+          <p className="styled-p">{filtered.length} items</p>
 
           <Product
             productsData={productsData}
@@ -156,42 +74,3 @@ class Products extends React.Component {
 }
 
 export default Products
-
-// return (
-//   <div className="products-container">
-//     <div className="listgrp-nav-container">
-//       <ListGroup
-//         brands={brands}
-//         tags={tags}
-//         selectedBrand={selectedBrand}
-//         selectedTag={selectedTag}
-//         onBrandSelect={onBrandSelect}
-//         onTagSelect={onTagSelect}
-//       />
-//       <Navbar images={images} />
-//     </div>
-//     <div className="paragraph-container">
-//       {/* <div className="productlist-container"> */}
-//       <p className="styled-p"> {filtered.length} items</p>
-
-//       <Product
-//         productsData={productsData}
-//         productsCount={filtered.length}
-//         pageSize={pageSize}
-//         currentPage={currentPage}
-//         onPageChange={onPageChange}
-//       />
-//       {/* <h1>Hellllllllooooo</h1> */}
-//       <div className="pagination-container">
-//         <Pagination
-//           productsCount={filtered.length}
-//           pageSize={pageSize}
-//           currentPage={currentPage}
-//           onPageChange={onPageChange}
-//         />
-//       </div>
-//     </div>
-
-//     {/* <Product productsData={productsData}  /> */}
-//   </div>
-// )

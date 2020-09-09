@@ -6,6 +6,25 @@ import Pagination from './common/page-pagination'
 import './../style/category.css'
 import SearchBox from './common/searchBox'
 
+const ProductDisplayGrid = {
+  display: 'flex',
+  flexWrap: 'wrap',
+  // maxWidth: '1140px',
+  // flex: '1',
+  display: 'grid',
+  gridTemplateColumns: 'repeat(auto-fill, minmax(auto,300px))',
+  justifyContent: 'start',
+  marginRight: '-150px',
+  marginLeft: '280px',
+}
+
+const ProductDisplayItem = {
+  // maxWidth: '100%',
+  // marginLeft: '150px',
+  // marginRight: '0px',
+  // maxWidth: '70%',
+}
+
 const Category = (props) => {
   const {
     brands,
@@ -23,11 +42,9 @@ const Category = (props) => {
     searchTerm,
     handleSearchTerm,
   } = props
-  console.log('searchTerm', searchTerm)
   const [categoryItems, setCategoryItems] = React.useState([])
 
   React.useEffect(() => {
-    console.log(allProducts)
     const { productCategory } = (match.params && match.params) || ''
     if (allProducts.length > 0 && categoryItems.length === 0) {
       const catItems = allProducts.filter((product) => {
@@ -35,35 +52,34 @@ const Category = (props) => {
           return product
         }
       })
-      // setCategoryItems((categoryItems) => [...categoryItems, catItems])
       setCategoryItems(catItems)
     }
   }, [allProducts])
 
+  /*assign categoryItem to a new variable (products)*/
   const products = categoryItems
-  console.log('renamed', products)
   const filteredCategory = filterLists(
     products,
     selectedBrand,
     selectedTag,
     searchTerm
   )
-  console.log('WOW filteredCategory', filteredCategory)
 
   const productsPagination = dataPagination(
     filteredCategory,
     pageSize,
     currentPage
   )
-
-  console.log('productsPagination', productsPagination)
-
   return (
-    <div className="catProducts-container">
-      <SearchBox searchTerm={searchTerm} handleSearchTerm={handleSearchTerm} />
-      <p className="styled-p4"> {filteredCategory.length} items </p>
-      {/* <div className="listgrp2-container"> */}
-      <div className="listGroup2-container">
+    <section className="catProducts-container ">
+      <div className="search-container">
+        <SearchBox
+          searchTerm={searchTerm}
+          handleSearchTerm={handleSearchTerm}
+        />
+      </div>
+
+      <div className="listgrp-prod-container">
         <ListGroup
           brands={brands}
           tags={tags}
@@ -72,11 +88,15 @@ const Category = (props) => {
           onBrandSelect={onBrandSelect}
           onTagSelect={onTagSelect}
         />
+        <p className="styled-p4"> {filteredCategory.length} items </p>
+        <Product
+          productsData={productsPagination}
+          productDisplayGrid={ProductDisplayGrid}
+          productDisplayItem={ProductDisplayItem}
+        />
       </div>
 
-      <div className="products-pagin2">
-        <Product productsData={productsPagination} />
-
+      <div className="products-items-main">
         <Pagination
           productsCount={filteredCategory.length}
           pageSize={pageSize}
@@ -84,81 +104,44 @@ const Category = (props) => {
           onPageChange={onPageChange}
         />
       </div>
-      {/* </div> */}
-    </div>
+    </section>
   )
 }
 
 export default Category
 
-// class Category extends React.Component {
-//   constructor(props) {
-//     super(props)
-//     this.state = {
-//       categoryItems: [],
-//     }
-//   }
-//   componentDidMount = () => {
-//     const { productCategory } = this.props.match.params
-//     const { products } = this.props
+{
+  /* return (
+   <div className="catProducts-container">
+     <div className="search-container">
+       <SearchBox
+         searchTerm={searchTerm}
+         handleSearchTerm={handleSearchTerm}
+       />
+     </div>
 
-//     const catItems = products.filter((product) => {
-//       if (product.product_type == productCategory) {
-//         return product
-//       }
-//     })
-//     console.log('Please print  catItems', catItems)
-//     this.setState(
-//       { categoryItems: catItems }
-//       // console.log('categoryItems', this.state.categoryItems)
-//     )
-//     // console.log('categoryItems', this.state.categoryItems)
-//   }
+     <div className="listgrp-prod-container">
+       <p />
+       <ListGroup
+         brands={brands}
+         tags={tags}
+         selectedBrand={selectedBrand}
+         selectedTag={selectedTag}
+         onBrandSelect={onBrandSelect}
+         onTagSelect={onTagSelect}
+       />
+       <p className="styled-p4"> {filteredCategory.length} items </p>
+       <div className="test">
+         <Product productsData={productsPagination} />
 
-//   render() {
-//     const {
-//       currentPage,
-//       pageSize,
-//       selectedCategory,
-//       onPageChange,
-//       brands,
-//       tags,
-//       selectedBrand,
-//       selectedTag,
-//       onBrandSelect,
-//       onTagSelect,
-//     } = this.props
-//     const { categoryItems } = this.state
-
-//     const productsPagination = dataPagination(
-//       categoryItems,
-//       pageSize,
-//       currentPage
-//     )
-//     // console.log('productsPagination', productsPagination)
-
-//     return (
-//       <div className="catProducts-container">
-//         <p className="styled-p4"> {categoryItems.length} items</p>
-//         <div className="listgrp2-container">
-//           <div className="listGroup2-container">
-//             <ListGroup
-//               brands={brands}
-//               tags={tags}
-//               selectedBrand={selectedBrand}
-//               selectedTag={selectedTag}
-//               onBrandSelect={onBrandSelect}
-//               onTagSelect={onTagSelect}
-//             />
-//           </div>
-
-//           <div className="products-pagin2">
-//             <Product productsData={productsPagination} />
-//           </div>
-//         </div>
-//       </div>
-//     )
-//   }
-// }
-
-// export default Category
+         <Pagination
+           productsCount={filteredCategory.length}
+           pageSize={pageSize}
+           currentPage={currentPage}
+           onPageChange={onPageChange}
+         />
+       </div >
+     </div>
+   </div>
+ ) */
+}

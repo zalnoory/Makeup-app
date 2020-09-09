@@ -6,8 +6,10 @@ const SearchBox = (props) => {
     <input
       style={{
         display: 'initial',
+        padding: '1em',
       }}
       type="text"
+      spellCheck="false"
       id="search"
       placeholder="Search... "
       value={searchTerm}

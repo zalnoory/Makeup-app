@@ -39,14 +39,11 @@ class ProductDetails extends React.Component {
   render() {
     if (this.state.product === {}) {
       return <Loader />
-      // return <div>waiting...</div>
     }
 
     const { product } = this.state
     return (
       <div className="container" id="productDetails-cont">
-        {/* <div className="main-container"> */}
-        {/* <div className="row"> */}
         <div className="page-container">
           <div className="container-image">
             <img
@@ -56,7 +53,6 @@ class ProductDetails extends React.Component {
             />
           </div>
           <div className="container" id="container-b">
-            {/* <div className="details-cont"> */}
             <div className="product-detail">
               {(product.brand || '')
                 .toLowerCase()
@@ -78,8 +74,7 @@ class ProductDetails extends React.Component {
             <p className="price"> ${product.price}</p>
           </div>
         </div>
-        {/* </div> */}
-        {/* <div className="row"> */}
+
         <div className="container-c">
           <p className="description-a">Details:</p>
 
@@ -88,7 +83,6 @@ class ProductDetails extends React.Component {
             dangerouslySetInnerHTML={{ __html: product.description }}
           ></p>
         </div>
-        {/* </div> */}
       </div>
     )
   }
