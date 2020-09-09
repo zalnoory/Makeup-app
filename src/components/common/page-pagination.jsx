@@ -31,27 +31,3 @@ const Pagination = (props) => {
 }
 
 export default Pagination
-
-// return (
-//   <nav aria-label="Page navigation example">
-//     <ul
-//       style={{ display: 'inline-block' }}
-//       className="pagination pagination-sm"
-//     >
-
-//       {pages.map((page) => (
-//         <li
-//           style={{ display: 'inline-block' }}
-//           key={page}
-//           className={page === currentPage ? 'page-item active' : 'page-item'}
-//         >
-//           <a className="page-link" onClick={() => onPageChange(page)}>
-//             {' '}
-//             {page}
-//           </a>
-//         </li>
-//       ))}
-
-//     </ul>
-//   </nav>
-// )

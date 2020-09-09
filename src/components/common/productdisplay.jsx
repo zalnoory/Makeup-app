@@ -2,7 +2,6 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { ProductColors } from './product-colors'
 import Modal from './modal'
-// import '../../style/productdisplay.css'
 
 class Productdisplay extends React.Component {
   constructor(props) {
@@ -17,16 +16,14 @@ class Productdisplay extends React.Component {
   }
 
   render() {
+    const { productDisplayItem } = this.props
     const { showModal } = this.state
     const { product } = this.props
     return (
       <React.Fragment>
-        <div className="productDisplay-item">
+        <div className="productDisplay-item" style={productDisplayItem}>
           <div className="image-container">
-            <Link
-              to={`/product-details/${product.id}`}
-              className="details-link"
-            >
+            <Link to={`/product-details/${product.id}`}>
               <img
                 className="image"
                 src={product.api_featured_image}
@@ -38,9 +35,9 @@ class Productdisplay extends React.Component {
               Quick View
             </div>
           </div>
-          <div id="container-m">
+          <div className="color-brand-cont">
             <Link to={`/product-details/${product.id}`} id="container-m-link">
-              <div className="container-m2">
+              <div>
                 {product.product_colors.slice(0, 5).map((color) => (
                   <ProductColors
                     key={color.hex_value}

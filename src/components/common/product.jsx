@@ -5,7 +5,12 @@ import '../../style/product.css'
 import Pagination from './page-pagination'
 
 class Product extends React.Component {
+  constructor(props) {
+    super(props)
+  }
+
   render() {
+    const { productDisplayGrid, productDisplayItem } = this.props
     const {
       productsData,
       productsCount,
@@ -17,9 +22,13 @@ class Product extends React.Component {
       return <p className="p-result"> Sorry, no item is found.</p>
     }
     return (
-      <div className="productDisplay-grid">
+      <div className="productDisplay-grid" style={productDisplayGrid}>
         {productsData.map((product) => (
-          <Productdisplay key={product.id} product={product} />
+          <Productdisplay
+            key={product.id}
+            product={product}
+            productDisplayItem={productDisplayItem}
+          />
         ))}
       </div>
     )
