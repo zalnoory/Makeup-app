@@ -34,7 +34,7 @@
 
 /* Make the image to responsive */
 .image {
-  display: block;
+  display: inline-flex;
   max-width: 100%;
   width: 100%;
   max-height: 300px;
@@ -89,17 +89,14 @@
     /* Grid Fallback */
     display: flex;
     flex-wrap: wrap;
-    max-width: 1140px;
+    /* max-width: 1140px;/ */
     /* flex: 1; */
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(auto, 350px));
     grid-gap: 2px;
     row-gap: 50px;
     justify-content: start;
-    margin-top: 32px;
-    margin-right: -150px;
-    margin-left: 280px;
-
+    margin: 0;
     border: 1px solid red;
 
     /* Supports Grid */

@@ -39,26 +39,12 @@
 }
 
 .styled-p4 {
-  text-align: center;
+  text-align: left;
   font-size: 18px;
   font-weight: 400;
+  padding-left: 2em;
   font-family: Brandon Text;
-
-  margin-top: 25px;
-
-  margin-left: 10px;
-  margin-bottom: 15px;
-}
-
-@media screen and (min-width: 767px) {
-  .styled-p4 {
-    margin-left: -29em;
-  }
-
-  /* .listgrp-prod-container {
-    display: flex;
-    flex-direction: row;
-  } */
+  padding-top: 16px;
 }
 
 /* .productlist-container {
