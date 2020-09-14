@@ -9,15 +9,15 @@ const Navbar = (props) => {
     <div className="top-nav-container">
       {images.map((image) => (
         <div
-          key={image.id}
           className=" div-item"
+          key={image.id}
           onClick={(e) => {
             e.stopPropagation()
             e.preventDefault()
             onCategorySelect(image.title)
           }}
         >
-          <Link to={`/category/${image.title}`} className="top-nav-link">
+          <Link to={`/category/${image.title}`}>
             <img
               className="nav-images"
               src={require(`../images/${image.src}`)}
@@ -37,23 +37,3 @@ const Navbar = (props) => {
 }
 
 export default Navbar
-
-// return (
-//   <div className="top-nav-container">
-
-//     {images.map((image) => (
-//       <div key={image.id} className=" div-item">
-
-//         <a className="top-nav-link" href="#">
-//           <img
-//             className="nav-images"
-//             src={require(`../images/${image.src}`)}
-//             alt={image.description}
-//           />
-//         </a>
-//         <p>{image.title}</p>
-//       </div>
-//     ))}
-
-//   </div>
-// )

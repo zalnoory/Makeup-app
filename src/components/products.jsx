@@ -1,16 +1,32 @@
-import React from "react";
-import Pagination from "./common/page-pagination";
-import Product from "./common/product";
-import Navbar from "./navbar";
-import "./../style/products.css";
-import styled from "styled-components";
+import React from 'react'
+import Pagination from './common/page-pagination'
+import Product from './common/product'
+import Navbar from './navbar'
+import './../style/products.css'
+import styled from 'styled-components'
+
+const ProductsPageWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 0em 2em 2em 2em;
+`
 
 const ProductsWrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
   padding: 4em;
-`;
+  justify-content: center;
+`
+const StyledP = styled.p`
+  text-align: center;
+  font-size: 18px;
+  font-weight: 400;
+  font-family: Brandon Text;
+`
 
 class Products extends React.Component {
   render() {
@@ -22,15 +38,16 @@ class Products extends React.Component {
       pageSize,
       currentPage,
       onCategorySelect,
-    } = this.props;
+    } = this.props
 
     return (
-      <section className="products-container">
-        <div className="listgrp-nav-container">
-          <Navbar images={images} onCategorySelect={onCategorySelect} />
-        </div>
+      <ProductsPageWrapper>
+        {/* <section className="products-container"> */}
+        {/* <div className="listgrp-nav-container"> */}
+        <Navbar images={images} onCategorySelect={onCategorySelect} />
+        {/* </div> */}
         <ProductsWrapper>
-          <p className="styled-p">{filtered.length} items</p>
+          <StyledP>{filtered.length} items</StyledP>
           <Product
             productsData={productsData}
             productsCount={filtered.length}
@@ -45,9 +62,10 @@ class Products extends React.Component {
             onPageChange={onPageChange}
           />
         </ProductsWrapper>
-      </section>
-    );
+        {/* </section> */}
+      </ProductsPageWrapper>
+    )
   }
 }
 
-export default Products;
+export default Products
