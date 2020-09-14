@@ -1,62 +1,19 @@
-.products-container {
-  /* display: grid; */
-  /* grid-template-columns: repeat(1, 1fr); */
-  /* grid-gap: 10px; */
-  /* overflow-x: hidden; */
+/* .products-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 100%;
-}
-
-.listgrp-nav-container {
-  /* display: flex;
-  flex-direction: row; */
-  padding-right: 1em;
-}
-
-.styled-p {
-  text-align: center;
-  font-size: 12px;
-  font-weight: 400;
-  font-family: Brandon Text;
-  /* margin-top: 35px; */
-  margin-top: 25px;
-  margin-right: 5em;
-}
-
-#p2 {
-  margin-bottom: 50px;
-}
-
-/* @media (min-width: 450px) {
-  .styled-p {
-    text-align: center;
-    margin-top: 20px;
-    margin-right: 10em;
-    font-size: 16px;
-  }
-
-  .products-items-main {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    padding: 1em;
-    width: 100%;
-  }
 } */
 
-@media (min-width: 768px) {
-  /* .products-container {
-    flex-direction: column;
-  } */
-  /* .listgrp-nav-container {
-    flex: 0 1 100%;
-  } */
+/* .listgrp-nav-container {
+  padding-right: 1em;
+display: flex;
+} */
 
-  /* .products-items-main {
-    flex: 0 1 100%;
-  } */
-}
+/* .styled-p {
+  text-align: center;
+  font-size: 18px;
+  font-weight: 400;
+  font-family: Brandon Text;
+} */

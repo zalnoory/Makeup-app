@@ -9,10 +9,46 @@ import Loader from './components/common/loader'
 import { getBrands, getProductTag } from './services/productsService'
 import dataPagination from './utils/data-pagination'
 import '././style/products.css'
+import SearchBox from './components/common/searchBox'
 import './App.css'
+import ListGroup from './components/common/listGroup'
+import styled from 'styled-components'
 // import Navbar from './components/navbar'
 // import Product from './components/common/product'
 // import ListGroup from './components/common/listGroup'
+
+const AppWrapper = styled.div`
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  flex-direction: column;
+`
+
+const SearchContainerWrapper = styled.header`
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  padding: 16px;
+  justify-content: flex-end;
+  border-bottom: 1px solid black;
+`
+
+const MainWrapper = styled.main`
+  display: flex;
+  width: 100%;
+`
+
+const ListGroupWrapper = styled.div`
+  flex: 0 1 200px;
+  border-right: 1px solid gray;
+`
+
+const PageWrapper = styled.div`
+  flex: 1 0 360px;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+`
 
 class App extends React.Component {
   state = {
@@ -152,62 +188,79 @@ class App extends React.Component {
 
     if (!isLoading) {
       return (
-        <div className="main-wrapper">
-          <header className="header"></header>
-          <main className="main">
-            <Switch>
-              <Route
-                path="/category/:productCategory"
-                render={(props) => (
-                  <Category
-                    {...props}
-                    brands={brands}
-                    currentPage={currentPage}
-                    onBrandSelect={this.handleBrandSelect}
-                    onPageChange={this.handlePageChange}
-                    onTagSelect={this.handleTagSelect}
-                    pageSize={pageSize}
-                    allProducts={products}
-                    selectedBrand={selectedBrand}
-                    selectedTag={selectedTag}
-                    tags={tags}
-                    filterLists={this.filterLists}
-                    searchTerm={searchTerm}
-                    handleSearchTerm={this.handleSearchTerm}
-                  />
-                )}
+        <AppWrapper>
+          <SearchContainerWrapper>
+            <SearchBox
+              searchTerm={this.state.searchTerm}
+              handleSearchTerm={this.handleSearchTerm}
+            />
+          </SearchContainerWrapper>
+          <MainWrapper>
+            <ListGroupWrapper>
+              <ListGroup
+                brands={brands}
+                tags={tags}
+                selectedBrand={selectedBrand}
+                selectedTag={selectedTag}
+                onBrandSelect={this.handleBrandSelect}
+                onTagSelect={this.handleTagSelect}
               />
-              <Route
-                path="/product-details/:productId"
-                component={ProductDetails}
-              />
-              <Route
-                render={() => (
-                  <Products
-                    exact
-                    path="/"
-                    productsData={productsPagination}
-                    filtered={filtered}
-                    pageSize={pageSize}
-                    currentPage={currentPage}
-                    brands={brands}
-                    tags={tags}
-                    selectedBrand={selectedBrand}
-                    selectedTag={selectedTag}
-                    onBrandSelect={this.handleBrandSelect}
-                    onTagSelect={this.handleTagSelect}
-                    onPageChange={this.handlePageChange}
-                    images={images}
-                    onCategorySelect={this.handleSelectedCategory}
-                    handleSearchTerm={this.handleSearchTerm}
-                    searchTerm={searchTerm}
-                  />
-                )}
-              />
-            </Switch>
-          </main>
-          <footer className="footer"></footer>
-        </div>
+            </ListGroupWrapper>
+            <PageWrapper>
+              <Switch>
+                <Route
+                  path="/category/:productCategory"
+                  render={(props) => (
+                    <Category
+                      {...props}
+                      brands={brands}
+                      currentPage={currentPage}
+                      onBrandSelect={this.handleBrandSelect}
+                      onPageChange={this.handlePageChange}
+                      onTagSelect={this.handleTagSelect}
+                      pageSize={pageSize}
+                      allProducts={products}
+                      selectedBrand={selectedBrand}
+                      selectedTag={selectedTag}
+                      tags={tags}
+                      filterLists={this.filterLists}
+                      searchTerm={searchTerm}
+                      handleSearchTerm={this.handleSearchTerm}
+                    />
+                  )}
+                />
+                <Route
+                  path="/product-details/:productId"
+                  component={ProductDetails}
+                />
+                <Route
+                  render={() => (
+                    <Products
+                      exact
+                      path="/"
+                      productsData={productsPagination}
+                      filtered={filtered}
+                      pageSize={pageSize}
+                      currentPage={currentPage}
+                      brands={brands}
+                      tags={tags}
+                      selectedBrand={selectedBrand}
+                      selectedTag={selectedTag}
+                      onBrandSelect={this.handleBrandSelect}
+                      onTagSelect={this.handleTagSelect}
+                      onPageChange={this.handlePageChange}
+                      images={images}
+                      onCategorySelect={this.handleSelectedCategory}
+                      handleSearchTerm={this.handleSearchTerm}
+                      searchTerm={searchTerm}
+                    />
+                  )}
+                />
+              </Switch>
+            </PageWrapper>
+          </MainWrapper>
+          <footer className="footer">i am the footer</footer>
+        </AppWrapper>
       )
     }
 

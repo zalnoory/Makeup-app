@@ -2,39 +2,39 @@
   font-weight: 400;
   font-family: Brandon Text;
   text-align: center;
-  /* font-size: 16px; */
-  /* align-items: center; */
-  justify-items: end;
-  /* margin-left: 170px; */
-  display: grid;
+  justify-items: center;
   grid-gap: 20px;
-  /* width: 70%; */
+  display: flex;
+  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(auto, 330px));
+  grid-gap: 44px;
+  row-gap: 50px;
+  width: 100%;
+
+  border: 1px solid red;
 }
 
 .productDisplay-item {
-  display: flex;
-  flex-direction: column;
-  /* align-items: center; */
-  margin-right: 70px;
-
-  max-width: 45%;
+  /* display: flex;
+  flex-direction: column; */
+  max-width: 100%;
   border: 1px solid red;
 }
 
 .image-container {
-  display: flex;
+  /* display: flex; */
   margin-bottom: 1em;
   align-items: center;
   justify-content: center;
   position: relative;
   max-width: 100%;
-
   border: 1px solid green;
 }
 
 /* Make the image to responsive */
 .image {
-  display: block;
+  display: inline-flex;
   max-width: 100%;
   width: 100%;
   max-height: 300px;
@@ -54,8 +54,9 @@
   opacity: 0;
   color: white;
   font-size: 16px;
-  text-align: center;
-  width: 50%;
+  width: 60%;
+  left: 20%;
+  z-index: 10;
 }
 
 /* When you mouse over the container, fade in the overlay title */
@@ -72,76 +73,14 @@
   white-space: nowrap;
   margin-top: -20px;
   margin-bottom: -15px;
-  font-size: 10px;
+  font-size: 14px;
 }
 
 .p-result {
   text-align: center;
-  font-size: 14px;
+  font-size: 24px;
   font-weight: 400;
   font-family: Brandon Text;
-  margin-top: 3px;
-  margin-left: 100px;
-}
-
-@media screen and (min-width: 767px) {
-  .productDisplay-grid {
-    /* Grid Fallback */
-    display: flex;
-    flex-wrap: wrap;
-    max-width: 1140px;
-    /* flex: 1; */
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(auto, 350px));
-    grid-gap: 2px;
-    row-gap: 50px;
-    justify-content: start;
-    margin-top: 32px;
-    margin-right: -150px;
-    margin-left: 280px;
-
-    border: 1px solid red;
-
-    /* Supports Grid */
-    /* display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(auto, 340px));
-    grid-gap: 10px;
-    column-gap: 1px; */
-  }
-
-  #container-m-link {
-    color: black;
-    text-decoration: none;
-  }
-  .overlay {
-    width: 100px;
-    margin-left: 42px;
-    margin-right: -35px;
-    padding: 5px;
-  }
-  .p-3 {
-    font-size: 14px;
-  }
-
-  .productDisplay-item {
-    /* margin-left: 10px; */
-    /* Demo-Specific Styles */
-    /* display: flex;
-    flex-direction: column; */
-    /* width: 80%; */
-    max-width: 100%;
-    /* Flex Fallback */
-    /* flex: 1 1 125px; */
-    /* border: 1px solid red; */
-  }
-
-  /* .image {
-    width: 100%;
-    max-width: 100%;
-  } */
-
-  /* .image-container {
-    width: 100%;
-    max-width: 100%;
-  } */
+  padding-top: 2em;
+  white-space: nowrap;
 }

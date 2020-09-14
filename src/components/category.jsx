@@ -4,18 +4,23 @@ import ListGroup from './common/listGroup'
 import dataPagination from '../utils/data-pagination'
 import Pagination from './common/page-pagination'
 import './../style/category.css'
-import SearchBox from './common/searchBox'
+import styled from 'styled-components'
+
+const CategoryPageWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding-right: 4em;
+  padding-left: 4em;
+`
 
 const ProductDisplayGrid = {
-  display: 'flex',
-  flexWrap: 'wrap',
-  // maxWidth: '1140px',
-  // flex: '1',
-  display: 'grid',
-  gridTemplateColumns: 'repeat(auto-fill, minmax(auto,300px))',
-  justifyContent: 'start',
-  marginRight: '-150px',
-  marginLeft: '280px',
+  // display: "flex",
+  // flexWrap: "wrap",
+  // // maxWidth: '1140px',
+  // // flex: '1',
+  // display: "grid",
+  // gridTemplateColumns: "repeat(auto-fill, minmax(auto,280px))",
+  // justifyContent: "start",
 }
 
 const ProductDisplayItem = {
@@ -40,7 +45,6 @@ const Category = (props) => {
     filterLists,
     onPageChange,
     searchTerm,
-    handleSearchTerm,
   } = props
   const [categoryItems, setCategoryItems] = React.useState([])
 
@@ -71,31 +75,13 @@ const Category = (props) => {
     currentPage
   )
   return (
-    <section className="catProducts-container ">
-      <div className="search-container">
-        <SearchBox
-          searchTerm={searchTerm}
-          handleSearchTerm={handleSearchTerm}
-        />
-      </div>
-
-      <div className="listgrp-prod-container">
-        <ListGroup
-          brands={brands}
-          tags={tags}
-          selectedBrand={selectedBrand}
-          selectedTag={selectedTag}
-          onBrandSelect={onBrandSelect}
-          onTagSelect={onTagSelect}
-        />
-        <p className="styled-p4"> {filteredCategory.length} items </p>
-        <Product
-          productsData={productsPagination}
-          productDisplayGrid={ProductDisplayGrid}
-          productDisplayItem={ProductDisplayItem}
-        />
-      </div>
-
+    <CategoryPageWrapper>
+      <p className="styled-p4"> {filteredCategory.length} items </p>
+      <Product
+        productsData={productsPagination}
+        productDisplayGrid={ProductDisplayGrid}
+        productDisplayItem={ProductDisplayItem}
+      />
       <div className="products-items-main">
         <Pagination
           productsCount={filteredCategory.length}
@@ -104,7 +90,7 @@ const Category = (props) => {
           onPageChange={onPageChange}
         />
       </div>
-    </section>
+    </CategoryPageWrapper>
   )
 }
 
