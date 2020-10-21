@@ -12,7 +12,10 @@ import '././style/products.css'
 import SearchBox from './components/common/searchBox'
 import './App.css'
 import ListGroup from './components/common/listGroup'
+import Sidemenu from './components/common/side-menu'
 import styled from 'styled-components'
+import ScreenDimensionProvider from './services/screenDimension'
+import ResponsiveLayout from './components/common/responsiveLayout'
 // import Navbar from './components/navbar'
 // import Product from './components/common/product'
 // import ListGroup from './components/common/listGroup'
@@ -30,7 +33,7 @@ const SearchContainerWrapper = styled.header`
   flex-direction: row;
   padding: 16px;
   justify-content: flex-end;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid rgb(179, 175, 175); ;
 `
 
 const MainWrapper = styled.main`
@@ -38,10 +41,10 @@ const MainWrapper = styled.main`
   width: 100%;
 `
 
-const ListGroupWrapper = styled.div`
-  flex: 0 1 200px;
-  border-right: 1px solid gray;
-`
+// const ListGroupWrapper = styled.div`
+//   flex: 0 1 200px;
+//   border-right: 1px solid rgb(179, 175, 175);
+// `
 
 const PageWrapper = styled.div`
   flex: 1 0 360px;
@@ -120,19 +123,31 @@ class App extends React.Component {
     }
   }
 
-  handleSearchTerm = (e) => {
-    this.setState({
-      ...this.state,
-      searchTerm: e.target.value,
-      currentPage: 1,
-      selectedBrand: 'All Brands',
-      selectedTag: 'All Tags',
-    })
+  handleSearchTerm = (searchTermValue) => {
+    this.setState(
+      {
+        ...this.state,
+        searchTerm: searchTermValue,
+        currentPage: 1,
+        selectedBrand: 'All Brands',
+        selectedTag: 'All Tags',
+      },
+      () => console.log(this.state.searchTerm)
+    )
   }
+
+  // handleSearchTerm = (e) => {
+  //   this.setState({
+  //     ...this.state,
+  //     searchTerm: e.target.value,
+  //     currentPage: 1,
+  //     selectedBrand: 'All Brands',
+  //     selectedTag: 'All Tags',
+  //   })
+  // }
 
   filterLists = (products = [], selectedBrand, selectedTag, searchTerm) => {
     const filtered = products
-
       .filter((product) => {
         if (selectedBrand !== 'All Brands') {
           return product.brand === selectedBrand
@@ -149,11 +164,31 @@ class App extends React.Component {
       })
       .filter((product) => {
         if (searchTerm !== '') {
-          return (
-            (product.brand &&
-              product.brand.toLowerCase().includes(searchTerm.toLowerCase())) ||
-            (product.product_type &&
-              product.product_type.includes(searchTerm.toLowerCase()))
+          const excludeKeys = [
+            'id',
+            'name',
+            'price',
+            'price_sign',
+            'currency',
+            'image_link',
+            'product_link',
+            'website_link',
+            'description',
+            'rating',
+            'created_at',
+            'updated_at',
+            'product_api_url',
+            'api_featured_image',
+            'product_colors',
+          ]
+
+          return Object.keys(product).some((key) =>
+            excludeKeys.includes(key)
+              ? false
+              : typeof product[key] === 'string' &&
+                product[key]
+                  .toLowerCase()
+                  .includes(searchTerm.toLowerCase().trim())
           )
         } else {
           return product
@@ -188,16 +223,22 @@ class App extends React.Component {
 
     if (!isLoading) {
       return (
-        <AppWrapper>
-          <SearchContainerWrapper>
-            <SearchBox
+        <ScreenDimensionProvider>
+          <AppWrapper>
+            <SearchContainerWrapper>
+              <SearchBox
+                handleSearchTerm={this.handleSearchTerm}
+                filterLists={this.filterLists}
+              />
+
+              {/* <SearchBox
               searchTerm={this.state.searchTerm}
               handleSearchTerm={this.handleSearchTerm}
-            />
-          </SearchContainerWrapper>
-          <MainWrapper>
-            <ListGroupWrapper>
-              <ListGroup
+            /> */}
+            </SearchContainerWrapper>
+            <MainWrapper>
+              {/* <ListGroupWrapper> */}
+              <ResponsiveLayout
                 brands={brands}
                 tags={tags}
                 selectedBrand={selectedBrand}
@@ -205,62 +246,82 @@ class App extends React.Component {
                 onBrandSelect={this.handleBrandSelect}
                 onTagSelect={this.handleTagSelect}
               />
-            </ListGroupWrapper>
-            <PageWrapper>
-              <Switch>
-                <Route
-                  path="/category/:productCategory"
-                  render={(props) => (
-                    <Category
-                      {...props}
-                      brands={brands}
-                      currentPage={currentPage}
-                      onBrandSelect={this.handleBrandSelect}
-                      onPageChange={this.handlePageChange}
-                      onTagSelect={this.handleTagSelect}
-                      pageSize={pageSize}
-                      allProducts={products}
-                      selectedBrand={selectedBrand}
-                      selectedTag={selectedTag}
-                      tags={tags}
-                      filterLists={this.filterLists}
-                      searchTerm={searchTerm}
-                      handleSearchTerm={this.handleSearchTerm}
-                    />
-                  )}
-                />
-                <Route
-                  path="/product-details/:productId"
-                  component={ProductDetails}
-                />
-                <Route
-                  render={() => (
-                    <Products
-                      exact
-                      path="/"
-                      productsData={productsPagination}
-                      filtered={filtered}
-                      pageSize={pageSize}
-                      currentPage={currentPage}
-                      brands={brands}
-                      tags={tags}
-                      selectedBrand={selectedBrand}
-                      selectedTag={selectedTag}
-                      onBrandSelect={this.handleBrandSelect}
-                      onTagSelect={this.handleTagSelect}
-                      onPageChange={this.handlePageChange}
-                      images={images}
-                      onCategorySelect={this.handleSelectedCategory}
-                      handleSearchTerm={this.handleSearchTerm}
-                      searchTerm={searchTerm}
-                    />
-                  )}
-                />
-              </Switch>
-            </PageWrapper>
-          </MainWrapper>
-          <footer className="footer">i am the footer</footer>
-        </AppWrapper>
+
+              {/* <Sidemenu
+                brands={brands}
+                tags={tags}
+                selectedBrand={selectedBrand}
+                selectedTag={selectedTag}
+                onBrandSelect={this.handleBrandSelect}
+                onTagSelect={this.handleTagSelect}
+              /> */}
+
+              {/* <ListGroup
+                brands={brands}
+                tags={tags}
+                selectedBrand={selectedBrand}
+                selectedTag={selectedTag}
+                onBrandSelect={this.handleBrandSelect}
+                onTagSelect={this.handleTagSelect}
+              /> */}
+              {/* </ListGroupWrapper> */}
+
+              <PageWrapper>
+                <Switch>
+                  <Route
+                    path="/category/:productCategory"
+                    render={(props) => (
+                      <Category
+                        {...props}
+                        brands={brands}
+                        currentPage={currentPage}
+                        onBrandSelect={this.handleBrandSelect}
+                        onPageChange={this.handlePageChange}
+                        onTagSelect={this.handleTagSelect}
+                        pageSize={pageSize}
+                        allProducts={products}
+                        selectedBrand={selectedBrand}
+                        selectedTag={selectedTag}
+                        tags={tags}
+                        filterLists={this.filterLists}
+                        searchTerm={searchTerm}
+                        handleSearchTerm={this.handleSearchTerm}
+                      />
+                    )}
+                  />
+                  <Route
+                    path="/product-details/:productId"
+                    component={ProductDetails}
+                  />
+                  <Route
+                    render={() => (
+                      <Products
+                        exact
+                        path="/"
+                        productsData={productsPagination}
+                        filtered={filtered}
+                        pageSize={pageSize}
+                        currentPage={currentPage}
+                        brands={brands}
+                        tags={tags}
+                        selectedBrand={selectedBrand}
+                        selectedTag={selectedTag}
+                        onBrandSelect={this.handleBrandSelect}
+                        onTagSelect={this.handleTagSelect}
+                        onPageChange={this.handlePageChange}
+                        images={images}
+                        onCategorySelect={this.handleSelectedCategory}
+                        handleSearchTerm={this.handleSearchTerm}
+                        searchTerm={searchTerm}
+                      />
+                    )}
+                  />
+                </Switch>
+              </PageWrapper>
+            </MainWrapper>
+            <footer className="footer">i am the footer</footer>
+          </AppWrapper>
+        </ScreenDimensionProvider>
       )
     }
 
@@ -270,43 +331,22 @@ class App extends React.Component {
 
 export default App
 
-// import React from 'react'
-// import { Route, Switch } from 'react-router-dom'
-// import Products from './components/products'
-// import ProductDetails from './components/product-details'
-// import Category from './components/category'
-// import './App.css'
+// return (
 
-// function App() {
-//   return (
-//     <div className="main-wrapper">
-//       <header className="header"></header>
-//       <main className="main">
-//         <Switch>
-//           {/* <div className="App"> */}
-//           <Route path="/category/:productCategory" component={Category} />
-
-//           <Route
-//             path="/product-details/:productId"
-//             component={ProductDetails}
-//           />
-//           <Route
-//             exact
-//             path="/"
-//             render={() => (
-//               <Products productsData={productsPagination} filtered={filtered} />
-//             )}
-//           />
-//           {/* <Route path="/product_details/:id" component={ProductDetails} /> */}
-//           {/* <Route exact path="/" component={Products} /> */}
-//           {/* <Products /> */}
-//           {/* <ProductDetails /> */}
-//           {/* </div> */}
-//         </Switch>
-//       </main>
-//       <footer className="footer"></footer>
-//     </div>
-//   )
-// }
-
-// export default App
+//   (product.brand &&
+//     product.brand
+//       .toLowerCase()
+//       .includes(searchTerm.toLowerCase().trim())) ||
+//   (product.product_type &&
+//     product.product_type
+//       .toLowerCase()
+//       .includes(searchTerm.toLowerCase().trim()))
+// )
+// return (
+//   (product.brand &&
+//     product.brand.toLowerCase().includes(searchTerm.toLowerCase())) ||
+//   (product.product_type &&
+//     product.product_type
+//       .toLowerCase()
+//       .includes(searchTerm.toLowerCase()))
+// )

@@ -4,11 +4,8 @@ import { ProductColors } from './product-colors'
 import Modal from './modal'
 
 class Productdisplay extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      showModal: false,
-    }
+  state = {
+    showModal: false,
   }
 
   toggleModal = () => {
@@ -16,12 +13,11 @@ class Productdisplay extends React.Component {
   }
 
   render() {
-    const { productDisplayItem } = this.props
     const { showModal } = this.state
     const { product } = this.props
     return (
       <React.Fragment>
-        <div className="productDisplay-item" style={productDisplayItem}>
+        <div className="productDisplay-item">
           <div className="image-container">
             <Link to={`/product-details/${product.id}`}>
               <img

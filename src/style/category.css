@@ -1,20 +1,16 @@
-.catProducts-container {
+/* .catProducts-container {
   display: flex;
   flex-direction: column;
-  /* justify-content: center;
-  align-items: center; */
   width: 100%;
-}
+} */
 
-.listgrp-prod-container {
-  /* margin-top: -40px;
-  margin-left: -20px; */
+/* .listgrp-prod-container {
   border: 0.5em solid green;
   display: flex;
   flex-direction: row;
-}
+} */
 
-.search-container {
+/* .search-container {
   width: 100%;
   padding-top: 1em;
   padding-bottom: 1em;
@@ -24,13 +20,11 @@
   align-items: center;
   justify-content: flex-end;
   flex-direction: row;
-}
+} */
 
 .styled-p4 {
-  text-align: left;
+  text-align: center;
   font-size: 18px;
   font-weight: 400;
-  padding-left: 2em;
   font-family: Brandon Text;
-  padding-top: 16px;
 }

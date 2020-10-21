@@ -38,14 +38,14 @@ class Products extends React.Component {
       pageSize,
       currentPage,
       onCategorySelect,
+      brands,
+      onBrandSelect,
+      selectedBrand,
     } = this.props
 
     return (
       <ProductsPageWrapper>
-        {/* <section className="products-container"> */}
-        {/* <div className="listgrp-nav-container"> */}
         <Navbar images={images} onCategorySelect={onCategorySelect} />
-        {/* </div> */}
         <ProductsWrapper>
           <StyledP>{filtered.length} items</StyledP>
           <Product
@@ -55,14 +55,13 @@ class Products extends React.Component {
             currentPage={currentPage}
             onPageChange={onPageChange}
           />
-          <Pagination
-            productsCount={filtered.length}
-            pageSize={pageSize}
-            currentPage={currentPage}
-            onPageChange={onPageChange}
-          />
+          {/* <Pagination
+          productsCount={filtered.length}
+          pageSize={pageSize}
+          currentPage={currentPage}
+          onPageChange={onPageChange}
+        /> */}
         </ProductsWrapper>
-        {/* </section> */}
       </ProductsPageWrapper>
     )
   }

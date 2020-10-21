@@ -7,9 +7,9 @@
   display: flex;
   flex-wrap: wrap;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(auto, 330px));
-  grid-gap: 44px;
-  row-gap: 50px;
+  grid-template-columns: repeat(auto-fill, minmax(auto, 300px));
+  grid-gap: 30px;
+  /* row-gap: 50px; */
   width: 100%;
 
   border: 1px solid red;

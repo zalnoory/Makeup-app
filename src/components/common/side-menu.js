@@ -1,7 +1,20 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import ListGroup from './listGroup'
-import ShowSidemenu from './showSidemenu'
+// import ShowSidemenu from './showSidemenu'
+
+const Overlay = styled.div`
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.1);
+  overflow-x: hidden;
+  transition: 0.5s;
+`
 
 const BurgerButton = styled.button`
   position: absolute;
@@ -61,39 +74,38 @@ const Sidemenu = (props) => {
     onBrandSelect,
     onTagSelect,
   } = props
-  // const [open, setOpen] = useState(false)
-  const { setRef, isComponentVisible, toggleIsComponentVisible } = ShowSidemenu(
-    true
-  )
+
+  const [isComponentVisible, setIsComponentVisible] = useState(false)
   return (
-    <div ref={(ref) => setRef(ref)} onClick={toggleIsComponentVisible}>
-      <Burger open={isComponentVisible} setOpen={toggleIsComponentVisible} />
+    <div>
+      <Burger open={isComponentVisible} setOpen={setIsComponentVisible} />
+
       {isComponentVisible && (
-        <Menu
-          open={isComponentVisible}
-          brands={brands}
-          tags={tags}
-          selectedBrand={selectedBrand}
-          selectedTag={selectedTag}
-          onBrandSelect={onBrandSelect}
-          onTagSelect={onTagSelect}
-        />
+        <>
+          <Overlay onClick={() => setIsComponentVisible(!isComponentVisible)} />
+          <Menu
+            open={isComponentVisible}
+            brands={brands}
+            tags={tags}
+            selectedBrand={selectedBrand}
+            selectedTag={selectedTag}
+            onBrandSelect={onBrandSelect}
+            onTagSelect={onTagSelect}
+          />
+        </>
       )}
     </div>
   )
 }
 
 const Burger = ({ open, setOpen }) => {
-  if (!open)
-    return (
-      <BurgerButton open={open} onClick={() => setOpen(!open)}>
-        <div />
-        <div />
-        <div />
-      </BurgerButton>
-    )
-
-  return <div />
+  return (
+    <BurgerButton onClick={() => setOpen(!open)}>
+      <div />
+      <div />
+      <div />
+    </BurgerButton>
+  )
 }
 
 const Menu = (props) => {

@@ -5,25 +5,10 @@ const ShowSidemenu = (initialIsVisible) => {
 
   const ref = useRef(null)
 
-  const setRef = (incommingRef) => {
-    if (ref.current === null) {
-      ref.current = incommingRef
-    }
-  }
-
   const handleClickOutside = (event) => {
-    event.preventDefault()
-    if (
-      ref.current &&
-      !ref.current.contains(event.target) &&
-      isComponentVisible
-    ) {
-      toggleIsComponentVisible()
+    if (ref.current && !ref.current.contains(event.target)) {
+      setIsComponentVisible(false)
     }
-  }
-
-  const toggleIsComponentVisible = () => {
-    setIsComponentVisible(!isComponentVisible)
   }
 
   useEffect(() => {
@@ -33,11 +18,7 @@ const ShowSidemenu = (initialIsVisible) => {
     }
   })
 
-  return {
-    setRef,
-    isComponentVisible,
-    toggleIsComponentVisible,
-  }
+  return { ref, isComponentVisible, setIsComponentVisible }
 }
 
 export default ShowSidemenu
