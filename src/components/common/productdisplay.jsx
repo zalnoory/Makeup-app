@@ -2,6 +2,27 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { ProductColors } from './product-colors'
 import Modal from './modal'
+import styled from 'styled-components'
+
+const ProductDisplayItem = styled.div`
+  max-width: 100%;
+`
+
+const ImageContainer = styled.div`
+  padding-bottom: 1em;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  max-width: 100%;
+`
+
+const StyledImg = styled.img`
+  display: inline-flex;
+  max-width: 100%;
+  width: 100%;
+  max-height: 300px;
+  object-fit: contain;
+`
 
 class Productdisplay extends React.Component {
   state = {
@@ -17,10 +38,10 @@ class Productdisplay extends React.Component {
     const { product } = this.props
     return (
       <React.Fragment>
-        <div className="productDisplay-item">
-          <div className="image-container">
+        <ProductDisplayItem>
+          <ImageContainer className="image-container">
             <Link to={`/product-details/${product.id}`}>
-              <img
+              <StyledImg
                 className="image"
                 src={product.api_featured_image}
                 alt={product.name}
@@ -30,7 +51,7 @@ class Productdisplay extends React.Component {
               {' '}
               Quick View
             </div>
-          </div>
+          </ImageContainer>
           <div className="color-brand-cont">
             <Link to={`/product-details/${product.id}`} id="container-m-link">
               <div>
@@ -58,7 +79,7 @@ class Productdisplay extends React.Component {
             onModalClick={this.toggleModal}
             product={product}
           />
-        </div>
+        </ProductDisplayItem>
       </React.Fragment>
     )
   }

@@ -55,12 +55,12 @@ class Products extends React.Component {
             currentPage={currentPage}
             onPageChange={onPageChange}
           />
-          {/* <Pagination
-          productsCount={filtered.length}
-          pageSize={pageSize}
-          currentPage={currentPage}
-          onPageChange={onPageChange}
-        /> */}
+          <Pagination
+            productsCount={filtered.length}
+            pageSize={pageSize}
+            currentPage={currentPage}
+            onPageChange={onPageChange}
+          />
         </ProductsWrapper>
       </ProductsPageWrapper>
     )

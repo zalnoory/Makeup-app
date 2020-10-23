@@ -1,5 +1,5 @@
 import React, { useState, useEffect, createContext, useContext } from 'react'
-const ViewContext = createContext()
+const ViewContext = createContext({})
 
 const ScreenDimensionProvider = ({ children }) => {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth)

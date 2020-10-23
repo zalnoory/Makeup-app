@@ -2,6 +2,45 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { ProductColors } from './product-colors'
 import '../../style/modal.css'
+import styled from 'styled-components'
+
+const ModalContainer = styled.div`
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  max-width: 100%;
+  height: 800px;
+  max-height: 100%;
+  z-index: 1010;
+  background: rgb(0, 0, 0);
+  background: rgba(241, 241, 241, 0.9);
+  color: black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: Brandon Text;
+`
+
+const ImageContainer = styled.div`
+  padding-top: 50px;
+  padding-bottom: 50px;
+`
+
+const DetailsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  white-space: nowrap;
+`
+
+const Paragrh1 = styled.p`
+  font-size: 25px;
+`
+
+const Paragrh2 = styled.p`
+  font-size: 20px;
+`
 
 class Modal extends React.Component {
   render() {
@@ -10,24 +49,24 @@ class Modal extends React.Component {
       return null
     }
     return (
-      <div className="p-modal" onClick={() => onModalClick()}>
-        <div className="product-image">
+      <ModalContainer onClick={() => onModalClick()}>
+        <ImageContainer>
           <img
-            className="featured-image"
+            style={{ maxWidth: '450px', maxHeight: '450px', width: '100%' }}
             src={product.api_featured_image}
             alt={product.name}
           />
-        </div>
-        <div className="details">
-          <div className="name1">{product.name}</div>
-          <div className="detail">
+        </ImageContainer>
+        <DetailsContainer>
+          <Paragrh1>{product.name}</Paragrh1>
+          <Paragrh2>
             {(product.brand || '')
               .toLowerCase()
               .split(' ')
               .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
               .join(' ')}
-          </div>
-          <div className="container" id="color-container">
+          </Paragrh2>
+          <div>
             {product.product_colors.slice(0, 20).map((color) => (
               <ProductColors
                 key={color.hex_value}
@@ -37,12 +76,15 @@ class Modal extends React.Component {
             ))}
           </div>
           <small>
-            <Link to={`/product-details/${product.id}`} id="modal-link">
+            <Link
+              to={`/product-details/${product.id}`}
+              style={{ fontSize: '16px', color: 'navy' }}
+            >
               See Full Details.
             </Link>
           </small>
-        </div>
-      </div>
+        </DetailsContainer>
+      </ModalContainer>
     )
   }
 }
