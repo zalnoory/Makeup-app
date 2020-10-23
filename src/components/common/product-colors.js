@@ -2,8 +2,8 @@ import React from 'react'
 import styled from 'styled-components'
 
 export const ProductColors = styled.span`
-  height: 10px;
-  width: 10px;
+  height: 16px;
+  width: 16px;
   margin: 1px;
   background-color: ${(props) => props.color};
   border-radius: 50%;

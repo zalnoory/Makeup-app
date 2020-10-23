@@ -1,4 +1,4 @@
-.productDisplay-grid {
+/* .productDisplay-grid {
   font-weight: 400;
   font-family: Brandon Text;
   text-align: center;
@@ -9,39 +9,34 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(auto, 300px));
   grid-gap: 30px;
-  /* row-gap: 50px; */
   width: 100%;
 
   border: 1px solid red;
-}
+} */
 
-.productDisplay-item {
-  /* display: flex;
-  flex-direction: column; */
+/* .productDisplay-item {
   max-width: 100%;
   border: 1px solid red;
-}
+} */
 
-.image-container {
-  /* display: flex; */
+/* .image-container {
+ 
   margin-bottom: 1em;
   align-items: center;
   justify-content: center;
   position: relative;
   max-width: 100%;
   border: 1px solid green;
-}
+} */
 
 /* Make the image to responsive */
-.image {
+/* .image {
   display: inline-flex;
   max-width: 100%;
   width: 100%;
   max-height: 300px;
   object-fit: contain;
-
-  /* margin-left: -35px; */
-}
+} */
 
 /* The overlay effect - lays on top of the container and over the image */
 .overlay {
@@ -76,11 +71,11 @@
   font-size: 14px;
 }
 
-.p-result {
+/* .p-result {
   text-align: center;
   font-size: 24px;
   font-weight: 400;
   font-family: Brandon Text;
   padding-top: 2em;
   white-space: nowrap;
-}
+} */

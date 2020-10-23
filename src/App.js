@@ -59,7 +59,7 @@ class App extends React.Component {
     currentPage: 1,
     images: [],
     isLoading: true,
-    pageSize: 42,
+    pageSize: 80,
     products: [],
     selectedBrand: 'All Brands',
     selectedCategory: '',
@@ -89,12 +89,15 @@ class App extends React.Component {
 
   handleBrandSelect = (brand) => {
     const state = this.state
-    this.setState({
-      ...state,
-      selectedBrand: brand,
-      searchTerm: '',
-      currentPage: 1,
-    })
+    this.setState(
+      {
+        ...state,
+        selectedBrand: brand,
+        searchTerm: '',
+        currentPage: 1,
+      },
+      () => console.log('print searchTerm in Brand', this.state.searchTerm)
+    )
   }
 
   handleTagSelect = (tag) => {
@@ -107,32 +110,29 @@ class App extends React.Component {
     this.setState({ ...state, currentPage: page })
   }
 
-  // handleSelectedCategory = (category) => {
-  //   const state = this.state
-
-  //   this.setState({ ...state, selectedCategory: category })
-  // }
-
   handleSelectedCategory = (category) => {
     if (category !== this.state.category) {
       this.setState({
         ...this.state,
         selectedCategory: category,
         searchTerm: '',
+        currentPage: 1,
+        selectedBrand: 'All Brands',
+        selectedTag: 'All Tags',
       })
     }
   }
 
-  handleSearchTerm = (searchTermValue) => {
+  handleSearchTerm = (searchTerm) => {
     this.setState(
       {
         ...this.state,
-        searchTerm: searchTermValue,
+        searchTerm: searchTerm,
         currentPage: 1,
         selectedBrand: 'All Brands',
         selectedTag: 'All Tags',
       },
-      () => console.log(this.state.searchTerm)
+      () => console.log('print searchTerm', this.state.searchTerm)
     )
   }
 
@@ -211,6 +211,8 @@ class App extends React.Component {
       tags,
       searchTerm,
     } = this.state
+
+    console.log('render searchTerm', this.state.searchTerm)
 
     const filtered = this.filterLists(
       products,
