@@ -16,6 +16,7 @@ import Sidemenu from './components/common/side-menu'
 import styled from 'styled-components'
 import ScreenDimensionProvider from './services/screenDimension'
 import ResponsiveLayout from './components/common/responsiveLayout'
+import { createRef } from 'react'
 // import Navbar from './components/navbar'
 // import Product from './components/common/product'
 // import ListGroup from './components/common/listGroup'
@@ -54,18 +55,23 @@ const PageWrapper = styled.div`
 `
 
 class App extends React.Component {
-  state = {
-    brands: [],
-    currentPage: 1,
-    images: [],
-    isLoading: true,
-    pageSize: 80,
-    products: [],
-    selectedBrand: 'All Brands',
-    selectedCategory: '',
-    selectedTag: 'All Tags',
-    tags: [],
-    searchTerm: '',
+  constructor(props) {
+    super(props)
+    this.state = {
+      brands: [],
+      currentPage: 1,
+      images: [],
+      isLoading: true,
+      pageSize: 80,
+      products: [],
+      selectedBrand: 'All Brands',
+      selectedCategory: '',
+      selectedTag: 'All Tags',
+      tags: [],
+      searchTerm: '',
+    }
+
+    this.searchBoxElem = createRef()
   }
 
   /*connect to backend*/
@@ -89,15 +95,16 @@ class App extends React.Component {
 
   handleBrandSelect = (brand) => {
     const state = this.state
-    this.setState(
-      {
-        ...state,
-        selectedBrand: brand,
-        searchTerm: '',
-        currentPage: 1,
-      },
-      () => console.log('print searchTerm in Brand', this.state.searchTerm)
-    )
+    // if (this.props.searchTerm !== '') {
+    //   this.searchBoxElem.current.searchtermOnselect()
+    // }
+
+    return this.setState({
+      ...state,
+      selectedBrand: brand,
+      // searchTerm: '',
+      currentPage: 1,
+    })
   }
 
   handleTagSelect = (tag) => {
@@ -124,16 +131,13 @@ class App extends React.Component {
   }
 
   handleSearchTerm = (searchTerm) => {
-    this.setState(
-      {
-        ...this.state,
-        searchTerm: searchTerm,
-        currentPage: 1,
-        selectedBrand: 'All Brands',
-        selectedTag: 'All Tags',
-      },
-      () => console.log('print searchTerm', this.state.searchTerm)
-    )
+    this.setState({
+      ...this.state,
+      searchTerm: searchTerm,
+      currentPage: 1,
+      selectedBrand: 'All Brands',
+      selectedTag: 'All Tags',
+    })
   }
 
   // handleSearchTerm = (e) => {
@@ -229,7 +233,9 @@ class App extends React.Component {
           <AppWrapper>
             <SearchContainerWrapper>
               <SearchBox
+                ref={this.searchBoxElem}
                 handleSearchTerm={this.handleSearchTerm}
+                handleBrandSelect={this.handleBrandSelect}
                 filterLists={this.filterLists}
               />
 

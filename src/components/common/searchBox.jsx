@@ -1,4 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React, {
+  useState,
+  useEffect,
+  forwardRef,
+  useImperativeHandle,
+} from 'react'
 import '../../style/searchBox.css'
 
 // class SearchBox extends React.Component {
@@ -48,7 +53,7 @@ import '../../style/searchBox.css'
 // export default SearchBox
 
 /*Hooks way */
-const SearchBox = (props) => {
+const SearchBox = forwardRef((props, ref) => {
   const [searchTerm, setSearchTerm] = useState('')
 
   useEffect(() => {
@@ -56,13 +61,24 @@ const SearchBox = (props) => {
     const timer = setTimeout(
       /*and then send searchTermValue to parent */
       () => props.handleSearchTerm(searchTerm),
-      500
+      1000
     )
     return () => clearTimeout(timer)
   }, [searchTerm])
 
+  const searchtermOnselect = () => {
+    setSearchTerm('')
+  }
+
+  useImperativeHandle(ref, () => {
+    return {
+      searchtermOnselect: searchtermOnselect,
+    }
+  })
+
   return (
     <input
+      {...props}
       style={{
         display: 'initial',
         padding: '1em',
@@ -75,7 +91,7 @@ const SearchBox = (props) => {
       onChange={(event) => setSearchTerm(event.target.value)}
     ></input>
   )
-}
+})
 
 export default SearchBox
 
