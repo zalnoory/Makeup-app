@@ -39,7 +39,7 @@
 } */
 
 /* The overlay effect - lays on top of the container and over the image */
-.overlay {
+/* .overlay {
   position: absolute;
   bottom: 0px;
   background: rgb(0, 0, 0);
@@ -52,24 +52,25 @@
   width: 60%;
   left: 20%;
   z-index: 10;
-}
+} */
 
 /* When you mouse over the container, fade in the overlay title */
-.image-container:hover .overlay {
+/* .image-container:hover .overlay {
   opacity: 1;
-}
+} */
 
-#container-m-link {
+/* #container-m-link {
   color: black;
   text-decoration: none;
-}
+} */
 
-.p-3 {
+/* No Need for p-3 */
+/* .p-3 {
   white-space: nowrap;
   margin-top: -20px;
   margin-bottom: -15px;
   font-size: 14px;
-}
+} */
 
 /* .p-result {
   text-align: center;

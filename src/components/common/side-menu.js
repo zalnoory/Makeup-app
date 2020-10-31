@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import ListGroup from './listGroup'
-// import ShowSidemenu from './showSidemenu'
 
 const Overlay = styled.div`
   height: 100%;

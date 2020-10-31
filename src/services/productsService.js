@@ -8,7 +8,7 @@ const brands = [
   'physicians formula',
   'maybelline',
   'rejuva minerals',
-  'lotus cosmetics',
+  'lotus cosmetics usa',
 ]
 
 const productTag = [

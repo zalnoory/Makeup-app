@@ -5,14 +5,10 @@ import { ProductColors } from './common/product-colors'
 import './../style/product-details.css'
 
 class ProductDetails extends React.Component {
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      product: {
-        product_colors: [],
-      },
-    }
+  state = {
+    product: {
+      product_colors: [],
+    },
   }
 
   async componentDidMount() {

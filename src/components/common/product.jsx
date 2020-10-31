@@ -18,7 +18,6 @@ const DisplayGrid = styled.div`
   font-family: Brandon Text;
   text-align: center;
   justify-items: center;
-  grid-gap: 20px;
   display: flex;
   flex-wrap: wrap;
   display: grid;
@@ -28,10 +27,6 @@ const DisplayGrid = styled.div`
 `
 
 class Product extends React.Component {
-  // constructor(props) {
-  //   super(props)
-  // }
-
   render() {
     const { productsData } = this.props
     if (productsData.length === 0) {
@@ -40,7 +35,11 @@ class Product extends React.Component {
     return (
       <DisplayGrid>
         {productsData.map((product) => (
-          <Productdisplay key={product.id} product={product} />
+          <Productdisplay
+            key={product.id}
+            product={product}
+            productsData={productsData}
+          />
         ))}
       </DisplayGrid>
     )

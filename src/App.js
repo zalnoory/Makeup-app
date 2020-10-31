@@ -16,6 +16,7 @@ import Sidemenu from './components/common/side-menu'
 import styled from 'styled-components'
 import ScreenDimensionProvider from './services/screenDimension'
 import ResponsiveLayout from './components/common/responsiveLayout'
+import { createRef } from 'react'
 // import Navbar from './components/navbar'
 // import Product from './components/common/product'
 // import ListGroup from './components/common/listGroup'
@@ -68,6 +69,8 @@ class App extends React.Component {
     searchTerm: '',
   }
 
+  searchBoxRef = createRef()
+
   /*connect to backend*/
   async componentDidMount() {
     const { data } = await axios.get(
@@ -79,11 +82,11 @@ class App extends React.Component {
 
     this.setState({
       ...this.state,
-      products: data.products,
       brands,
-      tags: getProductTag(),
       images: imageLoader(),
       isLoading: false,
+      products: data.products,
+      tags: getProductTag(),
     })
   }
 
@@ -92,17 +95,26 @@ class App extends React.Component {
     this.setState(
       {
         ...state,
-        selectedBrand: brand,
-        searchTerm: '',
         currentPage: 1,
+        searchTerm: '',
+        selectedBrand: brand,
       },
-      () => console.log('print searchTerm in Brand', this.state.searchTerm)
+      () => this.searchBoxRef.current.searchTermReset()
     )
   }
 
   handleTagSelect = (tag) => {
     const state = this.state
-    this.setState({ ...state, selectedTag: tag, currentPage: 1 })
+    this.setState(
+      {
+        ...state,
+        currentPage: 1,
+        searchTerm: '',
+        selectedBrand: 'All Brands',
+        selectedTag: tag,
+      },
+      () => this.searchBoxRef.current.searchTermReset()
+    )
   }
 
   handlePageChange = (page) => {
@@ -112,23 +124,26 @@ class App extends React.Component {
 
   handleSelectedCategory = (category) => {
     if (category !== this.state.category) {
-      this.setState({
-        ...this.state,
-        selectedCategory: category,
-        searchTerm: '',
-        currentPage: 1,
-        selectedBrand: 'All Brands',
-        selectedTag: 'All Tags',
-      })
+      this.setState(
+        {
+          ...this.state,
+          currentPage: 1,
+          searchTerm: '',
+          selectedBrand: 'All Brands',
+          selectedCategory: category,
+          selectedTag: 'All Tags',
+        },
+        () => this.searchBoxRef.current.searchTermReset()
+      )
     }
   }
 
-  handleSearchTerm = (searchTerm) => {
+  handleSearchTerm = (term) => {
     this.setState(
       {
         ...this.state,
-        searchTerm: searchTerm,
         currentPage: 1,
+        searchTerm: term,
         selectedBrand: 'All Brands',
         selectedTag: 'All Tags',
       },
@@ -165,30 +180,41 @@ class App extends React.Component {
       .filter((product) => {
         if (searchTerm !== '') {
           const excludeKeys = [
+            'api_featured_image',
+            'created_at',
+            'currency',
+            'description',
             'id',
+            'image_link',
             'name',
             'price',
             'price_sign',
-            'currency',
-            'image_link',
-            'product_link',
-            'website_link',
-            'description',
-            'rating',
-            'created_at',
-            'updated_at',
             'product_api_url',
-            'api_featured_image',
             'product_colors',
+            'product_link',
+            'rating',
+            'updated_at',
+            'website_link',
           ]
 
-          return Object.keys(product).some((key) =>
-            excludeKeys.includes(key)
-              ? false
-              : typeof product[key] === 'string' &&
-                product[key]
-                  .toLowerCase()
-                  .includes(searchTerm.toLowerCase().trim())
+          return Object.keys(product).some(
+            (key) =>
+              excludeKeys.includes(key)
+                ? false
+                : typeof product[key] === 'string' &&
+                  product[key]
+                    .toLowerCase()
+                    .includes(searchTerm.toLowerCase().trim())
+
+            // typeof product[key] === 'string' &&
+            // product['tag_list'].length !== 0 &&
+            // product['tag_list'].includes(
+            //   searchTerm
+            //     .toLowerCase()
+            //     .split(' ')
+            //     .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
+            //     .join(' ')
+            //     .trim()
           )
         } else {
           return product
@@ -206,10 +232,10 @@ class App extends React.Component {
       isLoading,
       pageSize,
       products,
+      searchTerm,
       selectedBrand,
       selectedTag,
       tags,
-      searchTerm,
     } = this.state
 
     console.log('render searchTerm', this.state.searchTerm)
@@ -230,7 +256,7 @@ class App extends React.Component {
             <SearchContainerWrapper>
               <SearchBox
                 handleSearchTerm={this.handleSearchTerm}
-                filterLists={this.filterLists}
+                ref={this.searchBoxRef}
               />
 
               {/* <SearchBox
@@ -242,31 +268,12 @@ class App extends React.Component {
               {/* <ListGroupWrapper> */}
               <ResponsiveLayout
                 brands={brands}
-                tags={tags}
-                selectedBrand={selectedBrand}
-                selectedTag={selectedTag}
                 onBrandSelect={this.handleBrandSelect}
                 onTagSelect={this.handleTagSelect}
+                selectedBrand={selectedBrand}
+                selectedTag={selectedTag}
+                tags={tags}
               />
-
-              {/* <Sidemenu
-                brands={brands}
-                tags={tags}
-                selectedBrand={selectedBrand}
-                selectedTag={selectedTag}
-                onBrandSelect={this.handleBrandSelect}
-                onTagSelect={this.handleTagSelect}
-              /> */}
-
-              {/* <ListGroup
-                brands={brands}
-                tags={tags}
-                selectedBrand={selectedBrand}
-                selectedTag={selectedTag}
-                onBrandSelect={this.handleBrandSelect}
-                onTagSelect={this.handleTagSelect}
-              /> */}
-              {/* </ListGroupWrapper> */}
 
               <PageWrapper>
                 <Switch>
@@ -275,19 +282,19 @@ class App extends React.Component {
                     render={(props) => (
                       <Category
                         {...props}
+                        allProducts={products}
                         brands={brands}
                         currentPage={currentPage}
+                        filterLists={this.filterLists}
+                        handleSearchTerm={this.handleSearchTerm}
                         onBrandSelect={this.handleBrandSelect}
                         onPageChange={this.handlePageChange}
                         onTagSelect={this.handleTagSelect}
                         pageSize={pageSize}
-                        allProducts={products}
+                        searchTerm={searchTerm}
                         selectedBrand={selectedBrand}
                         selectedTag={selectedTag}
                         tags={tags}
-                        filterLists={this.filterLists}
-                        searchTerm={searchTerm}
-                        handleSearchTerm={this.handleSearchTerm}
                       />
                     )}
                   />
@@ -296,25 +303,24 @@ class App extends React.Component {
                     component={ProductDetails}
                   />
                   <Route
+                    path="/"
                     render={() => (
                       <Products
-                        exact
-                        path="/"
-                        productsData={productsPagination}
-                        filtered={filtered}
-                        pageSize={pageSize}
-                        currentPage={currentPage}
                         brands={brands}
-                        tags={tags}
+                        currentPage={currentPage}
+                        filtered={filtered}
+                        handleSearchTerm={this.handleSearchTerm}
+                        images={images}
+                        onBrandSelect={this.handleBrandSelect}
+                        onCategorySelect={this.handleSelectedCategory}
+                        onPageChange={this.handlePageChange}
+                        onTagSelect={this.handleTagSelect}
+                        pageSize={pageSize}
+                        productsData={productsPagination}
+                        searchTerm={searchTerm}
                         selectedBrand={selectedBrand}
                         selectedTag={selectedTag}
-                        onBrandSelect={this.handleBrandSelect}
-                        onTagSelect={this.handleTagSelect}
-                        onPageChange={this.handlePageChange}
-                        images={images}
-                        onCategorySelect={this.handleSelectedCategory}
-                        handleSearchTerm={this.handleSearchTerm}
-                        searchTerm={searchTerm}
+                        tags={tags}
                       />
                     )}
                   />
@@ -332,23 +338,3 @@ class App extends React.Component {
 }
 
 export default App
-
-// return (
-
-//   (product.brand &&
-//     product.brand
-//       .toLowerCase()
-//       .includes(searchTerm.toLowerCase().trim())) ||
-//   (product.product_type &&
-//     product.product_type
-//       .toLowerCase()
-//       .includes(searchTerm.toLowerCase().trim()))
-// )
-// return (
-//   (product.brand &&
-//     product.brand.toLowerCase().includes(searchTerm.toLowerCase())) ||
-//   (product.product_type &&
-//     product.product_type
-//       .toLowerCase()
-//       .includes(searchTerm.toLowerCase()))
-// )

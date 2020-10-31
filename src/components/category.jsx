@@ -79,12 +79,12 @@ const Category = (props) => {
       <ProductsWrapper>
         <StyledP> {filteredCategory.length} items </StyledP>
         <Product productsData={productsPagination} />
-        {/* <Pagination
+        <Pagination
           productsCount={filteredCategory.length}
           pageSize={pageSize}
           currentPage={currentPage}
           onPageChange={onPageChange}
-        /> */}
+        />
       </ProductsWrapper>
     </CategoryPageWrapper>
   )

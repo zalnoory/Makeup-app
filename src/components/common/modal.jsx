@@ -21,6 +21,7 @@ const ModalContainer = styled.div`
   flex-direction: column;
   align-items: center;
   font-family: Brandon Text;
+  font-weight: 200;
 `
 
 const ImageContainer = styled.div`
@@ -42,14 +43,40 @@ const Paragrh2 = styled.p`
   font-size: 20px;
 `
 
+const ButtonContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  padding-top: 50px;
+  cursor: pointer;
+`
+
+const Prev = styled.div`
+  padding-right: 150px;
+  @media (min-width: 450px) {
+    padding-right: 300px;
+  }
+`
+
+const Next = styled.div`
+  padding-left: 150px;
+  @media (min-width: 450px) {
+    padding-left: 300px;
+  }
+`
+
 class Modal extends React.Component {
   render() {
-    const { showModal, onModalClick, product } = this.props
+    const { showModal, onModalClick, product, handleNext } = this.props
     if (!showModal) {
       return null
     }
     return (
       <ModalContainer onClick={() => onModalClick()}>
+        <ButtonContainer>
+          <Prev>&laquo; Previous</Prev>
+          <Next onClick={() => handleNext}>Next &raquo;</Next>
+        </ButtonContainer>
+
         <ImageContainer>
           <img
             style={{ maxWidth: '450px', maxHeight: '450px', width: '100%' }}

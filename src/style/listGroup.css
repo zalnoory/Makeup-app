@@ -1,17 +1,31 @@
-.list_grp_container {
+input {
+  display: none;
+}
+
+input:checked + label::after {
+  content: '-';
+  right: 10px;
+  top: 4px;
+}
+
+input + label + .content {
+  display: none;
+}
+
+input:checked + label + .content {
+  display: block;
+}
+
+/* .list_grp_container {
   padding-top: 1em;
   padding-right: 16px;
   padding-left: 16px;
   display: flex;
   flex-direction: column;
   align-items: center;
-}
+} */
 
-input {
-  display: none;
-}
-
-label {
+/* label {
   font-family: Brandon Text;
   font-weight: 500;
   position: relative;
@@ -23,41 +37,27 @@ label {
   width: 100%;
   color: rgba(0, 0, 0, 0.863);
   border-bottom: 1px solid rgb(179, 175, 175);
-}
+} */
 
-label::after {
+/* label::after {
   content: '+';
   font-size: 14px;
   font-weight: bold;
   position: absolute;
   right: 10px;
   top: 4px;
-}
+} */
 /* label:hover {
   background: #2bbbad;
 } */
 
-input:checked + label::after {
-  content: '-';
-  right: 10px;
-  top: 4px;
-}
-
-.content {
+/* .content {
   background: white;
   padding: 5px 5px;
   border: 0px;
   margin: 0 0 1px 0;
   border-radius: 3px;
-}
-
-input + label + .content {
-  display: none;
-}
-
-input:checked + label + .content {
-  display: block;
-}
+} */
 
 /* @media screen and (min-width: 768px) {
   .list_grp_container {
