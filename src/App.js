@@ -17,6 +17,9 @@ import styled from 'styled-components'
 import ScreenDimensionProvider from './services/screenDimension'
 import ResponsiveLayout from './components/common/responsiveLayout'
 import { createRef } from 'react'
+import { DisplayTime } from './components/common/time-display'
+import vecteezyVector from './images/vecteezyVector.jpg'
+
 // import Navbar from './components/navbar'
 // import Product from './components/common/product'
 // import ListGroup from './components/common/listGroup'
@@ -33,19 +36,29 @@ const SearchContainerWrapper = styled.header`
   width: 100%;
   flex-direction: row;
   padding: 16px;
-  justify-content: flex-end;
-  border-bottom: 1px solid rgb(179, 175, 175); ;
+  justify-content: space-between;
+  border-bottom: 1px solid rgb(179, 175, 175);
+`
+
+const Vector = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `
 
 const MainWrapper = styled.main`
   display: flex;
   width: 100%;
 `
-
-// const ListGroupWrapper = styled.div`
-//   flex: 0 1 200px;
-//   border-right: 1px solid rgb(179, 175, 175);
-// `
+const FooterWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  background-color: #f5f5f5;
+  align-items: center;
+  font-family: Brandon Text;
+  font-weight: 500;
+  padding: 40px;
+`
 
 const PageWrapper = styled.div`
   flex: 1 0 360px;
@@ -98,6 +111,7 @@ class App extends React.Component {
         currentPage: 1,
         searchTerm: '',
         selectedBrand: brand,
+        selectedTag: 'All Tags',
       },
       () => this.searchBoxRef.current.searchTermReset()
     )
@@ -151,15 +165,9 @@ class App extends React.Component {
     )
   }
 
-  // handleSearchTerm = (e) => {
-  //   this.setState({
-  //     ...this.state,
-  //     searchTerm: e.target.value,
-  //     currentPage: 1,
-  //     selectedBrand: 'All Brands',
-  //     selectedTag: 'All Tags',
-  //   })
-  // }
+  disableLink = (e) => {
+    e.preventDefault()
+  }
 
   filterLists = (products = [], selectedBrand, selectedTag, searchTerm) => {
     const filtered = products
@@ -186,7 +194,6 @@ class App extends React.Component {
             'description',
             'id',
             'image_link',
-            'name',
             'price',
             'price_sign',
             'product_api_url',
@@ -251,13 +258,32 @@ class App extends React.Component {
 
     if (!isLoading) {
       return (
-        <ScreenDimensionProvider>
-          <AppWrapper>
+        <AppWrapper>
+          <ScreenDimensionProvider>
             <SearchContainerWrapper>
-              <SearchBox
-                handleSearchTerm={this.handleSearchTerm}
-                ref={this.searchBoxRef}
-              />
+              <div></div>
+              <Vector onClick={(e) => this.disableLink(e)}>
+                <a href="https://www.vecteezy.com/free-vector/abc">
+                  <img
+                    src={vecteezyVector}
+                    style={{
+                      width: '175px',
+                      height: '175px',
+                    }}
+                  ></img>
+                </a>
+                <p style={{ marginTop: '-50px', color: '#f9f9f9' }}>
+                  <small>vecteezy</small>
+                </p>
+              </Vector>
+              <div></div>
+
+              <div style={{ paddingTop: '70px' }}>
+                <SearchBox
+                  handleSearchTerm={this.handleSearchTerm}
+                  ref={this.searchBoxRef}
+                />
+              </div>
 
               {/* <SearchBox
               searchTerm={this.state.searchTerm}
@@ -327,9 +353,11 @@ class App extends React.Component {
                 </Switch>
               </PageWrapper>
             </MainWrapper>
-            <footer className="footer">i am the footer</footer>
-          </AppWrapper>
-        </ScreenDimensionProvider>
+            <FooterWrapper>
+              <DisplayTime />
+            </FooterWrapper>
+          </ScreenDimensionProvider>
+        </AppWrapper>
       )
     }
 

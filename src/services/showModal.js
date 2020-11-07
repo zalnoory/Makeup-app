@@ -1,7 +1,13 @@
-import React, { useRef, useState, useEffect } from 'react'
+import React, {
+  useRef,
+  useState,
+  useEffect,
+  createContext,
+  useContext,
+} from 'react'
 
-const ShowSidemenu = (initialIsVisible) => {
-  const [isComponentVisible, setIsComponentVisible] = useState(initialIsVisible)
+const showModalComp = () => {
+  const [isComponentVisible, setIsComponentVisible] = useState(true)
 
   const ref = useRef(null)
 
@@ -18,7 +24,10 @@ const ShowSidemenu = (initialIsVisible) => {
     }
   })
 
-  return { ref, isComponentVisible, setIsComponentVisible }
+  return
+  {
+    ref, isComponentVisible, setIsComponentVisible
+  }
 }
 
-export default ShowSidemenu
+export default showModalComp

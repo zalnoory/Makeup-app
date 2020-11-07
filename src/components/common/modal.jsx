@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { ProductColors } from './product-colors'
 import '../../style/modal.css'
 import styled from 'styled-components'
+// import showModalComp from '../../services/showModal'
 
 const ModalContainer = styled.div`
   position: fixed;
@@ -43,77 +44,131 @@ const Paragrh2 = styled.p`
   font-size: 20px;
 `
 
-const ButtonContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  padding-top: 50px;
-  cursor: pointer;
-`
+// const ShowModalComp = (initialState) => {
+//   const [isComponentVisible, setIsComponentVisible] = useState(initialState)
 
-const Prev = styled.div`
-  padding-right: 150px;
-  @media (min-width: 450px) {
-    padding-right: 300px;
+//   const ref = useRef(null)
+
+//   const handleClickOutside = (event) => {
+//     if (ref.current && !ref.current.contains(event.target)) {
+//       setIsComponentVisible(false)
+//     }
+//   }
+
+//   useEffect(() => {
+//     document.addEventListener('click', handleClickOutside, true)
+//     return () => {
+//       document.removeEventListener('click', handleClickOutside, true)
+//     }
+//   })
+
+//   return {
+//     ref,
+//     isComponentVisible,
+//     setIsComponentVisible,
+//   }
+// }
+
+const Modal = (props) => {
+  const { showModal, setShowModal, product } = props
+  if (!showModal) {
+    return null
   }
-`
-
-const Next = styled.div`
-  padding-left: 150px;
-  @media (min-width: 450px) {
-    padding-left: 300px;
-  }
-`
-
-class Modal extends React.Component {
-  render() {
-    const { showModal, onModalClick, product, handleNext } = this.props
-    if (!showModal) {
-      return null
-    }
-    return (
-      <ModalContainer onClick={() => onModalClick()}>
-        <ButtonContainer>
-          <Prev>&laquo; Previous</Prev>
-          <Next onClick={() => handleNext}>Next &raquo;</Next>
-        </ButtonContainer>
-
-        <ImageContainer>
-          <img
-            style={{ maxWidth: '450px', maxHeight: '450px', width: '100%' }}
-            src={product.api_featured_image}
-            alt={product.name}
-          />
-        </ImageContainer>
-        <DetailsContainer>
-          <Paragrh1>{product.name}</Paragrh1>
-          <Paragrh2>
-            {(product.brand || '')
-              .toLowerCase()
-              .split(' ')
-              .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
-              .join(' ')}
-          </Paragrh2>
-          <div>
-            {product.product_colors.slice(0, 20).map((color) => (
-              <ProductColors
-                key={color.hex_value}
-                className="page-item"
-                color={color.hex_value}
-              />
-            ))}
-          </div>
-          <small>
-            <Link
-              to={`/product-details/${product.id}`}
-              style={{ fontSize: '16px', color: 'navy' }}
-            >
-              See Full Details.
-            </Link>
-          </small>
-        </DetailsContainer>
-      </ModalContainer>
-    )
-  }
+  return (
+    <ModalContainer
+      showModal={showModal}
+      onClick={() => setShowModal(!showModal)}
+    >
+      <ImageContainer>
+        <img
+          style={{ maxWidth: '450px', maxHeight: '450px', width: '100%' }}
+          src={product.api_featured_image}
+          alt={product.name}
+        />
+      </ImageContainer>
+      <DetailsContainer>
+        <Paragrh1>{product.name}</Paragrh1>
+        <Paragrh2>
+          {(product.brand || '')
+            .toLowerCase()
+            .split(' ')
+            .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
+            .join(' ')}
+        </Paragrh2>
+        <div>
+          {product.product_colors.slice(0, 20).map((color) => (
+            <ProductColors
+              key={color.hex_value}
+              className="page-item"
+              color={color.hex_value}
+            />
+          ))}
+        </div>
+        <small>
+          <Link
+            to={`/product-details/${product.id}`}
+            style={{ fontSize: '16px', color: 'navy' }}
+          >
+            See Full Details.
+          </Link>
+        </small>
+      </DetailsContainer>
+    </ModalContainer>
+  )
 }
 
 export default Modal
+
+// class Modal extends React.Component {
+//   render() {
+//     const { showModal, onModalClick, product, handleNext } = this.props
+//     if (!showModal) {
+//       return null
+//     }
+//     return (
+//       <ModalContainer onClick={() => onModalClick()}>
+//         <ButtonContainer>
+//           <Prev>&laquo; Previous</Prev>
+//           <Next onClick={() => handleNext}>Next &raquo;</Next>
+//         </ButtonContainer>
+
+//         <ImageContainer>
+//           <img
+//             style={{ maxWidth: '450px', maxHeight: '450px', width: '100%' }}
+//             src={product.api_featured_image}
+//             alt={product.name}
+//           />
+//         </ImageContainer>
+//         <DetailsContainer>
+//           <Paragrh1>{product.name}</Paragrh1>
+//           <Paragrh2>
+//             {(product.brand || '')
+//               .toLowerCase()
+//               .split(' ')
+//               .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
+//               .join(' ')}
+//           </Paragrh2>
+//           <div>
+//             {product.product_colors.slice(0, 20).map((color) => (
+//               <ProductColors
+//                 key={color.hex_value}
+//                 className="page-item"
+//                 color={color.hex_value}
+//               />
+//             ))}
+//           </div>
+//           <small>
+//             <Link
+//               to={`/product-details/${product.id}`}
+//               style={{ fontSize: '16px', color: 'navy' }}
+//             >
+//               See Full Details.
+//             </Link>
+//           </small>
+//         </DetailsContainer>
+//       </ModalContainer>
+//     )
+//   }
+// }
+
+// export default Modal

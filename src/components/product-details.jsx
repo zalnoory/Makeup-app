@@ -3,6 +3,51 @@ import axios from 'axios'
 import Loader from './common/loader'
 import { ProductColors } from './common/product-colors'
 import './../style/product-details.css'
+import styled from 'styled-components'
+
+const ProdDetailsCont = styled.div`
+  font-family: Brandon Text;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding-top: 40px;
+  padding-left: 40px;
+`
+
+const ImageContainer = styled.div`
+  display: flex;
+  display: inline-flex;
+  flex-direction: column;
+  height: 100%;
+  vertical-align: top;
+  padding-top: 10px;
+`
+
+const Styledlink = styled.a`
+  padding-top: 40px;
+  padding-bottom: 40px;
+  font-size: 16px;
+`
+
+const ProdImage = styled.img`
+  width: 100%;
+  max-width: 350px;
+  max-height: 350px;
+`
+
+const ProductDetail = styled.div`
+  padding-top: 100px;
+  font-size: 18px;
+`
+
+const Name = styled.p`
+  font-size: 20px;
+`
+
+const ParagraphContainer = styled.div`
+  padding-top: 30px;
+  font-size: 18px;
+`
 
 class ProductDetails extends React.Component {
   state = {
@@ -39,47 +84,39 @@ class ProductDetails extends React.Component {
 
     const { product } = this.state
     return (
-      <div className="container" id="productDetails-cont">
-        <div className="page-container">
-          <div className="container-image">
-            <img
-              className="prod-image"
-              src={product.api_featured_image}
-              alt={product.name}
-            />
-          </div>
-          <div className="container" id="container-b">
-            <div className="product-detail">
+      <ProdDetailsCont>
+        <div>
+          <ImageContainer>
+            <ProdImage src={product.api_featured_image} alt={product.name} />
+          </ImageContainer>
+          <ProductDetail>
+            <Name style={{ fontSize: '16px', fontWeight: '500' }}>
               {(product.brand || '')
                 .toLowerCase()
                 .split(' ')
                 .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
                 .join(' ')}
-            </div>
-            <div className="name">{product.name}</div>
+            </Name>
+            <Name>{product.name}</Name>
 
             <div>
               {product.product_colors.slice(0, 20).map((color) => (
                 <ProductColors
-                  id="page1-item"
                   key={color.hex_value}
                   color={color.hex_value}
+                  style={{ paddingTop: '5px', height: '20px', width: '20px' }}
                 />
               ))}
             </div>
-            <p className="price"> ${product.price}</p>
-          </div>
+            <p> ${product.price}</p>
+          </ProductDetail>
         </div>
-
-        <div className="container-c">
-          <p className="description-a">Details:</p>
-
-          <p
-            className="description"
-            dangerouslySetInnerHTML={{ __html: product.description }}
-          ></p>
-        </div>
-      </div>
+        <ParagraphContainer>
+          <p>Details:</p>
+          <p dangerouslySetInnerHTML={{ __html: product.description }} />
+        </ParagraphContainer>
+        <Styledlink href="/">Previous</Styledlink>
+      </ProdDetailsCont>
     )
   }
 }

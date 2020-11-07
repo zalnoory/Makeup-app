@@ -75,6 +75,7 @@ const Sidemenu = (props) => {
   } = props
 
   const [isComponentVisible, setIsComponentVisible] = useState(false)
+
   return (
     <div>
       <Burger open={isComponentVisible} setOpen={setIsComponentVisible} />

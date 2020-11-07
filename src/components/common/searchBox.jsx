@@ -27,18 +27,20 @@ class SearchBox extends React.Component {
 
   render() {
     return (
-      <input
-        style={{
-          display: 'initial',
-          padding: '1em',
-        }}
-        type="text"
-        spellCheck="false"
-        id="search"
-        placeholder="Search... "
-        value={this.state.searchTermValue}
-        onChange={this.getSearchTermValue}
-      ></input>
+      <div>
+        <input
+          style={{
+            display: 'initial',
+            padding: '1em',
+          }}
+          type="text"
+          spellCheck="false"
+          id="search"
+          placeholder="Search Makeup... "
+          value={this.state.searchTermValue}
+          onChange={this.getSearchTermValue}
+        ></input>
+      </div>
     )
   }
 }

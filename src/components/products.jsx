@@ -20,12 +20,36 @@ const ProductsWrapper = styled.div`
   width: 100%;
   padding: 4em;
   justify-content: center;
+  font-family: Brandon Text;
 `
 const StyledP = styled.p`
   text-align: center;
   font-size: 18px;
-  font-weight: 400;
-  font-family: Brandon Text;
+  font-weight: 400; ;
+`
+
+const ButtonContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  padding-top: 50px;
+  cursor: pointer;
+  align-self: center;
+`
+
+const Prev = styled.div`
+  padding-right: 100px;
+  padding-bottom: 30px;
+  /* @media (min-width: 450px) {
+    padding-right: 300px;
+  } */
+`
+
+const Next = styled.div`
+  padding-left: 100px;
+  padding-bottom: 30px;
+  /* @media (min-width: 450px) {
+    padding-left: 700px;
+  } */
 `
 
 class Products extends React.Component {
@@ -48,6 +72,10 @@ class Products extends React.Component {
         <Navbar images={images} onCategorySelect={onCategorySelect} />
         <ProductsWrapper>
           <StyledP>{filtered.length} items</StyledP>
+          <ButtonContainer>
+            <Prev>&laquo; Previous</Prev>
+            <Next>Next &raquo;</Next>
+          </ButtonContainer>
           <Product
             productsData={productsData}
             productsCount={filtered.length}

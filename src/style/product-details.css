@@ -1,24 +1,25 @@
-#productDetails-cont {
+/* #productDetails-cont {
   font-family: Brandon Text;
   display: flex;
   flex-direction: column;
-}
-.container-image {
+  
+} */
+/* .container-image {
   display: flex;
   flex-direction: column;
   height: 100%;
   display: inline-block;
   vertical-align: top;
   margin-top: 10px;
-  /* margin-left: -10px; */
-}
+  
+} */
 
-.prod-image {
+/* .prod-image {
   width: 100%;
   max-width: 350px;
   max-height: 350px;
   margin-right: 150px;
-}
+} */
 
 /* .details-cont {
   position: flex;
@@ -29,54 +30,45 @@
   line-height: 30px;
 } */
 
-.product-detail {
+/* .product-detail {
   font-weight: bold;
   display: inline-block;
   *display: inline;
   margin-bottom: 10px;
   outline: none;
   vertical-align: top;
-}
+} */
 
-.name {
+/* .name {
   font-size: 18px;
   margin-top: -10px;
   margin-bottom: 2px;
   margin-left: 0px;
-}
+} */
 
-#container-b {
+/* #container-b {
   margin-top: 20px;
   margin-left: -15px;
-}
+} */
 
-.container-c {
+/* .container-c {
   font-size: 11px;
   margin-top: 30px;
-}
+} */
 
-#page1-item {
+/* #page1-item {
   margin-top: 5px;
   height: 20px;
   width: 20px;
   margin-left: 0px;
-}
+} */
 
-.description-a {
+/* .description-a {
   margin-top: -40px;
   font-size: 14px;
-}
+} */
 
-.description {
-  margin-top: -15px;
-  font-size: 16px;
-}
-
-.price {
-  font-size: 16px;
-}
-
-@media screen and (min-width: 450px) {
+/* @media screen and (min-width: 450px) {
   .product-detail {
     font-size: 16px;
   }
@@ -85,4 +77,4 @@
     max-width: 450px;
     max-height: 450px;
   }
-}
+} */
