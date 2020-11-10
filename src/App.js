@@ -107,7 +107,7 @@ class App extends React.Component {
         selectedBrand: brand,
         selectedTag: 'All Tags',
       },
-      /*Resest "searchTermValue" in SearchBox (child comp) */
+      /*Resest "searchTermValue" in SearchBox(child comp) */
       () => this.searchBoxRef.current.searchTermReset()
     )
   }
@@ -122,7 +122,7 @@ class App extends React.Component {
         selectedBrand: 'All Brands',
         selectedTag: tag,
       },
-      /*Resest "searchTermValue" in SearchBox (child comp) */
+      /*Resest "searchTermValue" in SearchBox(child comp) */
       () => this.searchBoxRef.current.searchTermReset()
     )
   }
@@ -131,9 +131,9 @@ class App extends React.Component {
     const state = this.state
     this.setState(
       { ...state, currentPage: page },
-      /*scroll to top (net-prev-comp)*/ () =>
+      /*scroll to top (next-prev-comp)*/ () =>
         document
-          .getElementById('ButtonContainer ')
+          .getElementById('ButtonContainer')
           .scrollIntoView({ behavior: 'smooth' })
     )
   }
@@ -149,7 +149,7 @@ class App extends React.Component {
           selectedCategory: category,
           selectedTag: 'All Tags',
         },
-        /*Resest "searchTermValue" in SearchBox (child comp) */
+        /*Resest "searchTermValue" in SearchBox(child comp) */
         () => this.searchBoxRef.current.searchTermReset()
       )
     }

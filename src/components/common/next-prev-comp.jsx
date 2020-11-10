@@ -24,7 +24,7 @@ const NextPrevComp = (props) => {
   const pagesCount = Math.ceil(filtered.length / pageSize)
 
   return (
-    <ButtonContainer id="ButtonContainer ">
+    <ButtonContainer id="ButtonContainer">
       {currentPage > 1 ? (
         <Prev onClick={() => handleNextBack('back')}>&laquo; Previous</Prev>
       ) : null}
