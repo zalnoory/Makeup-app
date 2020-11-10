@@ -61,30 +61,6 @@ const PageWrapper = styled.div`
   align-items: center;
 `
 
-const ButtonContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  padding-top: 50px;
-  cursor: pointer;
-  align-self: center;
-`
-
-const Prev = styled.div`
-  padding-right: 100px;
-  padding-bottom: 30px;
-  /* @media (min-width: 450px) {
-    padding-right: 300px;
-  } */
-`
-
-const Next = styled.div`
-  padding-left: 100px;
-  padding-bottom: 30px;
-  /* @media (min-width: 450px) {
-    padding-left: 700px;
-  } */
-`
-
 class App extends React.Component {
   state = {
     brands: [],
@@ -131,6 +107,7 @@ class App extends React.Component {
         selectedBrand: brand,
         selectedTag: 'All Tags',
       },
+      /*Resest "searchTermValue" in SearchBox (child comp) */
       () => this.searchBoxRef.current.searchTermReset()
     )
   }
@@ -145,13 +122,20 @@ class App extends React.Component {
         selectedBrand: 'All Brands',
         selectedTag: tag,
       },
+      /*Resest "searchTermValue" in SearchBox (child comp) */
       () => this.searchBoxRef.current.searchTermReset()
     )
   }
 
   handlePageChange = (page) => {
     const state = this.state
-    this.setState({ ...state, currentPage: page })
+    this.setState(
+      { ...state, currentPage: page },
+      /*scroll to top (net-prev-comp)*/ () =>
+        document
+          .getElementById('ButtonContainer ')
+          .scrollIntoView({ behavior: 'smooth' })
+    )
   }
 
   handleSelectedCategory = (category) => {
@@ -165,6 +149,7 @@ class App extends React.Component {
           selectedCategory: category,
           selectedTag: 'All Tags',
         },
+        /*Resest "searchTermValue" in SearchBox (child comp) */
         () => this.searchBoxRef.current.searchTermReset()
       )
     }
@@ -311,11 +296,6 @@ class App extends React.Component {
                   ref={this.searchBoxRef}
                 />
               </div>
-
-              {/* <SearchBox
-              searchTerm={this.state.searchTerm}
-              handleSearchTerm={this.handleSearchTerm}
-            /> */}
             </SearchContainerWrapper>
             <MainWrapper>
               {/* <ListGroupWrapper> */}
