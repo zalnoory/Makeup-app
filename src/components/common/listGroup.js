@@ -1,9 +1,9 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import List from './list'
 import '../../style/listGroup.css'
 import styled from 'styled-components'
 
-const List_grp_Container = styled.div`
+const ListGrpContainer = styled.div`
   padding-top: 1em;
   padding-right: 16px;
   padding-left: 16px;
@@ -36,7 +36,7 @@ const StyledLabel = styled.label`
 
 const StyledContent = styled.div`
   background: white;
-  padding: 5px 5px;
+  padding: 5px 0px;
   border: 0px;
   margin: 0 0 1px 0;
   border-radius: 3px;
@@ -53,7 +53,7 @@ const ListGroup = (props) => {
   } = props
 
   return (
-    <List_grp_Container>
+    <ListGrpContainer>
       <input type="checkbox" id="brands" />
       <StyledLabel htmlFor="brands">Brands</StyledLabel>
 
@@ -73,7 +73,7 @@ const ListGroup = (props) => {
           selectedItem={selectedTag}
         />
       </StyledContent>
-    </List_grp_Container>
+    </ListGrpContainer>
   )
 }
 

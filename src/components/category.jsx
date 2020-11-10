@@ -1,7 +1,7 @@
 import React from 'react'
 import Product from './common/product'
-import ListGroup from './common/listGroup'
 import dataPagination from '../utils/data-pagination'
+import NextPrevComp from './common/next-prev-comp'
 import Pagination from './common/page-pagination'
 import './../style/category.css'
 import styled from 'styled-components'
@@ -33,18 +33,15 @@ const StyledP = styled.p`
 const Category = (props) => {
   const {
     allProducts,
-    brands,
     currentPage,
     filterLists,
     match,
-    onBrandSelect,
     onPageChange,
-    onTagSelect,
     pageSize,
     searchTerm,
     selectedBrand,
     selectedTag,
-    tags,
+    handleNextBack,
   } = props
   const [categoryItems, setCategoryItems] = React.useState([])
 
@@ -74,10 +71,18 @@ const Category = (props) => {
     pageSize,
     currentPage
   )
+
   return (
     <CategoryPageWrapper>
       <ProductsWrapper>
         <StyledP> {filteredCategory.length} items </StyledP>
+        <NextPrevComp
+          filtered={filteredCategory}
+          currentPage={currentPage}
+          pageSize={pageSize}
+          handleNextBack={handleNextBack}
+        />
+
         <Product productsData={productsPagination} />
         <Pagination
           productsCount={filteredCategory.length}

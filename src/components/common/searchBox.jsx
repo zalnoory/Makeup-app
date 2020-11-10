@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import '../../style/searchBox.css'
 
 class SearchBox extends React.Component {

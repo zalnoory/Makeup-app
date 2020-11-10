@@ -1,5 +1,6 @@
 import React from 'react'
 import Pagination from './common/page-pagination'
+import NextPrevComp from './common/next-prev-comp'
 import Product from './common/product'
 import Navbar from './navbar'
 import './../style/products.css'
@@ -28,30 +29,6 @@ const StyledP = styled.p`
   font-weight: 400; ;
 `
 
-const ButtonContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  padding-top: 50px;
-  cursor: pointer;
-  align-self: center;
-`
-
-const Prev = styled.div`
-  padding-right: 100px;
-  padding-bottom: 30px;
-  /* @media (min-width: 450px) {
-    padding-right: 300px;
-  } */
-`
-
-const Next = styled.div`
-  padding-left: 100px;
-  padding-bottom: 30px;
-  /* @media (min-width: 450px) {
-    padding-left: 700px;
-  } */
-`
-
 class Products extends React.Component {
   render() {
     const {
@@ -62,9 +39,7 @@ class Products extends React.Component {
       pageSize,
       currentPage,
       onCategorySelect,
-      brands,
-      onBrandSelect,
-      selectedBrand,
+      handleNextBack,
     } = this.props
 
     return (
@@ -72,17 +47,14 @@ class Products extends React.Component {
         <Navbar images={images} onCategorySelect={onCategorySelect} />
         <ProductsWrapper>
           <StyledP>{filtered.length} items</StyledP>
-          <ButtonContainer>
-            <Prev>&laquo; Previous</Prev>
-            <Next>Next &raquo;</Next>
-          </ButtonContainer>
-          <Product
-            productsData={productsData}
-            productsCount={filtered.length}
-            pageSize={pageSize}
+          <NextPrevComp
+            filtered={filtered}
             currentPage={currentPage}
-            onPageChange={onPageChange}
+            pageSize={pageSize}
+            handleNextBack={handleNextBack}
           />
+
+          <Product productsData={productsData} />
           <Pagination
             productsCount={filtered.length}
             pageSize={pageSize}

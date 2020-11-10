@@ -11,18 +11,12 @@ import dataPagination from './utils/data-pagination'
 import '././style/products.css'
 import SearchBox from './components/common/searchBox'
 import './App.css'
-import ListGroup from './components/common/listGroup'
-import Sidemenu from './components/common/side-menu'
 import styled from 'styled-components'
 import ScreenDimensionProvider from './services/screenDimension'
 import ResponsiveLayout from './components/common/responsiveLayout'
 import { createRef } from 'react'
 import { DisplayTime } from './components/common/time-display'
 import vecteezyVector from './images/vecteezyVector.jpg'
-
-// import Navbar from './components/navbar'
-// import Product from './components/common/product'
-// import ListGroup from './components/common/listGroup'
 
 const AppWrapper = styled.div`
   display: flex;
@@ -65,6 +59,30 @@ const PageWrapper = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+`
+
+const ButtonContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  padding-top: 50px;
+  cursor: pointer;
+  align-self: center;
+`
+
+const Prev = styled.div`
+  padding-right: 100px;
+  padding-bottom: 30px;
+  /* @media (min-width: 450px) {
+    padding-right: 300px;
+  } */
+`
+
+const Next = styled.div`
+  padding-left: 100px;
+  padding-bottom: 30px;
+  /* @media (min-width: 450px) {
+    padding-left: 700px;
+  } */
 `
 
 class App extends React.Component {
@@ -169,6 +187,17 @@ class App extends React.Component {
     e.preventDefault()
   }
 
+  handleNextBack = (direction) => {
+    const state = this.state
+    if (direction === 'back') {
+      this.setState({ ...state, currentPage: this.state.currentPage - 1 })
+    } else {
+      if (direction === 'next') {
+        this.setState({ ...state, currentPage: this.state.currentPage + 1 })
+      }
+    }
+  }
+
   filterLists = (products = [], selectedBrand, selectedTag, searchTerm) => {
     const filtered = products
       .filter((product) => {
@@ -245,8 +274,6 @@ class App extends React.Component {
       tags,
     } = this.state
 
-    console.log('render searchTerm', this.state.searchTerm)
-
     const filtered = this.filterLists(
       products,
       selectedBrand,
@@ -272,7 +299,7 @@ class App extends React.Component {
                     }}
                   ></img>
                 </a>
-                <p style={{ marginTop: '-50px', color: '#f9f9f9' }}>
+                <p style={{ marginTop: '-50px', color: '#f0f0f0' }}>
                   <small>vecteezy</small>
                 </p>
               </Vector>
@@ -321,6 +348,7 @@ class App extends React.Component {
                         selectedBrand={selectedBrand}
                         selectedTag={selectedTag}
                         tags={tags}
+                        handleNextBack={this.handleNextBack}
                       />
                     )}
                   />
@@ -347,6 +375,7 @@ class App extends React.Component {
                         selectedBrand={selectedBrand}
                         selectedTag={selectedTag}
                         tags={tags}
+                        handleNextBack={this.handleNextBack}
                       />
                     )}
                   />
