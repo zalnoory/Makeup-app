@@ -23,7 +23,7 @@ const StyledImg = styled.img`
   object-fit: contain;
 `
 
-const Overlay = styled.div`
+const Overlay = styled.a`
   position: absolute;
   bottom: 0px;
   background: rgb(0, 0, 0);
@@ -54,15 +54,6 @@ const ColorContainer = styled.div`
 const Productdisplay = (props) => {
   const { product, productsData } = props
   const [isModalVisible, setIsModalVisiblel] = useState(false)
-  const [selectIndex, setSelectIndex] = useState(0)
-
-  // const handleNext = () => {
-  //   const productsData = this.props
-  //   let selectedIndex = this.state.SelectedIndex
-  //   if (selectedIndex >= 0 && selectedIndex < productsData.length) {
-  //     this.setState({ selectedIndex: productsData + 1 })
-  //   }
-  // }
 
   return (
     <React.Fragment>
@@ -78,7 +69,6 @@ const Productdisplay = (props) => {
             {' '}
             Quick View
           </Overlay>
-          {/* <Overlay onClick={this.toggleModal}> Quick View</Overlay> */}
         </ImageContainer>
         <StyledLink to={`/product-details/${product.id}`}>
           <ColorContainer>

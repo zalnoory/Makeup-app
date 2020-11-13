@@ -25,7 +25,7 @@ const AppWrapper = styled.div`
   flex-direction: column;
 `
 
-const SearchContainerWrapper = styled.header`
+const HeaderWrapper = styled.header`
   display: flex;
   width: 100%;
   flex-direction: row;
@@ -156,16 +156,13 @@ class App extends React.Component {
   }
 
   handleSearchTerm = (term) => {
-    this.setState(
-      {
-        ...this.state,
-        currentPage: 1,
-        searchTerm: term,
-        selectedBrand: 'All Brands',
-        selectedTag: 'All Tags',
-      },
-      () => console.log('print searchTerm', this.state.searchTerm)
-    )
+    this.setState({
+      ...this.state,
+      currentPage: 1,
+      searchTerm: term,
+      selectedBrand: 'All Brands',
+      selectedTag: 'All Tags',
+    })
   }
 
   disableLink = (e) => {
@@ -272,7 +269,7 @@ class App extends React.Component {
       return (
         <AppWrapper>
           <ScreenDimensionProvider>
-            <SearchContainerWrapper>
+            <HeaderWrapper>
               <div></div>
               <Vector onClick={(e) => this.disableLink(e)}>
                 <a href="https://www.vecteezy.com/free-vector/abc">
@@ -296,7 +293,7 @@ class App extends React.Component {
                   ref={this.searchBoxRef}
                 />
               </div>
-            </SearchContainerWrapper>
+            </HeaderWrapper>
             <MainWrapper>
               {/* <ListGroupWrapper> */}
               <ResponsiveLayout
