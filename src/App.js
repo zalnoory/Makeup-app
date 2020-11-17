@@ -1,6 +1,6 @@
 import React from 'react'
 import axios from 'axios'
-import { Route, Switch } from 'react-router-dom'
+import { Redirect, Route, Switch } from 'react-router-dom'
 import Products from './components/products'
 import ProductDetails from './components/product-details'
 import Category from './components/category'
@@ -62,18 +62,22 @@ const PageWrapper = styled.div`
 `
 
 class App extends React.Component {
-  state = {
-    brands: [],
-    currentPage: 1,
-    images: [],
-    isLoading: true,
-    pageSize: 80,
-    products: [],
-    selectedBrand: 'All Brands',
-    selectedCategory: '',
-    selectedTag: 'All Tags',
-    tags: [],
-    searchTerm: '',
+  constructor(props) {
+    super(props)
+    this.filterByValue = this.filterByValue.bind(this)
+    this.state = {
+      brands: [],
+      currentPage: 1,
+      images: [],
+      isLoading: true,
+      pageSize: 80,
+      products: [],
+      selectedBrand: 'All Brands',
+      selectedCategory: '',
+      selectedTag: 'All Tags',
+      tags: [],
+      searchTerm: '',
+    }
   }
 
   searchBoxRef = createRef()
@@ -196,50 +200,48 @@ class App extends React.Component {
           return product
         }
       })
-      .filter((product) => {
-        if (searchTerm !== '') {
-          const excludeKeys = [
-            'api_featured_image',
-            'created_at',
-            'currency',
-            'description',
-            'id',
-            'image_link',
-            'price',
-            'price_sign',
-            'product_api_url',
-            'product_colors',
-            'product_link',
-            'rating',
-            'updated_at',
-            'website_link',
-          ]
 
-          return Object.keys(product).some(
-            (key) =>
-              excludeKeys.includes(key)
-                ? false
-                : typeof product[key] === 'string' &&
-                  product[key]
-                    .toLowerCase()
-                    .includes(searchTerm.toLowerCase().trim())
-
-            // typeof product[key] === 'string' &&
-            // product['tag_list'].length !== 0 &&
-            // product['tag_list'].includes(
-            //   searchTerm
-            //     .toLowerCase()
-            //     .split(' ')
-            //     .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
-            //     .join(' ')
-            //     .trim()
-          )
-        } else {
-          return product
-        }
-      })
+    if (searchTerm.length > 0) {
+      return this.filterByValue(filtered, searchTerm)
+    }
 
     return filtered
+  }
+
+  filterByValue(filteredProductsArray, searchTerm) {
+    const searchRegex = new RegExp(searchTerm, 'i')
+
+    return filteredProductsArray.filter((product) => {
+      const {
+        api_featured_image,
+        created_at,
+        currency,
+        description,
+        id,
+        image_link,
+        price,
+        price_sign,
+        product_api_url,
+        product_colors,
+        product_link,
+        rating,
+        updated_at,
+        website_link,
+        ...includedKeys
+      } = product
+
+      return Object.values(includedKeys).some((value) => {
+        if (Array.isArray(value)) {
+          return value.some((tag) => tag.match(searchRegex))
+        }
+
+        if (typeof value === 'string') {
+          return value.match(searchRegex)
+        }
+
+        return false
+      })
+    })
   }
 
   render() {
@@ -333,6 +335,7 @@ class App extends React.Component {
                     path="/product-details/:productId"
                     component={ProductDetails}
                   />
+
                   <Route
                     path="/"
                     render={() => (
@@ -356,6 +359,7 @@ class App extends React.Component {
                       />
                     )}
                   />
+                  {/* <Route path="/search-result" component={SearchResult} />   */}
                 </Switch>
               </PageWrapper>
             </MainWrapper>

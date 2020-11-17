@@ -1,9 +1,11 @@
 import React from 'react'
 import '../../style/searchBox.css'
+import { Redirect } from 'react-router-dom'
 
 class SearchBox extends React.Component {
   state = {
     searchTermValue: '',
+    redirect: null,
   }
   timer = null
 
@@ -26,6 +28,8 @@ class SearchBox extends React.Component {
   }
 
   render() {
+    const { searchTermValue } = this.state
+
     return (
       <div>
         <input
@@ -37,8 +41,9 @@ class SearchBox extends React.Component {
           spellCheck="false"
           id="search"
           placeholder="Search Makeup... "
-          value={this.state.searchTermValue}
+          value={searchTermValue}
           onChange={this.getSearchTermValue}
+          onBlur={() => this.setState({ searchTermValue: '' })}
         ></input>
       </div>
     )

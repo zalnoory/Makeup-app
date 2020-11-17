@@ -23,7 +23,7 @@ const StyledImg = styled.img`
   object-fit: contain;
 `
 
-const Overlay = styled.a`
+const Overlay = styled.div`
   position: absolute;
   bottom: 0px;
   background: rgb(0, 0, 0);
