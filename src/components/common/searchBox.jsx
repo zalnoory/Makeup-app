@@ -1,30 +1,23 @@
 import React from 'react'
 import '../../style/searchBox.css'
-import { Redirect } from 'react-router-dom'
 
 class SearchBox extends React.Component {
   state = {
     searchTermValue: '',
     redirect: null,
   }
-  timer = null
 
   getSearchTermValue = (e) => {
-    /*set timer to hold off handleSearchTerm() untill user finish typing */
-    clearTimeout(this.timer)
-    this.setState(
-      { searchTermValue: e.target.value },
-      () =>
-        (this.timer = setTimeout(
-          /*send searchTerm value to parent */
-          () => this.props.handleSearchTerm(this.state.searchTermValue),
-          350
-        ))
-    )
+    this.setState({ searchTermValue: e.target.value })
   }
 
-  searchTermReset = () => {
-    this.setState({ searchTermValue: '' })
+  submitSearchTermValue = (e) => {
+    /*submit searchTermValue on 'Enter' */
+    if (e.key === 'Enter') {
+      /*send searchTerm value to parent */
+      this.props.handleSearchTerm(this.state.searchTermValue)
+      this.setState({ searchTermValue: '' })
+    }
   }
 
   render() {
@@ -43,6 +36,7 @@ class SearchBox extends React.Component {
           placeholder="Search Makeup... "
           value={searchTermValue}
           onChange={this.getSearchTermValue}
+          onKeyDown={(e) => this.submitSearchTermValue(e)}
           onBlur={() => this.setState({ searchTermValue: '' })}
         ></input>
       </div>

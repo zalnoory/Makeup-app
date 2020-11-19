@@ -1,6 +1,6 @@
 import React from 'react'
 import axios from 'axios'
-import { Redirect, Route, Switch } from 'react-router-dom'
+import { withRouter, Redirect, Route, Switch } from 'react-router-dom'
 import Products from './components/products'
 import ProductDetails from './components/product-details'
 import Category from './components/category'
@@ -14,7 +14,6 @@ import './App.css'
 import styled from 'styled-components'
 import ScreenDimensionProvider from './services/screenDimension'
 import ResponsiveLayout from './components/common/responsiveLayout'
-import { createRef } from 'react'
 import { DisplayTime } from './components/common/time-display'
 import vecteezyVector from './images/vecteezyVector.jpg'
 
@@ -80,8 +79,6 @@ class App extends React.Component {
     }
   }
 
-  searchBoxRef = createRef()
-
   /*connect to backend*/
   async componentDidMount() {
     const { data } = await axios.get(
@@ -103,32 +100,24 @@ class App extends React.Component {
 
   handleBrandSelect = (brand) => {
     const state = this.state
-    this.setState(
-      {
-        ...state,
-        currentPage: 1,
-        searchTerm: '',
-        selectedBrand: brand,
-        selectedTag: 'All Tags',
-      },
-      /*Resest "searchTermValue" in SearchBox(child comp) */
-      () => this.searchBoxRef.current.searchTermReset()
-    )
+    this.setState({
+      ...state,
+      currentPage: 1,
+      searchTerm: '',
+      selectedBrand: brand,
+      selectedTag: 'All Tags',
+    })
   }
 
   handleTagSelect = (tag) => {
     const state = this.state
-    this.setState(
-      {
-        ...state,
-        currentPage: 1,
-        searchTerm: '',
-        selectedBrand: 'All Brands',
-        selectedTag: tag,
-      },
-      /*Resest "searchTermValue" in SearchBox(child comp) */
-      () => this.searchBoxRef.current.searchTermReset()
-    )
+    this.setState({
+      ...state,
+      currentPage: 1,
+      searchTerm: '',
+      selectedBrand: 'All Brands',
+      selectedTag: tag,
+    })
   }
 
   handlePageChange = (page) => {
@@ -144,29 +133,28 @@ class App extends React.Component {
 
   handleSelectedCategory = (category) => {
     if (category !== this.state.category) {
-      this.setState(
-        {
-          ...this.state,
-          currentPage: 1,
-          searchTerm: '',
-          selectedBrand: 'All Brands',
-          selectedCategory: category,
-          selectedTag: 'All Tags',
-        },
-        /*Resest "searchTermValue" in SearchBox(child comp) */
-        () => this.searchBoxRef.current.searchTermReset()
-      )
+      this.setState({
+        ...this.state,
+        currentPage: 1,
+        searchTerm: '',
+        selectedBrand: 'All Brands',
+        selectedCategory: category,
+        selectedTag: 'All Tags',
+      })
     }
   }
 
   handleSearchTerm = (term) => {
-    this.setState({
-      ...this.state,
-      currentPage: 1,
-      searchTerm: term,
-      selectedBrand: 'All Brands',
-      selectedTag: 'All Tags',
-    })
+    this.setState(
+      {
+        ...this.state,
+        currentPage: 1,
+        searchTerm: term,
+        selectedBrand: 'All Brands',
+        selectedTag: 'All Tags',
+      },
+      () => this.props.history.push('/')
+    )
   }
 
   disableLink = (e) => {
@@ -290,14 +278,10 @@ class App extends React.Component {
               <div></div>
 
               <div style={{ paddingTop: '70px' }}>
-                <SearchBox
-                  handleSearchTerm={this.handleSearchTerm}
-                  ref={this.searchBoxRef}
-                />
+                <SearchBox handleSearchTerm={this.handleSearchTerm} />
               </div>
             </HeaderWrapper>
             <MainWrapper>
-              {/* <ListGroupWrapper> */}
               <ResponsiveLayout
                 brands={brands}
                 onBrandSelect={this.handleBrandSelect}
@@ -335,7 +319,6 @@ class App extends React.Component {
                     path="/product-details/:productId"
                     component={ProductDetails}
                   />
-
                   <Route
                     path="/"
                     render={() => (
@@ -359,7 +342,6 @@ class App extends React.Component {
                       />
                     )}
                   />
-                  {/* <Route path="/search-result" component={SearchResult} />   */}
                 </Switch>
               </PageWrapper>
             </MainWrapper>
@@ -375,4 +357,4 @@ class App extends React.Component {
   }
 }
 
-export default App
+export default withRouter(App)
