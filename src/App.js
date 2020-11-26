@@ -100,24 +100,30 @@ class App extends React.Component {
 
   handleBrandSelect = (brand) => {
     const state = this.state
-    this.setState({
-      ...state,
-      currentPage: 1,
-      searchTerm: '',
-      selectedBrand: brand,
-      selectedTag: 'All Tags',
-    })
+    this.setState(
+      {
+        ...state,
+        currentPage: 1,
+        searchTerm: '',
+        selectedBrand: brand,
+        selectedTag: 'All Tags',
+      },
+      () => this.props.history.push('/')
+    )
   }
 
   handleTagSelect = (tag) => {
     const state = this.state
-    this.setState({
-      ...state,
-      currentPage: 1,
-      searchTerm: '',
-      selectedBrand: 'All Brands',
-      selectedTag: tag,
-    })
+    this.setState(
+      {
+        ...state,
+        currentPage: 1,
+        searchTerm: '',
+        selectedBrand: 'All Brands',
+        selectedTag: tag,
+      },
+      () => this.props.history.push('/')
+    )
   }
 
   handlePageChange = (page) => {

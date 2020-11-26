@@ -21,9 +21,12 @@ const DisplayGrid = styled.div`
   display: flex;
   flex-wrap: wrap;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(auto, 300px));
-  grid-gap: 30px;
+  grid-template-columns: repeat(auto-fill, minmax(auto, 130px));
+  grid-gap: 20px;
   width: 100%;
+  @media screen and (min-width: 1020px) {
+    grid-template-columns: repeat(auto-fill, minmax(auto, 300px));
+  }
 `
 
 class Product extends React.Component {

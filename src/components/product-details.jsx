@@ -23,12 +23,6 @@ const ImageContainer = styled.div`
   padding-top: 10px;
 `
 
-const Styledlink = styled.a`
-  padding-top: 40px;
-  padding-bottom: 40px;
-  font-size: 16px;
-`
-
 const ProdImage = styled.img`
   width: 100%;
   max-width: 350px;
@@ -115,7 +109,6 @@ class ProductDetails extends React.Component {
           <p>Details:</p>
           <p dangerouslySetInnerHTML={{ __html: product.description }} />
         </ParagraphContainer>
-        <Styledlink href="/">Previous</Styledlink>
       </ProdDetailsCont>
     )
   }

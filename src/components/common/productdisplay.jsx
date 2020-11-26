@@ -6,6 +6,8 @@ import styled from 'styled-components'
 
 const ProductDisplayItem = styled.div`
   max-width: 100%;
+  font-weight: 400;
+  font-family: Brandon Text;
 `
 
 const ImageContainer = styled.div`
@@ -13,14 +15,14 @@ const ImageContainer = styled.div`
   justify-content: center;
   position: relative;
   max-width: 100%;
+  overflow: hidden;
 `
 
 const StyledImg = styled.img`
   display: inline-flex;
   max-width: 100%;
   width: 100%;
-  max-height: 300px;
-  object-fit: contain;
+  height: auto;
 `
 
 const Overlay = styled.div`
@@ -48,7 +50,14 @@ const StyledLink = styled(Link)`
 `
 
 const ColorContainer = styled.div`
-  margin-top: 25px;
+  margin-top: 10px;
+`
+
+const StyledP = styled.p`
+  font-size: 12px;
+  @media screen and (min-width: 1020px) {
+    font-size: 16px;
+  }
 `
 
 const Productdisplay = (props) => {
@@ -76,7 +85,7 @@ const Productdisplay = (props) => {
               {product.product_colors.slice(0, 5).map((color) => (
                 <ProductColors key={color.hex_value} color={color.hex_value} />
               ))}
-              <p>
+              <StyledP>
                 {(product.brand || '')
                   .toLowerCase()
                   .split(' ')
@@ -84,7 +93,7 @@ const Productdisplay = (props) => {
                   .join(' ')}{' '}
                 {product.product_type.charAt(0).toUpperCase() +
                   product.product_type.slice(1)}
-              </p>
+              </StyledP>
             </div>
           </ColorContainer>
         </StyledLink>
