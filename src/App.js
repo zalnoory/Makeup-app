@@ -1,6 +1,6 @@
 import React from 'react'
 import axios from 'axios'
-import { withRouter, Redirect, Route, Switch } from 'react-router-dom'
+import { withRouter, Route, Switch } from 'react-router-dom'
 import Products from './components/products'
 import ProductDetails from './components/product-details'
 import Category from './components/category'
