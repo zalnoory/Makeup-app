@@ -3,20 +3,22 @@ import '../../style/searchBox.css'
 import styled from 'styled-components'
 
 const Input = styled.input`
-  height: 50px;
-  font-size: 25px;
+  display: initial;
+  height: 20px;
   width: 100%;
+  font-weight: 100;
+  font-size: 16px;
+  font-family: Brandon Text;
   border: 2px solid #aaa;
   border-radius: 4px;
   outline: none;
   transition: 0.3s;
   cursor: pointer;
   align-self: flex-end;
-  display: initial;
 
   :focus {
-    border-color: #4d4e4e;
-    box-shadow: 0 0 8px 0 #4d4e4e;
+    border-color: #afb1b1;
+    box-shadow: 0 0 8px 0 #afb1b1;
   }
 `
 
