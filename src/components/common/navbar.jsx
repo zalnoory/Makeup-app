@@ -52,7 +52,7 @@ const Navbar = (props) => {
         >
           <Link to={`/category/${image.title}`}>
             <NavImage
-              src={require(`../images/${image.src}`)}
+              src={require(`../../images/${image.src}`)}
               alt={image.description}
             />
           </Link>

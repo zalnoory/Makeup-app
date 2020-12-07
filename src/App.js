@@ -1,20 +1,19 @@
-import React from 'react'
-import axios from 'axios'
-import { withRouter, Route, Switch } from 'react-router-dom'
-import Products from './components/products'
-import ProductDetails from './components/product-details'
-import Category from './components/category'
-import imageLoader from './services/images'
-import Loader from './components/common/loader'
-import { getBrands, getProductTag } from './services/productsService'
-import dataPagination from './utils/data-pagination'
-import SearchBox from './components/common/searchBox'
 import './App.css'
-import styled from 'styled-components'
-import ScreenDimensionProvider from './services/screenDimension'
+import Category from './components/category'
+import Header from './components/common/header'
+import Loader from './components/common/loader'
+import ProductDetails from './components/product-details'
+import Products from './components/products'
+import React from 'react'
 import ResponsiveLayout from './components/common/responsiveLayout'
+import ScreenDimensionProvider from './services/screenDimension'
+import axios from 'axios'
+import dataPagination from './utils/data-pagination'
+import imageLoader from './services/images'
+import styled from 'styled-components'
 import { DisplayTime } from './components/common/time-display'
-import vecteezyVector from './images/vecteezyVector.jpg'
+import { getBrands, getProductTag } from './services/productsService'
+import { withRouter, Route, Switch } from 'react-router-dom'
 
 const AppWrapper = styled.div`
   display: flex;
@@ -30,12 +29,6 @@ const HeaderWrapper = styled.header`
   padding: 16px;
   justify-content: space-between;
   border-bottom: 1px solid rgb(179, 175, 175);
-`
-
-const Vector = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 `
 
 const MainWrapper = styled.main`
@@ -265,26 +258,7 @@ class App extends React.Component {
         <AppWrapper>
           <ScreenDimensionProvider>
             <HeaderWrapper>
-              <div></div>
-              <Vector onClick={(e) => this.disableLink(e)}>
-                <a href="https://www.vecteezy.com/free-vector/abc">
-                  <img
-                    src={vecteezyVector}
-                    style={{
-                      width: '175px',
-                      height: '175px',
-                    }}
-                  ></img>
-                </a>
-                <p style={{ marginTop: '-50px', color: '#f0f0f0' }}>
-                  <small>vecteezy</small>
-                </p>
-              </Vector>
-              <div></div>
-
-              <div style={{ paddingTop: '70px' }}>
-                <SearchBox handleSearchTerm={this.handleSearchTerm} />
-              </div>
+              <Header handleSearchTerm={this.handleSearchTerm} />
             </HeaderWrapper>
             <MainWrapper>
               <ResponsiveLayout

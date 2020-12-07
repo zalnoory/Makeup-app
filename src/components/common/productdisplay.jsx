@@ -112,58 +112,6 @@ const Productdisplay = (props) => {
 
 export default Productdisplay
 
-// const Productdisplay = (props) => {
-//   const { product, productsData } = props
-//   const [isModalVisible, setIsModalVisiblel] = useState(false)
-
-//   return (
-//     <React.Fragment>
-//       <ProductDisplayItem>
-//         <ImageContainer>
-//           <StyledLink to={`/product-details/${product.id}`}>
-//             <StyledImg src={product.api_featured_image} alt={product.name} />
-//           </StyledLink>
-//           <Overlay
-//             isModalVisible={isModalVisible}
-//             onClick={() => setIsModalVisiblel(!isModalVisible)}
-//           >
-//             {' '}
-//             Quick View
-//           </Overlay>
-//         </ImageContainer>
-//         <StyledLink to={`/product-details/${product.id}`}>
-//           <ColorContainer>
-//             <div>
-//               {product.product_colors.slice(0, 5).map((color) => (
-//                 <ProductColors key={color.hex_value} color={color.hex_value} />
-//               ))}
-//               <StyledP>
-//                 {(product.brand || '')
-//                   .toLowerCase()
-//                   .split(' ')
-//                   .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
-//                   .join(' ')}{' '}
-//                 {product.product_type.charAt(0).toUpperCase() +
-//                   product.product_type.slice(1)}
-//               </StyledP>
-//             </div>
-//           </ColorContainer>
-//         </StyledLink>
-//         {/* Modal Component */}
-
-//         <Modal
-//           showModal={isModalVisible}
-//           setShowModal={setIsModalVisiblel}
-//           product={product}
-//           productsData={productsData}
-//         />
-//       </ProductDisplayItem>
-//     </React.Fragment>
-//   )
-// }
-
-// export default Productdisplay
-
 // class Productdisplay extends React.Component {
 //   state = {
 //     showModal: false,

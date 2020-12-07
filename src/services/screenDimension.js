@@ -10,7 +10,6 @@ const ScreenDimensionProvider = ({ children }) => {
       setScreenWidth(window.innerWidth)
       setScreenHeight(window.innerWidth)
     }
-    //   setScreenWidth(window.innerWidth)
     window.addEventListener('resize', screenDimensionHandler)
     return () => window.removeEventListener('resize', screenDimensionHandler)
   }, [])

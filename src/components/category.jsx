@@ -11,7 +11,6 @@ const CategoryPageWrapper = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  /* padding: 0em 2em 2em 2em; */
 `
 
 const ProductsWrapper = styled.div`

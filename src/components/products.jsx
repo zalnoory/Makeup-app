@@ -1,8 +1,8 @@
-import React from 'react'
-import Pagination from './common/page-pagination'
+import Navbar from './common/navbar'
 import NextPrevComp from './common/next-prev-comp'
+import Pagination from './common/page-pagination'
 import Product from './common/product'
-import Navbar from './navbar'
+import React from 'react'
 import styled from 'styled-components'
 
 const ProductsPageWrapper = styled.div`
@@ -11,7 +11,6 @@ const ProductsPageWrapper = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  /* padding: 0em 2em 2em 2em; */
 `
 
 const ProductsWrapper = styled.div`

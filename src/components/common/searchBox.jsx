@@ -40,16 +40,6 @@ class SearchBox extends React.Component {
       this.setState({ searchTermValue: '' }, () => e.preventDefault())
     }
   }
-
-  // submitSearchTermValue = (e) => {
-  //   /*submit searchTermValue on 'Enter' */
-  //   if (e.key === 'Enter') {
-  //     /*send searchTerm value to parent */
-  //     this.props.handleSearchTerm(this.state.searchTermValue)
-  //     this.setState({ searchTermValue: '' }, () => e.preventDefault())
-  //   }
-  // }
-
   render() {
     const { searchTermValue } = this.state
 
