@@ -1,7 +1,5 @@
 import React from 'react'
 import Productdisplay from './productdisplay'
-import '../../style/products.css'
-import '../../style/product.css'
 import styled from 'styled-components'
 
 const ProductResult = styled.p`

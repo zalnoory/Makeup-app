@@ -1,6 +1,5 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import './../style/navbar.css'
 import styled from 'styled-components'
 
 const TopNavContainer = styled.div`

@@ -1,7 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { ProductColors } from './product-colors'
-import '../../style/modal.css'
 import styled from 'styled-components'
 
 const ModalContainer = styled.div`

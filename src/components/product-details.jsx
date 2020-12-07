@@ -2,7 +2,6 @@ import React from 'react'
 import axios from 'axios'
 import Loader from './common/loader'
 import { ProductColors } from './common/product-colors'
-import './../style/product-details.css'
 import styled from 'styled-components'
 
 const ProdDetailsCont = styled.div`
@@ -12,6 +11,7 @@ const ProdDetailsCont = styled.div`
   justify-content: flex-start;
   padding-top: 40px;
   padding-left: 40px;
+  padding-right: 20px;
 `
 
 const ImageContainer = styled.div`

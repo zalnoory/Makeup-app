@@ -3,7 +3,6 @@ import Product from './common/product'
 import dataPagination from '../utils/data-pagination'
 import NextPrevComp from './common/next-prev-comp'
 import Pagination from './common/page-pagination'
-import './../style/category.css'
 import styled from 'styled-components'
 
 const CategoryPageWrapper = styled.div`

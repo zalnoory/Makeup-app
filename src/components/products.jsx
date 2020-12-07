@@ -3,7 +3,6 @@ import Pagination from './common/page-pagination'
 import NextPrevComp from './common/next-prev-comp'
 import Product from './common/product'
 import Navbar from './navbar'
-import './../style/products.css'
 import styled from 'styled-components'
 
 const ProductsPageWrapper = styled.div`

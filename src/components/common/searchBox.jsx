@@ -1,5 +1,4 @@
 import React from 'react'
-import '../../style/searchBox.css'
 import styled from 'styled-components'
 
 const Input = styled.input`
@@ -18,7 +17,7 @@ const Input = styled.input`
 
   :focus {
     border-color: #dbdbdb;
-    box-shadow: 0 0 8px 0#dbdbdb;
+    box-shadow: 0 0 8px 0#c5c4c4;
   }
 `
 
@@ -33,13 +32,23 @@ class SearchBox extends React.Component {
   }
 
   submitSearchTermValue = (e) => {
+    const { searchTermValue } = this.state
     /*submit searchTermValue on 'Enter' */
-    if (e.key === 'Enter') {
+    if (searchTermValue.length > 0 && e.key === 'Enter') {
       /*send searchTerm value to parent */
-      this.props.handleSearchTerm(this.state.searchTermValue)
-      this.setState({ searchTermValue: '' })
+      this.props.handleSearchTerm(searchTermValue)
+      this.setState({ searchTermValue: '' }, () => e.preventDefault())
     }
   }
+
+  // submitSearchTermValue = (e) => {
+  //   /*submit searchTermValue on 'Enter' */
+  //   if (e.key === 'Enter') {
+  //     /*send searchTerm value to parent */
+  //     this.props.handleSearchTerm(this.state.searchTermValue)
+  //     this.setState({ searchTermValue: '' }, () => e.preventDefault())
+  //   }
+  // }
 
   render() {
     const { searchTermValue } = this.state
@@ -55,9 +64,8 @@ class SearchBox extends React.Component {
           spellCheck="false"
           placeholder="Search Makeup... "
           value={searchTermValue}
-          onChange={this.getSearchTermValue}
-          onKeyDown={(e) => this.submitSearchTermValue(e)}
-          onBlur={() => this.setState({ searchTermValue: '' })}
+          onChange={(e) => this.getSearchTermValue(e)}
+          onKeyPress={(e) => this.submitSearchTermValue(e)}
         />
       </div>
     )
