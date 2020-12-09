@@ -13,7 +13,7 @@ const ProductDisplayItem = styled.div`
     opacity: 1;
   }
   &:hover .image {
-    opacity: 0.3;
+    opacity: 0.5;
   }
 `
 
