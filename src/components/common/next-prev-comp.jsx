@@ -8,7 +8,11 @@ const ButtonContainer = styled.div`
   align-self: center;
   justify-content: space-between;
   width: 100%;
-  padding: 20px;
+  padding: 80px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 400;
+  font-family: Brandon Text;
 `
 
 const Prev = styled.div``
