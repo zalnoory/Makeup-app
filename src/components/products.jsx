@@ -1,8 +1,8 @@
-import React from 'react'
+import Navbar from './common/navbar'
+import NextPrevComp from './common/next-prev-comp'
 import Pagination from './common/page-pagination'
 import Product from './common/product'
-import Navbar from './navbar'
-import './../style/products.css'
+import React from 'react'
 import styled from 'styled-components'
 
 const ProductsPageWrapper = styled.div`
@@ -11,7 +11,6 @@ const ProductsPageWrapper = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  padding: 0em 2em 2em 2em;
 `
 
 const ProductsWrapper = styled.div`
@@ -20,12 +19,12 @@ const ProductsWrapper = styled.div`
   width: 100%;
   padding: 4em;
   justify-content: center;
+  font-family: Brandon Text;
 `
 const StyledP = styled.p`
   text-align: center;
   font-size: 18px;
-  font-weight: 400;
-  font-family: Brandon Text;
+  font-weight: 400; ;
 `
 
 class Products extends React.Component {
@@ -38,23 +37,22 @@ class Products extends React.Component {
       pageSize,
       currentPage,
       onCategorySelect,
+      handleNextBack,
     } = this.props
 
     return (
       <ProductsPageWrapper>
-        {/* <section className="products-container"> */}
-        {/* <div className="listgrp-nav-container"> */}
         <Navbar images={images} onCategorySelect={onCategorySelect} />
-        {/* </div> */}
         <ProductsWrapper>
           <StyledP>{filtered.length} items</StyledP>
-          <Product
-            productsData={productsData}
-            productsCount={filtered.length}
-            pageSize={pageSize}
+          <NextPrevComp
+            filtered={filtered}
             currentPage={currentPage}
-            onPageChange={onPageChange}
+            pageSize={pageSize}
+            handleNextBack={handleNextBack}
           />
+
+          <Product productsData={productsData} />
           <Pagination
             productsCount={filtered.length}
             pageSize={pageSize}
@@ -62,7 +60,6 @@ class Products extends React.Component {
             onPageChange={onPageChange}
           />
         </ProductsWrapper>
-        {/* </section> */}
       </ProductsPageWrapper>
     )
   }

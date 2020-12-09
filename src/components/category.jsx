@@ -1,50 +1,45 @@
 import React from 'react'
 import Product from './common/product'
-import ListGroup from './common/listGroup'
 import dataPagination from '../utils/data-pagination'
+import NextPrevComp from './common/next-prev-comp'
 import Pagination from './common/page-pagination'
-import './../style/category.css'
 import styled from 'styled-components'
 
 const CategoryPageWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  padding-right: 4em;
-  padding-left: 4em;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 `
 
-const ProductDisplayGrid = {
-  // display: "flex",
-  // flexWrap: "wrap",
-  // // maxWidth: '1140px',
-  // // flex: '1',
-  // display: "grid",
-  // gridTemplateColumns: "repeat(auto-fill, minmax(auto,280px))",
-  // justifyContent: "start",
-}
+const ProductsWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 4em;
+  justify-content: center;
+`
 
-const ProductDisplayItem = {
-  // maxWidth: '100%',
-  // marginLeft: '150px',
-  // marginRight: '0px',
-  // maxWidth: '70%',
-}
+const StyledP = styled.p`
+  text-align: center;
+  font-size: 18px;
+  font-weight: 400;
+  font-family: Brandon Text;
+`
 
 const Category = (props) => {
   const {
-    brands,
-    currentPage,
-    onBrandSelect,
-    onTagSelect,
-    pageSize,
     allProducts,
+    currentPage,
+    filterLists,
     match,
+    onPageChange,
+    pageSize,
+    searchTerm,
     selectedBrand,
     selectedTag,
-    tags,
-    filterLists,
-    onPageChange,
-    searchTerm,
+    handleNextBack,
   } = props
   const [categoryItems, setCategoryItems] = React.useState([])
 
@@ -74,60 +69,28 @@ const Category = (props) => {
     pageSize,
     currentPage
   )
+
   return (
     <CategoryPageWrapper>
-      <p className="styled-p4"> {filteredCategory.length} items </p>
-      <Product
-        productsData={productsPagination}
-        productDisplayGrid={ProductDisplayGrid}
-        productDisplayItem={ProductDisplayItem}
-      />
-      <div className="products-items-main">
+      <ProductsWrapper>
+        <StyledP> {filteredCategory.length} items </StyledP>
+        <NextPrevComp
+          filtered={filteredCategory}
+          currentPage={currentPage}
+          pageSize={pageSize}
+          handleNextBack={handleNextBack}
+        />
+
+        <Product productsData={productsPagination} />
         <Pagination
           productsCount={filteredCategory.length}
           pageSize={pageSize}
           currentPage={currentPage}
           onPageChange={onPageChange}
         />
-      </div>
+      </ProductsWrapper>
     </CategoryPageWrapper>
   )
 }
 
 export default Category
-
-{
-  /* return (
-   <div className="catProducts-container">
-     <div className="search-container">
-       <SearchBox
-         searchTerm={searchTerm}
-         handleSearchTerm={handleSearchTerm}
-       />
-     </div>
-
-     <div className="listgrp-prod-container">
-       <p />
-       <ListGroup
-         brands={brands}
-         tags={tags}
-         selectedBrand={selectedBrand}
-         selectedTag={selectedTag}
-         onBrandSelect={onBrandSelect}
-         onTagSelect={onTagSelect}
-       />
-       <p className="styled-p4"> {filteredCategory.length} items </p>
-       <div className="test">
-         <Product productsData={productsPagination} />
-
-         <Pagination
-           productsCount={filteredCategory.length}
-           pageSize={pageSize}
-           currentPage={currentPage}
-           onPageChange={onPageChange}
-         />
-       </div >
-     </div>
-   </div>
- ) */
-}

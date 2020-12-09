@@ -9,37 +9,12 @@ body {
   font-family: Brandon Text;
   font-size: 8px;
   font-weight: 400;
-  overflow-x: hidden;
+  /* overflow-x: hidden; */
   text-align: center;
 }
 
-.main-wrapper {
+/* .main-wrapper {
   max-width: 1140px;
   margin: 0 auto;
   min-height: 100vh;
-}
-
-/* body {
-  min-height: 100vh;
-  position: relative;
-  box-sizing: border-box;
-  background-color: rgb (255, 255, 255);
-  font-family: Brandon Text;
-  text-align: center;
-  font-size: 8px;
-  font-weight: 400;
-  overflow-x: hidden;
-} */
-
-/* .main-wrapper {
-  min-height: 100vh;
-  position: relative;
-  box-sizing: border-box;
-  background-color: rgb (255, 255, 255);
-  font-family: Brandon Text;
-  text-align: center;
-  font-size: 8px;
-  font-weight: 400;
-  overflow-x: hidden;
-  
 } */

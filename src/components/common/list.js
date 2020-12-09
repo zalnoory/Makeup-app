@@ -9,7 +9,9 @@ const List = (props) => {
         <li
           key={item}
           className={
-            item === selectedItem ? 'list-group-item active' : 'list-group-item'
+            item === selectedItem
+              ? 'list-group-item active '
+              : 'list-group-item border-0'
           }
           onClick={() => onItemSelect(item)}
         >

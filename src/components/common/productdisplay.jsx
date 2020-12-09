@@ -1,71 +1,180 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ProductColors } from './product-colors'
 import Modal from './modal'
+import styled from 'styled-components'
 
-class Productdisplay extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      showModal: false,
-    }
+const ProductDisplayItem = styled.div`
+  max-width: 100%;
+  font-weight: 400;
+  font-family: Brandon Text;
+  position: relative;
+  &:hover .overlay {
+    opacity: 1;
   }
-
-  toggleModal = () => {
-    this.setState({ showModal: !this.state.showModal })
+  &:hover .image {
+    opacity: 0.5;
   }
+`
 
-  render() {
-    const { productDisplayItem } = this.props
-    const { showModal } = this.state
-    const { product } = this.props
-    return (
-      <React.Fragment>
-        <div className="productDisplay-item" style={productDisplayItem}>
-          <div className="image-container">
-            <Link to={`/product-details/${product.id}`}>
-              <img
-                className="image"
-                src={product.api_featured_image}
-                alt={product.name}
-              />
-            </Link>
-            <div className="overlay" onClick={this.toggleModal}>
-              {' '}
-              Quick View
-            </div>
-          </div>
-          <div className="color-brand-cont">
-            <Link to={`/product-details/${product.id}`} id="container-m-link">
-              <div>
-                {product.product_colors.slice(0, 5).map((color) => (
-                  <ProductColors
-                    key={color.hex_value}
-                    color={color.hex_value}
-                  />
-                ))}
-                <p className="p-3">
-                  {(product.brand || '')
-                    .toLowerCase()
-                    .split(' ')
-                    .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
-                    .join(' ')}{' '}
-                  {product.product_type.charAt(0).toUpperCase() +
-                    product.product_type.slice(1)}
-                </p>
-              </div>
-            </Link>
-          </div>
-          {/* Modal Component */}
-          <Modal
-            showModal={showModal}
-            onModalClick={this.toggleModal}
-            product={product}
+const ImageContainer = styled.div`
+  transition: 0.5s ease;
+  transform: translat(50%, 50%);
+  text-align: center;
+  bottom: 10%;
+  width: 100%;
+`
+
+const StyledImg = styled.img`
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: 0.5s ease;
+  backface-visibility: hidden;
+`
+
+const Overlay = styled.div`
+  background-color: rgba(65, 64, 64, 0.5);
+  color: white;
+  font-size: 16px;
+  bottom: 0px;
+  opacity: 0;
+`
+
+const StyledLink = styled(Link)`
+  color: black !important;
+  text-decoration: none !important;
+`
+
+const ColorContainer = styled.div`
+  margin-top: 10px;
+`
+
+const StyledP = styled.p`
+  font-size: 12px;
+  @media screen and (min-width: 1020px) {
+    font-size: 16px;
+  }
+`
+
+const Productdisplay = (props) => {
+  const { product, productsData } = props
+  const [isModalVisible, setIsModalVisiblel] = useState(false)
+
+  return (
+    <ProductDisplayItem>
+      <ImageContainer className="imageContainer">
+        <StyledLink to={`/product-details/${product.id}`}>
+          <StyledImg
+            className="image"
+            src={product.api_featured_image}
+            alt={product.name}
           />
-        </div>
-      </React.Fragment>
-    )
-  }
+        </StyledLink>
+
+        <Overlay
+          className="overlay"
+          isModalVisible={isModalVisible}
+          onClick={() => setIsModalVisiblel(!isModalVisible)}
+        >
+          {' '}
+          Quick View
+        </Overlay>
+      </ImageContainer>
+      <StyledLink to={`/product-details/${product.id}`}>
+        <ColorContainer>
+          <div>
+            {product.product_colors.slice(0, 5).map((color) => (
+              <ProductColors key={color.hex_value} color={color.hex_value} />
+            ))}
+            <StyledP>
+              {(product.brand || '')
+                .toLowerCase()
+                .split(' ')
+                .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
+                .join(' ')}{' '}
+              {product.product_type.charAt(0).toUpperCase() +
+                product.product_type.slice(1)}
+            </StyledP>
+          </div>
+        </ColorContainer>
+      </StyledLink>
+
+      <Modal
+        showModal={isModalVisible}
+        setShowModal={setIsModalVisiblel}
+        product={product}
+        productsData={productsData}
+      />
+    </ProductDisplayItem>
+  )
 }
 
 export default Productdisplay
+
+// class Productdisplay extends React.Component {
+//   state = {
+//     showModal: false,
+//     selectedIndex: 0,
+//   }
+
+//   toggleModal = () => {
+//     this.setState({ showModal: !this.state.showModal })
+//   }
+
+//   handleNext = () => {
+//     const productsData = this.props
+//     let selectedIndex = this.state.SelectedIndex
+//     if (selectedIndex >= 0 && selectedIndex < productsData.length) {
+//       this.setState({ selectedIndex: productsData + 1 })
+//     }
+//   }
+
+//   render() {
+//     const { showModal } = this.state
+//     const { productsData, product } = this.props
+//     return (
+//       <React.Fragment>
+//         <ProductDisplayItem>
+//           <ImageContainer>
+//             <StyledLink to={`/product-details/${product.id}`}>
+//               <StyledImg src={product.api_featured_image} alt={product.name} />
+//             </StyledLink>
+//             <Overlay onClick={this.toggleModal}> Quick View</Overlay>
+//           </ImageContainer>
+//           <StyledLink to={`/product-details/${product.id}`}>
+//             <ColorContainer>
+//               <div>
+//                 {product.product_colors.slice(0, 5).map((color) => (
+//                   <ProductColors
+//                     key={color.hex_value}
+//                     color={color.hex_value}
+//                   />
+//                 ))}
+//                 <p>
+//                   {(product.brand || '')
+//                     .toLowerCase()
+//                     .split(' ')
+//                     .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
+//                     .join(' ')}{' '}
+//                   {product.product_type.charAt(0).toUpperCase() +
+//                     product.product_type.slice(1)}
+//                 </p>
+//               </div>
+//             </ColorContainer>
+//           </StyledLink>
+//           {/* Modal Component */}
+//           <Modal
+//             showModal={showModal}
+//             onModalClick={this.toggleModal}
+//             product={product}
+//             handleNext={this.handleNext}
+//             productsData={productsData}
+//           />
+//         </ProductDisplayItem>
+//       </React.Fragment>
+//     )
+//   }
+// }
+
+// export default Productdisplay

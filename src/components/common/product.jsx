@@ -1,31 +1,49 @@
-import React from "react";
-import Productdisplay from "./productdisplay";
-import "../../style/products.css";
-import "../../style/product.css";
-// import Pagination from "./page-pagination";
+import React from 'react'
+import Productdisplay from './productdisplay'
+import styled from 'styled-components'
+
+const ProductResult = styled.p`
+  text-align: center;
+  font-size: 24px;
+  font-weight: 400;
+  font-family: Brandon Text;
+  padding-top: 2em;
+  white-space: nowrap;
+`
+
+const DisplayGrid = styled.div`
+  font-weight: 400;
+  font-family: Brandon Text;
+  text-align: center;
+  justify-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(auto, 130px));
+  grid-gap: 20px;
+  width: 100%;
+  @media screen and (min-width: 1020px) {
+    grid-template-columns: repeat(auto-fill, minmax(auto, 300px));
+  }
+`
 
 class Product extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
-    const { productDisplayGrid, productDisplayItem } = this.props;
-    const { productsData } = this.props;
+    const { productsData } = this.props
     if (productsData.length === 0) {
-      return <p className="p-result"> Sorry, no item is found.</p>;
+      return <ProductResult> Sorry, no item is found.</ProductResult>
     }
     return (
-      <div className="productDisplay-grid" style={productDisplayGrid}>
+      <DisplayGrid>
         {productsData.map((product) => (
           <Productdisplay
             key={product.id}
             product={product}
-            productDisplayItem={productDisplayItem}
+            productsData={productsData}
           />
         ))}
-      </div>
-    );
+      </DisplayGrid>
+    )
   }
 }
-export default Product;
+export default Product

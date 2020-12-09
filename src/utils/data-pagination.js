@@ -1,4 +1,3 @@
-import React from 'react'
 const dataPagination = (items, pageSize, pageNumber) => {
   const startingIndex = (pageNumber - 1) * pageSize
   const lastIndex = pageNumber * pageSize
