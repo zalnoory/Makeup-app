@@ -16,6 +16,7 @@ const DisplayGrid = styled.div`
   font-family: Brandon Text;
   text-align: center;
   justify-items: center;
+  justify-content: center;
   display: flex;
   flex-wrap: wrap;
   display: grid;

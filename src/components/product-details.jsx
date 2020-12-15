@@ -1,7 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import Loader from './common/loader'
-import { ProductColors } from './common/product-colors'
+// import { ProductColors } from './common/product-colors'
 import styled from 'styled-components'
 
 const ProdDetailsCont = styled.div`
@@ -41,6 +41,21 @@ const Name = styled.p`
 const ParagraphContainer = styled.div`
   padding-top: 30px;
   font-size: 18px;
+`
+
+const ProductColors = styled.span`
+  height: 10px;
+  width: 10px;
+  margin: 2px;
+  background-color: ${(props) => props.color};
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  display: inline-block;
+  text-align: center;
+  @media screen and (min-width: 1020px) {
+    height: 16px;
+    width: 16px;
+  }
 `
 
 class ProductDetails extends React.Component {

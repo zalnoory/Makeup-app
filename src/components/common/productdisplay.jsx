@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { ProductColors } from './product-colors'
+// import { ProductColors } from './product-colors'
 import Modal from './modal'
 import styled from 'styled-components'
 
@@ -54,6 +54,21 @@ const StyledP = styled.p`
   font-size: 12px;
   @media screen and (min-width: 1020px) {
     font-size: 16px;
+  }
+`
+
+const ProductColors = styled.span`
+  height: 10px;
+  width: 10px;
+  margin: 2px;
+  background-color: ${(props) => props.color};
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  display: inline-block;
+  text-align: center;
+  @media screen and (min-width: 1020px) {
+    height: 16px;
+    width: 16px;
   }
 `
 

@@ -208,17 +208,22 @@ class App extends React.Component {
         price,
         price_sign,
         product_api_url,
-        product_colors,
         product_link,
         rating,
         updated_at,
         website_link,
+        // product_colors,
         ...includedKeys
       } = product
 
       return Object.values(includedKeys).some((value) => {
         if (Array.isArray(value)) {
-          return value.some((tag) => tag.match(searchRegex))
+          // return value.some((tag) => tag.match(searchRegex))
+          return value.some((tag) =>
+            typeof tag === 'string'
+              ? tag.match(searchRegex)
+              : tag.colour_name && tag.colour_name.match(searchRegex)
+          )
         }
 
         if (typeof value === 'string') {

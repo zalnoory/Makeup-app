@@ -19,12 +19,13 @@ const ProductsWrapper = styled.div`
   width: 100%;
   padding: 4em;
   justify-content: center;
-  font-family: Brandon Text;
+  align-items: center;
 `
 const StyledP = styled.p`
   text-align: center;
   font-size: 18px;
-  font-weight: 400; ;
+  font-weight: 400;
+  font-family: Brandon Text;
 `
 
 class Products extends React.Component {
