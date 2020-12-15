@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { ProductColors } from './product-colors'
+// import { ProductColors } from './product-colors'
 import styled from 'styled-components'
 
 const ModalContainer = styled.div`
@@ -40,6 +40,21 @@ const Paragrh1 = styled.p`
 
 const Paragrh2 = styled.p`
   font-size: 20px;
+`
+
+const ProductColors = styled.span`
+  height: 10px;
+  width: 10px;
+  margin: 2px;
+  background-color: ${(props) => props.color};
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  display: inline-block;
+  text-align: center;
+  @media screen and (min-width: 1020px) {
+    height: 16px;
+    width: 16px;
+  }
 `
 
 const Modal = (props) => {
