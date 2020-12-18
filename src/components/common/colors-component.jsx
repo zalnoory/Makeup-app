@@ -25,8 +25,9 @@ const ProductColors = styled.span`
 `
 const InnerDiv = styled.div`
   display: flex;
-  flex-flow: row wrap;
+  /* flex-flow: row wrap; */
   justify-content: center;
+  white-space: nowrap;
 `
 
 const ColorName = styled.div`
