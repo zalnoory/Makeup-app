@@ -2,7 +2,9 @@ import React from 'react'
 import axios from 'axios'
 import Loader from './common/loader'
 // import { ProductColors } from './common/product-colors'
+
 import styled from 'styled-components'
+import Colors from './common/colors-component'
 
 const ProdDetailsCont = styled.div`
   font-family: Brandon Text;
@@ -43,25 +45,29 @@ const ParagraphContainer = styled.div`
   font-size: 18px;
 `
 
-const ProductColors = styled.span`
-  height: 10px;
-  width: 10px;
-  margin: 2px;
-  background-color: ${(props) => props.color};
-  border-radius: 50%;
-  border: 1px solid rgba(0, 0, 0, 0.3);
+const Row = styled.div`
   display: inline-block;
-  text-align: center;
-  @media screen and (min-width: 1020px) {
-    height: 16px;
-    width: 16px;
+  position: relative;
+  width: 100%;
+  border: '2px solid green';
+`
+
+const FlexColumn = styled.div`
+  display: inline-block;
+  position: relative;
+  width: 6%;
+  @media screen and (min-width: 750px) {
+    width: 2%;
   }
 `
+
+const FlexGrid = styled.div``
 
 class ProductDetails extends React.Component {
   state = {
     product: {
       product_colors: [],
+      isHovered: {},
     },
   }
 
@@ -86,12 +92,30 @@ class ProductDetails extends React.Component {
     })
   }
 
+  /* using the callBack function of setState to update state (the better way in updating state)*/
+
+  handleOnMouseEnter = (index) => {
+    this.setState((prevState) => ({
+      isHovered: { ...prevState.isHovered, [index]: true },
+    }))
+  }
+
+  // handleOnMouseLeave = (index) => {
+  //   this.setState((prevState) => {
+  //     return { isHovered: { ...prevState.isHovered, [index]: false } }
+  //   })
+  // }
+
+  handleOnMouseLeave = (index) => {
+    this.setState({ ...this.state, isHovered: { [index]: false } })
+  }
+
   render() {
     if (this.state.product === {}) {
       return <Loader />
     }
 
-    const { product } = this.state
+    const { product, isHovered } = this.state
     return (
       <ProdDetailsCont>
         <div>
@@ -107,16 +131,27 @@ class ProductDetails extends React.Component {
                 .join(' ')}
             </Name>
             <Name>{product.name}</Name>
-
-            <div>
-              {product.product_colors.slice(0, 20).map((color) => (
-                <ProductColors
-                  key={color.hex_value}
-                  color={color.hex_value}
-                  style={{ paddingTop: '5px', height: '20px', width: '20px' }}
-                />
-              ))}
-            </div>
+            <FlexGrid>
+              <Row>
+                {product && product.product_colors.length > 0
+                  ? product.product_colors.map((color, index) => (
+                      <FlexColumn>
+                        <Colors
+                          key={index}
+                          color={color}
+                          handleOnMouseEnter={() =>
+                            this.handleOnMouseEnter(index)
+                          }
+                          handleOnMouseLeave={() =>
+                            this.handleOnMouseLeave(index)
+                          }
+                          isHovering={isHovered && isHovered[index]}
+                        />
+                      </FlexColumn>
+                    ))
+                  : null}
+              </Row>
+            </FlexGrid>
             <p> ${product.price}</p>
           </ProductDetail>
         </div>

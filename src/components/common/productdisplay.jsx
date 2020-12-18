@@ -99,9 +99,21 @@ const Productdisplay = (props) => {
       <StyledLink to={`/product-details/${product.id}`}>
         <ColorContainer>
           <div>
-            {product.product_colors.slice(0, 5).map((color) => (
-              <ProductColors key={color.hex_value} color={color.hex_value} />
-            ))}
+            {product.product_colors.length > 0
+              ? product.product_colors
+                  .slice(0, 5)
+                  .map((color) => (
+                    <ProductColors
+                      key={color.hex_value}
+                      color={color.hex_value}
+                    />
+                  ))
+              : null}
+            {/* {product.product_colors.length > 5 ? (
+              <p>
+                <small> More Colors</small>
+              </p>
+            ) : null} */}
             <StyledP>
               {(product.brand || '')
                 .toLowerCase()
