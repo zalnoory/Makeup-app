@@ -10,19 +10,15 @@ const ProdDetailsCont = styled.div`
   font-family: Brandon Text;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  padding-top: 40px;
-  padding-left: 40px;
-  padding-right: 20px;
+  border: 1px solid gold;
+  padding: 25px;
 `
 
 const ImageContainer = styled.div`
   display: flex;
-  display: inline-flex;
-  flex-direction: column;
   height: 100%;
-  vertical-align: top;
-  padding-top: 10px;
+  border: 1px solid red;
+  justify-content: center;
 `
 
 const ProdImage = styled.img`
@@ -32,32 +28,48 @@ const ProdImage = styled.img`
 `
 
 const ProductDetail = styled.div`
-  padding-top: 100px;
-  font-size: 18px;
+  padding-top: 50px;
+  border: 1px solid red;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
 `
 
-const Name = styled.p`
-  font-size: 20px;
+const Name = styled.div`
+  font-size: 18px;
+  text-transform: capitalize;
+  &.brand {
+    font-size: 16px;
+  }
+`
+
+const Price = styled.p`
+  price {
+    border: 1px solid green;
+  }
 `
 
 const ParagraphContainer = styled.div`
   padding-top: 30px;
   font-size: 18px;
+  text-align: left;
 `
 
 const Row = styled.div`
   display: inline-block;
   position: relative;
   width: 100%;
-  border: '2px solid green';
+  padding-top: 5px;
+  padding-bottom: 15px;
+  border: 1px solid gold;
 `
 
 const FlexColumn = styled.div`
   display: inline-block;
   position: relative;
-  width: 6%;
+  /* width: 10%; */
   @media screen and (min-width: 750px) {
-    width: 2%;
+    /* width: 4%; */
   }
 `
 
@@ -123,13 +135,7 @@ class ProductDetails extends React.Component {
             <ProdImage src={product.api_featured_image} alt={product.name} />
           </ImageContainer>
           <ProductDetail>
-            <Name style={{ fontSize: '16px', fontWeight: '500' }}>
-              {(product.brand || '')
-                .toLowerCase()
-                .split(' ')
-                .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
-                .join(' ')}
-            </Name>
+            <Name className="brand">{product.brand}</Name>
             <Name>{product.name}</Name>
             <FlexGrid>
               <Row>
@@ -151,8 +157,8 @@ class ProductDetails extends React.Component {
                     ))
                   : null}
               </Row>
+              <Price className="price"> ${product.price}</Price>
             </FlexGrid>
-            <p> ${product.price}</p>
           </ProductDetail>
         </div>
         <ParagraphContainer>

@@ -18,7 +18,7 @@ import { withRouter, Route, Switch } from 'react-router-dom'
 const AppWrapper = styled.div`
   display: flex;
   width: 100%;
-  height: 100vh;
+  height: auto;
   flex-direction: column;
 `
 
