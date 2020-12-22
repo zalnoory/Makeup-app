@@ -5,18 +5,16 @@ const Wrapper = styled.div`
   display: flex;
   flex-flow: row nowrap;
   flex-direction: column;
-  height: 40px;
+  height: 50px;
+  width: 30px;
 `
 
 const ProductColors = styled.span`
-  height: 16px;
-  width: 16px;
-  margin: 1.5px;
+  height: 20px;
+  width: 20px;
   background-color: ${(props) => props.color.hex_value};
   border-radius: 50%;
   border: 1px solid rgba(0, 0, 0, 0.3);
-  display: inline-flex;
-  text-align: center;
 
   @media screen and (min-width: 750px) {
     height: 25px;
@@ -25,15 +23,15 @@ const ProductColors = styled.span`
 `
 const InnerDiv = styled.div`
   display: flex;
-  /* flex-flow: row wrap; */
   justify-content: center;
   white-space: nowrap;
+  padding-top: 5px;
 `
 
 const ColorName = styled.div`
   font-family: Brandon Text;
   font-weight: 500;
-  font-size: 14px;
+  font-size: 12px;
 `
 
 const Colors = (props) => {

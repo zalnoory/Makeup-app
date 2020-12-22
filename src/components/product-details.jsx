@@ -43,10 +43,6 @@ const Name = styled.div`
   }
 `
 
-const Price = styled.p`
-  border: 1px solid green;
-`
-
 const ParagraphContainer = styled.div`
   padding-top: 30px;
   font-size: 18px;
@@ -57,10 +53,9 @@ const Row = styled.div`
   display: inline-block;
   position: relative;
   width: 100%;
-  padding-top: 5px;
-  padding-bottom: 15px;
+  padding-top: 20px;
+  padding-bottom: 20px;
   border: 1px solid gold;
-  /* text-align: left; */
 `
 
 const FlexColumn = styled.div`
@@ -155,7 +150,7 @@ class ProductDetails extends React.Component {
                     ))
                   : null}
               </Row>
-              <Price className="price"> ${product.price}</Price>
+              <p className="price"> ${product.price}</p>
             </FlexGrid>
           </ProductDetail>
         </div>
