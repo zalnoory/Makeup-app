@@ -62,6 +62,7 @@ const Row = styled.div`
   padding-top: 5px;
   padding-bottom: 15px;
   border: 1px solid gold;
+  text-align: left;
 `
 
 const FlexColumn = styled.div`
