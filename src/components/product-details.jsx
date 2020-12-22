@@ -44,9 +44,7 @@ const Name = styled.div`
 `
 
 const Price = styled.p`
-  price {
-    border: 1px solid green;
-  }
+  border: 1px solid green;
 `
 
 const ParagraphContainer = styled.div`
@@ -62,19 +60,18 @@ const Row = styled.div`
   padding-top: 5px;
   padding-bottom: 15px;
   border: 1px solid gold;
-  text-align: left;
+  /* text-align: left; */
 `
 
 const FlexColumn = styled.div`
   display: inline-block;
   position: relative;
-  /* width: 10%; */
-  @media screen and (min-width: 750px) {
-    /* width: 4%; */
-  }
 `
 
-const FlexGrid = styled.div``
+const FlexGrid = styled.div`
+  text-align: left;
+  font-size: 16px;
+`
 
 class ProductDetails extends React.Component {
   state = {
