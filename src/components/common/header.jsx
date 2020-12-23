@@ -10,13 +10,13 @@ const Header = (props) => {
       <img
         src={vecteezyVector}
         style={{
-          width: '175px',
-          height: '175px',
+          width: '100px',
+          height: '100px',
         }}
       />
       <div></div>
 
-      <div style={{ paddingTop: '70px' }}>
+      <div style={{ paddingTop: '30px', paddingRight: '10px' }}>
         <SearchBox handleSearchTerm={handleSearchTerm} />
       </div>
     </React.Fragment>

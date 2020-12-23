@@ -26,7 +26,6 @@ const HeaderWrapper = styled.header`
   display: flex;
   width: 100%;
   flex-direction: row;
-  padding: 16px;
   justify-content: space-between;
   border-bottom: 1px solid rgb(179, 175, 175);
 `

@@ -10,7 +10,7 @@ const ModalContainer = styled.div`
   transform: translate(-50%, -50%);
   width: 100%;
   max-width: 100%;
-  height: 800px;
+  height: 100vh;
   max-height: 100%;
   z-index: 1010;
   background: rgb(0, 0, 0);

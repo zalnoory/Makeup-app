@@ -17,8 +17,8 @@ const Overlay = styled.div`
 
 const BurgerButton = styled.button`
   position: absolute;
-  top: 2%;
-  left: 1rem;
+  top: 1%;
+  left: 5px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;

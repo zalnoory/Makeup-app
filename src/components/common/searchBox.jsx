@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 const Input = styled.input`
   display: initial;
-  height: 20px;
+  height: 40px;
   width: 100%;
   font-weight: 100;
   font-size: 16px;
@@ -13,7 +13,6 @@ const Input = styled.input`
   outline: none;
   transition: 0.3s;
   cursor: pointer;
-  align-self: flex-end;
 
   :focus {
     border-color: #dbdbdb;
