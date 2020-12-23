@@ -52,6 +52,7 @@ const ColorContainer = styled.div`
 
 const StyledP = styled.p`
   font-size: 12px;
+  text-transform: capitalize;
   @media screen and (min-width: 1020px) {
     font-size: 16px;
   }
@@ -114,15 +115,7 @@ const Productdisplay = (props) => {
                 <small> More Colors</small>
               </p>
             ) : null} */}
-            <StyledP>
-              {(product.brand || '')
-                .toLowerCase()
-                .split(' ')
-                .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
-                .join(' ')}{' '}
-              {product.product_type.charAt(0).toUpperCase() +
-                product.product_type.slice(1)}
-            </StyledP>
+            <StyledP>{product.brand}</StyledP>
           </div>
         </ColorContainer>
       </StyledLink>
@@ -179,13 +172,7 @@ export default Productdisplay
 //                   />
 //                 ))}
 //                 <p>
-//                   {(product.brand || '')
-//                     .toLowerCase()
-//                     .split(' ')
-//                     .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
-//                     .join(' ')}{' '}
-//                   {product.product_type.charAt(0).toUpperCase() +
-//                     product.product_type.slice(1)}
+//                   {product.brand }
 //                 </p>
 //               </div>
 //             </ColorContainer>

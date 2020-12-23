@@ -23,7 +23,8 @@ const DisplayGrid = styled.div`
   grid-template-columns: repeat(auto-fill, 50%);
   width: 100%;
   @media screen and (min-width: 1020px) {
-    grid-template-columns: repeat(auto-fill, 25%);
+    grid-template-columns: repeat(auto-fill, 20%);
+    grid-gap: 20px;
   }
 `
 

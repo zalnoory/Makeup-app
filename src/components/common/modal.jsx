@@ -40,6 +40,7 @@ const Paragrh1 = styled.p`
 
 const Paragrh2 = styled.p`
   font-size: 20px;
+  text-transform: capitalize;
 `
 
 const ProductColors = styled.span`
@@ -76,13 +77,7 @@ const Modal = (props) => {
       </ImageContainer>
       <DetailsContainer>
         <Paragrh1>{product.name}</Paragrh1>
-        <Paragrh2>
-          {(product.brand || '')
-            .toLowerCase()
-            .split(' ')
-            .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
-            .join(' ')}
-        </Paragrh2>
+        <Paragrh2>{product.brand}</Paragrh2>
         <div>
           {product.product_colors.slice(0, 20).map((color) => (
             <ProductColors
