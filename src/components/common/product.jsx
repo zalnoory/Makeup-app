@@ -20,11 +20,10 @@ const DisplayGrid = styled.div`
   display: flex;
   flex-wrap: wrap;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(auto, 130px));
-  grid-gap: 20px;
+  grid-template-columns: repeat(auto-fill, 50%);
   width: 100%;
   @media screen and (min-width: 1020px) {
-    grid-template-columns: repeat(auto-fill, minmax(auto, 300px));
+    grid-template-columns: repeat(auto-fill, 25%);
   }
 `
 
