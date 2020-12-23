@@ -81,7 +81,7 @@ const Sidemenu = (props) => {
       <Burger open={isComponentVisible} setOpen={setIsComponentVisible} />
 
       {isComponentVisible && (
-        <>
+        <React.Fragment>
           <Overlay onClick={() => setIsComponentVisible(!isComponentVisible)} />
           <Menu
             open={isComponentVisible}
@@ -92,7 +92,7 @@ const Sidemenu = (props) => {
             onBrandSelect={onBrandSelect}
             onTagSelect={onTagSelect}
           />
-        </>
+        </React.Fragment>
       )}
     </div>
   )

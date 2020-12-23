@@ -10,14 +10,12 @@ const ProdDetailsCont = styled.div`
   font-family: Brandon Text;
   display: flex;
   flex-direction: column;
-  border: 1px solid gold;
   padding: 25px;
 `
 
 const ImageContainer = styled.div`
   display: flex;
   height: 100%;
-  border: 1px solid red;
   justify-content: center;
 `
 
@@ -29,7 +27,6 @@ const ProdImage = styled.img`
 
 const ProductDetail = styled.div`
   padding-top: 50px;
-  border: 1px solid red;
   align-items: center;
   display: flex;
   flex-direction: column;
@@ -55,7 +52,6 @@ const Row = styled.div`
   width: 100%;
   padding-top: 20px;
   padding-bottom: 20px;
-  border: 1px solid gold;
 `
 
 const FlexColumn = styled.div`
