@@ -37,13 +37,12 @@ const ColorName = styled.div`
 const Colors = (props) => {
   const { color, handleOnMouseLeave, handleOnMouseEnter, isHovering } = props
   return (
-    <Wrapper>
+    <Wrapper
+      onMouseLeave={handleOnMouseLeave}
+      onMouseEnter={handleOnMouseEnter}
+    >
       <InnerDiv>
-        <ProductColors
-          color={color}
-          onMouseLeave={handleOnMouseLeave}
-          onMouseEnter={handleOnMouseEnter}
-        />
+        <ProductColors color={color} />
       </InnerDiv>
       <InnerDiv>
         {isHovering && <ColorName>{color.colour_name}</ColorName>}
