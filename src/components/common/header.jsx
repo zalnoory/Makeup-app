@@ -1,9 +1,15 @@
 import React from 'react'
 import vecteezyVector from '../../images/vecteezyVector.jpg'
 import SearchBox from './searchBox'
+import { useHistory } from 'react-router-dom'
 
 const Header = (props) => {
   const { handleSearchTerm } = props
+  const history = useHistory()
+  const goHome = () => {
+    history.push('/')
+  }
+
   return (
     <React.Fragment>
       <div></div>
@@ -13,6 +19,7 @@ const Header = (props) => {
           width: '100px',
           height: '100px',
         }}
+        onClick={goHome}
       />
       <div></div>
 

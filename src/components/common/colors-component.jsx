@@ -15,11 +15,6 @@ const ProductColors = styled.span`
   background-color: ${(props) => props.color.hex_value};
   border-radius: 50%;
   border: 1px solid rgba(0, 0, 0, 0.3);
-
-  /* @media screen and (min-width: 750px) {
-    height: 25px;
-    width: 25px;
-  } */
 `
 const InnerDiv = styled.div`
   display: flex;
