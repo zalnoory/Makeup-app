@@ -46,6 +46,11 @@ const ParagraphContainer = styled.div`
   text-align: left;
 `
 
+const FlexGrid = styled.div`
+  text-align: left;
+  font-size: 16px;
+`
+
 const Row = styled.div`
   display: inline-block;
   position: relative;
@@ -57,11 +62,6 @@ const Row = styled.div`
 const FlexColumn = styled.div`
   display: inline-block;
   position: relative;
-`
-
-const FlexGrid = styled.div`
-  text-align: left;
-  font-size: 16px;
 `
 
 class ProductDetails extends React.Component {

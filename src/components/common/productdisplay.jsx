@@ -110,11 +110,11 @@ const Productdisplay = (props) => {
                     />
                   ))
               : null}
-            {/* {product.product_colors.length > 5 ? (
+            {product.product_colors.length > 5 && (
               <p>
                 <small> More Colors</small>
               </p>
-            ) : null} */}
+            )}
             <StyledP>{product.brand}</StyledP>
           </div>
         </ColorContainer>
