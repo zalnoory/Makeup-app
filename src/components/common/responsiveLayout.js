@@ -19,7 +19,7 @@ const ResponsiveLayout = (props) => {
     onTagSelect,
   } = props
   const { screenWidth } = useViewPort()
-  const breakpoint = 620
+  const breakpoint = 550
 
   return screenWidth < breakpoint ? (
     <Sidemenu
