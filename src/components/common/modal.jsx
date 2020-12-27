@@ -25,7 +25,7 @@ const ModalContainer = styled.div`
 
 const ImageContainer = styled.div`
   padding-top: 50px;
-  padding-bottom: 50px;
+  padding-bottom: 20px;
 `
 
 const DetailsContainer = styled.div`
