@@ -59,9 +59,10 @@ const StyledMenu = styled.nav`
   z-index: 2;
   opacity: 1;
   overflow: scroll;
-  @media (max-width: 750px) {
+  width: 50%;
+  /* @media (max-width: 750px) {
     width: 50%;
-  }
+  } */
 `
 
 const Sidemenu = (props) => {

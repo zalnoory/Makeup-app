@@ -6,6 +6,7 @@ import styled from 'styled-components'
 
 const ProductDisplayItem = styled.div`
   max-width: 100%;
+  padding-bottom: 50px;
   font-weight: 400;
   font-family: Brandon Text;
   position: relative;
@@ -53,6 +54,8 @@ const ColorContainer = styled.div`
 const StyledP = styled.p`
   font-size: 12px;
   text-transform: capitalize;
+  padding: 0;
+  margin: 0;
   @media screen and (min-width: 1020px) {
     font-size: 16px;
   }
@@ -111,9 +114,9 @@ const Productdisplay = (props) => {
                   ))
               : null}
             {product.product_colors.length > 5 && (
-              <p>
-                <small> More Colors</small>
-              </p>
+              <StyledP>
+                <small> more colors</small>
+              </StyledP>
             )}
             <StyledP>{product.brand}</StyledP>
           </div>
