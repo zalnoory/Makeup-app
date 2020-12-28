@@ -35,17 +35,26 @@ const DetailsContainer = styled.div`
 `
 
 const Paragrh1 = styled.p`
-  font-size: 25px;
+  font-size: 16px;
+  padding-bottom: 0px;
+  margin: 0;
+  @media screen and (min-width: 1020px) {
+    font-size: 20px;
+  }
 `
 
 const Paragrh2 = styled.p`
-  font-size: 20px;
+  padding-top: 0px;
+  font-size: 14px;
   text-transform: capitalize;
+  @media screen and (min-width: 1020px) {
+    font-size: 18px;
+  }
 `
 
 const ProductColors = styled.span`
-  height: 10px;
-  width: 10px;
+  height: 14px;
+  width: 14px;
   margin: 2px;
   background-color: ${(props) => props.color};
   border-radius: 50%;
@@ -87,7 +96,7 @@ const Modal = (props) => {
             />
           ))}
         </div>
-        <small>
+        <small style={{ paddingTop: '10px' }}>
           <Link
             to={`/product-details/${product.id}`}
             style={{ fontSize: '16px', color: 'navy' }}
