@@ -62,8 +62,8 @@ const StyledP = styled.p`
 `
 
 const ProductColors = styled.span`
-  height: 10px;
-  width: 10px;
+  height: 14px;
+  width: 14px;
   margin: 2px;
   background-color: ${(props) => props.color};
   border-radius: 50%;

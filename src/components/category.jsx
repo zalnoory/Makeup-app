@@ -28,6 +28,7 @@ const StyledP = styled.p`
   font-size: 18px;
   font-weight: 400;
   font-family: Brandon Text;
+  padding-top: 30px;
 `
 
 const Category = (props) => {

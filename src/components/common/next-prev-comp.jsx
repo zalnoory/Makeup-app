@@ -8,7 +8,7 @@ const ButtonContainer = styled.div`
   align-self: center;
   justify-content: space-between;
   width: 100%;
-  padding: 80px;
+  padding: 40px;
   text-align: center;
   font-size: 18px;
   font-weight: 400;
