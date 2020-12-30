@@ -1,7 +1,6 @@
 import React from 'react'
 import axios from 'axios'
 import Loader from './common/loader'
-// import { ProductColors } from './common/product-colors'
 
 import styled from 'styled-components'
 import Colors from './common/colors-component'
@@ -94,7 +93,6 @@ class ProductDetails extends React.Component {
   }
 
   /* using the callBack function of setState to update state (the better way in updating state)*/
-
   handleOnMouseEnter = (index) => {
     this.setState((prevState) => ({
       isHovered: { ...prevState.isHovered, [index]: true },

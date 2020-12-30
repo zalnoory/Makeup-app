@@ -97,7 +97,6 @@ class App extends React.Component {
         currentPage: 1,
         searchTerm: '',
         selectedBrand: brand,
-        selectedTag: 'All Tags',
       },
       () => this.props.history.push('/')
     )
@@ -110,7 +109,6 @@ class App extends React.Component {
         ...state,
         currentPage: 1,
         searchTerm: '',
-        selectedBrand: 'All Brands',
         selectedTag: tag,
       },
       () => this.props.history.push('/')
@@ -134,9 +132,9 @@ class App extends React.Component {
         ...this.state,
         currentPage: 1,
         searchTerm: '',
-        selectedBrand: 'All Brands',
+        // selectedBrand: 'All Brands',
         selectedCategory: category,
-        selectedTag: 'All Tags',
+        // selectedTag: 'All Tags',
       })
     }
   }
@@ -167,6 +165,19 @@ class App extends React.Component {
         this.setState({ ...state, currentPage: this.state.currentPage + 1 })
       }
     }
+  }
+
+  goHome = () => {
+    const state = this.state
+    this.setState(
+      {
+        ...state,
+        selectedBrand: 'All Brands',
+        selectedTag: 'All Tags',
+        selectedCategory: '',
+      },
+      () => this.props.history.push('/')
+    )
   }
 
   filterLists = (products = [], selectedBrand, selectedTag, searchTerm) => {
@@ -262,7 +273,10 @@ class App extends React.Component {
         <AppWrapper>
           <ScreenDimensionProvider>
             <HeaderWrapper>
-              <Header handleSearchTerm={this.handleSearchTerm} />
+              <Header
+                handleSearchTerm={this.handleSearchTerm}
+                handleGoHome={this.goHome}
+              />
             </HeaderWrapper>
             <MainWrapper>
               <ResponsiveLayout
