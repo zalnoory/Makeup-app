@@ -31,6 +31,7 @@ const DropDownList = styled.ul`
 const ListItem = styled.li`
   list-style: none;
   margin-bottom: 0.8em;
+  text-transform: capitalize;
 `
 
 const DropList = (props) => {
@@ -42,11 +43,7 @@ const DropList = (props) => {
         <DropDownList>
           {items.sort().map((item) => (
             <ListItem key={item} onClick={() => onItemSelect(item)}>
-              {`${item
-                .toLowerCase()
-                .split(' ')
-                .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
-                .join(' ')}`}
+              {item}
             </ListItem>
           ))}
         </DropDownList>

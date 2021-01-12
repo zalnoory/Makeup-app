@@ -1,20 +1,12 @@
 html,
 * {
   box-sizing: border-box;
-  /* display: flexbox; */
 }
 
 body {
   background-color: rgb (255, 255, 255);
   font-family: Brandon Text;
-  font-size: 8px;
+  font-size: 1rem;
   font-weight: 400;
-  /* overflow-x: hidden; */
   text-align: center;
 }
-
-/* .main-wrapper {
-  max-width: 1140px;
-  margin: 0 auto;
-  min-height: 100vh;
-} */

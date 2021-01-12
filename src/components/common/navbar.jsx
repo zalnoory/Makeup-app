@@ -5,7 +5,6 @@ import styled from 'styled-components'
 const TopNavContainer = styled.div`
   display: flex;
   flex-direction: row;
-  padding: 10px;
   width: 100%;
   justify-content: center;
 `
@@ -34,6 +33,7 @@ const StyledP = styled.p`
   font-size: 14px;
   font-weight: 400;
   font-family: Brandon Text;
+  text-transform: capitalize;
 `
 
 const Navbar = (props) => {
@@ -56,12 +56,7 @@ const Navbar = (props) => {
               alt={image.description}
             />
           </Link>
-          <StyledP>
-            {image.title
-              .split(' ')
-              .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
-              .join(' ')}
-          </StyledP>
+          <StyledP>{image.title}</StyledP>
         </ImageContainer>
       ))}
     </TopNavContainer>

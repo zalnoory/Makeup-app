@@ -6,6 +6,7 @@ import styled from 'styled-components'
 
 const ProductDisplayItem = styled.div`
   max-width: 100%;
+  padding-bottom: 50px;
   font-weight: 400;
   font-family: Brandon Text;
   position: relative;
@@ -52,14 +53,17 @@ const ColorContainer = styled.div`
 
 const StyledP = styled.p`
   font-size: 12px;
+  text-transform: capitalize;
+  padding: 0;
+  margin: 0;
   @media screen and (min-width: 1020px) {
     font-size: 16px;
   }
 `
 
 const ProductColors = styled.span`
-  height: 10px;
-  width: 10px;
+  height: 14px;
+  width: 14px;
   margin: 2px;
   background-color: ${(props) => props.color};
   border-radius: 50%;
@@ -99,18 +103,22 @@ const Productdisplay = (props) => {
       <StyledLink to={`/product-details/${product.id}`}>
         <ColorContainer>
           <div>
-            {product.product_colors.slice(0, 5).map((color) => (
-              <ProductColors key={color.hex_value} color={color.hex_value} />
-            ))}
-            <StyledP>
-              {(product.brand || '')
-                .toLowerCase()
-                .split(' ')
-                .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
-                .join(' ')}{' '}
-              {product.product_type.charAt(0).toUpperCase() +
-                product.product_type.slice(1)}
-            </StyledP>
+            {product.product_colors.length > 0
+              ? product.product_colors
+                  .slice(0, 5)
+                  .map((color) => (
+                    <ProductColors
+                      key={color.hex_value}
+                      color={color.hex_value}
+                    />
+                  ))
+              : null}
+            {product.product_colors.length > 5 && (
+              <StyledP>
+                <small> more colors</small>
+              </StyledP>
+            )}
+            <StyledP>{product.brand}</StyledP>
           </div>
         </ColorContainer>
       </StyledLink>
@@ -167,13 +175,7 @@ export default Productdisplay
 //                   />
 //                 ))}
 //                 <p>
-//                   {(product.brand || '')
-//                     .toLowerCase()
-//                     .split(' ')
-//                     .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
-//                     .join(' ')}{' '}
-//                   {product.product_type.charAt(0).toUpperCase() +
-//                     product.product_type.slice(1)}
+//                   {product.brand }
 //                 </p>
 //               </div>
 //             </ColorContainer>

@@ -5,8 +5,6 @@ import styled from 'styled-components'
 
 const ListGrpContainer = styled.div`
   padding-top: 1em;
-  padding-right: 16px;
-  padding-left: 16px;
   display: flex;
   flex-direction: column;
   align-items: center;

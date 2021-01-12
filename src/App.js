@@ -18,7 +18,7 @@ import { withRouter, Route, Switch } from 'react-router-dom'
 const AppWrapper = styled.div`
   display: flex;
   width: 100%;
-  height: 100vh;
+  height: auto;
   flex-direction: column;
 `
 
@@ -26,7 +26,6 @@ const HeaderWrapper = styled.header`
   display: flex;
   width: 100%;
   flex-direction: row;
-  padding: 16px;
   justify-content: space-between;
   border-bottom: 1px solid rgb(179, 175, 175);
 `
@@ -98,7 +97,6 @@ class App extends React.Component {
         currentPage: 1,
         searchTerm: '',
         selectedBrand: brand,
-        selectedTag: 'All Tags',
       },
       () => this.props.history.push('/')
     )
@@ -111,7 +109,6 @@ class App extends React.Component {
         ...state,
         currentPage: 1,
         searchTerm: '',
-        selectedBrand: 'All Brands',
         selectedTag: tag,
       },
       () => this.props.history.push('/')
@@ -135,9 +132,9 @@ class App extends React.Component {
         ...this.state,
         currentPage: 1,
         searchTerm: '',
-        selectedBrand: 'All Brands',
         selectedCategory: category,
         selectedTag: 'All Tags',
+        selectedBrand: 'All Brands',
       })
     }
   }
@@ -170,8 +167,26 @@ class App extends React.Component {
     }
   }
 
-  filterLists = (products = [], selectedBrand, selectedTag, searchTerm) => {
-    const filtered = products
+  goHome = () => {
+    const state = this.state
+    this.setState(
+      {
+        ...state,
+        selectedBrand: 'All Brands',
+        selectedTag: 'All Tags',
+        selectedCategory: '',
+      },
+      () => this.props.history.push('/')
+    )
+  }
+
+  filterLists = (
+    selectedproducts = [],
+    selectedBrand,
+    selectedTag,
+    searchTerm
+  ) => {
+    const filtered = selectedproducts
       .filter((product) => {
         if (selectedBrand !== 'All Brands') {
           return product.brand === selectedBrand
@@ -212,7 +227,6 @@ class App extends React.Component {
         rating,
         updated_at,
         website_link,
-        // product_colors,
         ...includedKeys
       } = product
 
@@ -234,6 +248,50 @@ class App extends React.Component {
       })
     })
   }
+
+  // filterByValue = (filteredProductsArray, searchTerm) => {
+  //   const getSearchTermArray = searchTerm.split(' ')
+
+  //   const displayResult = filteredProductsArray.filter((product) => {
+  //     const {
+  //       api_featured_image,
+  //       created_at,
+  //       currency,
+  //       description,
+  //       id,
+  //       image_link,
+  //       price,
+  //       price_sign,
+  //       product_api_url,
+  //       product_link,
+  //       rating,
+  //       updated_at,
+  //       website_link,
+  //       ...includedKeys
+  //     } = product
+
+  //     return getSearchTermArray.some((term) => {
+  //       return Object.values(includedKeys).some((value) => {
+  //         if (Array.isArray(value)) {
+  //           return value.some((tag) =>
+  //             typeof tag === 'string'
+  //               ? tag.includes(term.toLowerCase())
+  //               : tag.colour_name &&
+  //                 tag.colour_name.includes(term.toLowerCase())
+  //           )
+  //         }
+
+  //         if (typeof value === 'string') {
+  //           return value.includes(term.toLowerCase())
+  //         }
+
+  //         return false
+  //       })
+  //     })
+  //   })
+
+  //   return displayResult
+  // }
 
   render() {
     const {
@@ -263,7 +321,10 @@ class App extends React.Component {
         <AppWrapper>
           <ScreenDimensionProvider>
             <HeaderWrapper>
-              <Header handleSearchTerm={this.handleSearchTerm} />
+              <Header
+                handleSearchTerm={this.handleSearchTerm}
+                handleGoHome={this.goHome}
+              />
             </HeaderWrapper>
             <MainWrapper>
               <ResponsiveLayout
@@ -282,7 +343,7 @@ class App extends React.Component {
                     render={(props) => (
                       <Category
                         {...props}
-                        allProducts={products}
+                        products={products}
                         brands={brands}
                         currentPage={currentPage}
                         filterLists={this.filterLists}

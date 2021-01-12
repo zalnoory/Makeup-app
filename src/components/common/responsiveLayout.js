@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import { useViewPort } from '../../services/screenDimension'
 
 const ListGroupWrapper = styled.div`
-  flex: 0 1 200px;
+  flex: 0 1 160px;
   border-right: 1px solid rgb(179, 175, 175);
 `
 
@@ -19,7 +19,7 @@ const ResponsiveLayout = (props) => {
     onTagSelect,
   } = props
   const { screenWidth } = useViewPort()
-  const breakpoint = 620
+  const breakpoint = 750
 
   return screenWidth < breakpoint ? (
     <Sidemenu

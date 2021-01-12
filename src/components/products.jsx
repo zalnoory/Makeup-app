@@ -17,15 +17,19 @@ const ProductsWrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding: 4em;
   justify-content: center;
   align-items: center;
+
+  @media screen and (min-width: 1020px) {
+    padding: 4em;
+  }
 `
 const StyledP = styled.p`
   text-align: center;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 400;
   font-family: Brandon Text;
+  padding-top: 30px;
 `
 
 class Products extends React.Component {

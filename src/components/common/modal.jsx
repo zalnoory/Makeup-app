@@ -10,7 +10,7 @@ const ModalContainer = styled.div`
   transform: translate(-50%, -50%);
   width: 100%;
   max-width: 100%;
-  height: 800px;
+  height: 100vh;
   max-height: 100%;
   z-index: 1010;
   background: rgb(0, 0, 0);
@@ -25,7 +25,7 @@ const ModalContainer = styled.div`
 
 const ImageContainer = styled.div`
   padding-top: 50px;
-  padding-bottom: 50px;
+  padding-bottom: 20px;
 `
 
 const DetailsContainer = styled.div`
@@ -35,16 +35,26 @@ const DetailsContainer = styled.div`
 `
 
 const Paragrh1 = styled.p`
-  font-size: 25px;
+  font-size: 16px;
+  padding-bottom: 0px;
+  margin: 0;
+  @media screen and (min-width: 1020px) {
+    font-size: 20px;
+  }
 `
 
 const Paragrh2 = styled.p`
-  font-size: 20px;
+  padding-top: 0px;
+  font-size: 14px;
+  text-transform: capitalize;
+  @media screen and (min-width: 1020px) {
+    font-size: 18px;
+  }
 `
 
 const ProductColors = styled.span`
-  height: 10px;
-  width: 10px;
+  height: 14px;
+  width: 14px;
   margin: 2px;
   background-color: ${(props) => props.color};
   border-radius: 50%;
@@ -76,13 +86,7 @@ const Modal = (props) => {
       </ImageContainer>
       <DetailsContainer>
         <Paragrh1>{product.name}</Paragrh1>
-        <Paragrh2>
-          {(product.brand || '')
-            .toLowerCase()
-            .split(' ')
-            .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
-            .join(' ')}
-        </Paragrh2>
+        <Paragrh2>{product.brand}</Paragrh2>
         <div>
           {product.product_colors.slice(0, 20).map((color) => (
             <ProductColors
@@ -92,7 +96,7 @@ const Modal = (props) => {
             />
           ))}
         </div>
-        <small>
+        <small style={{ paddingTop: '10px' }}>
           <Link
             to={`/product-details/${product.id}`}
             style={{ fontSize: '16px', color: 'navy' }}

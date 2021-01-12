@@ -17,8 +17,8 @@ const Overlay = styled.div`
 
 const BurgerButton = styled.button`
   position: absolute;
-  top: 2%;
-  left: 1rem;
+  top: 1%;
+  left: 5px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -59,9 +59,10 @@ const StyledMenu = styled.nav`
   z-index: 2;
   opacity: 1;
   overflow: scroll;
-  @media (max-width: 576px) {
+  width: 50%;
+  /* @media (max-width: 750px) {
     width: 50%;
-  }
+  } */
 `
 
 const Sidemenu = (props) => {
@@ -81,7 +82,7 @@ const Sidemenu = (props) => {
       <Burger open={isComponentVisible} setOpen={setIsComponentVisible} />
 
       {isComponentVisible && (
-        <>
+        <React.Fragment>
           <Overlay onClick={() => setIsComponentVisible(!isComponentVisible)} />
           <Menu
             open={isComponentVisible}
@@ -92,7 +93,7 @@ const Sidemenu = (props) => {
             onBrandSelect={onBrandSelect}
             onTagSelect={onTagSelect}
           />
-        </>
+        </React.Fragment>
       )}
     </div>
   )
