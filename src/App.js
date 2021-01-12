@@ -132,9 +132,9 @@ class App extends React.Component {
         ...this.state,
         currentPage: 1,
         searchTerm: '',
-        // selectedBrand: 'All Brands',
         selectedCategory: category,
-        // selectedTag: 'All Tags',
+        selectedTag: 'All Tags',
+        selectedBrand: 'All Brands',
       })
     }
   }
@@ -180,8 +180,13 @@ class App extends React.Component {
     )
   }
 
-  filterLists = (products = [], selectedBrand, selectedTag, searchTerm) => {
-    const filtered = products
+  filterLists = (
+    selectedproducts = [],
+    selectedBrand,
+    selectedTag,
+    searchTerm
+  ) => {
+    const filtered = selectedproducts
       .filter((product) => {
         if (selectedBrand !== 'All Brands') {
           return product.brand === selectedBrand
@@ -222,7 +227,6 @@ class App extends React.Component {
         rating,
         updated_at,
         website_link,
-        // product_colors,
         ...includedKeys
       } = product
 
@@ -244,6 +248,50 @@ class App extends React.Component {
       })
     })
   }
+
+  // filterByValue = (filteredProductsArray, searchTerm) => {
+  //   const getSearchTermArray = searchTerm.split(' ')
+
+  //   const displayResult = filteredProductsArray.filter((product) => {
+  //     const {
+  //       api_featured_image,
+  //       created_at,
+  //       currency,
+  //       description,
+  //       id,
+  //       image_link,
+  //       price,
+  //       price_sign,
+  //       product_api_url,
+  //       product_link,
+  //       rating,
+  //       updated_at,
+  //       website_link,
+  //       ...includedKeys
+  //     } = product
+
+  //     return getSearchTermArray.some((term) => {
+  //       return Object.values(includedKeys).some((value) => {
+  //         if (Array.isArray(value)) {
+  //           return value.some((tag) =>
+  //             typeof tag === 'string'
+  //               ? tag.includes(term.toLowerCase())
+  //               : tag.colour_name &&
+  //                 tag.colour_name.includes(term.toLowerCase())
+  //           )
+  //         }
+
+  //         if (typeof value === 'string') {
+  //           return value.includes(term.toLowerCase())
+  //         }
+
+  //         return false
+  //       })
+  //     })
+  //   })
+
+  //   return displayResult
+  // }
 
   render() {
     const {
@@ -295,7 +343,7 @@ class App extends React.Component {
                     render={(props) => (
                       <Category
                         {...props}
-                        allProducts={products}
+                        products={products}
                         brands={brands}
                         currentPage={currentPage}
                         filterLists={this.filterLists}

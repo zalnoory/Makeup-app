@@ -33,7 +33,7 @@ const StyledP = styled.p`
 
 const Category = (props) => {
   const {
-    allProducts,
+    products,
     currentPage,
     filterLists,
     match,
@@ -48,20 +48,18 @@ const Category = (props) => {
 
   React.useEffect(() => {
     const { productCategory } = (match.params && match.params) || ''
-    if (allProducts.length > 0 && categoryItems.length === 0) {
-      const catItems = allProducts.filter((product) => {
+    if (products.length > 0 && categoryItems.length === 0) {
+      const catItems = products.filter((product) => {
         if (product.product_type == productCategory) {
           return product
         }
       })
       setCategoryItems(catItems)
     }
-  }, [allProducts])
+  }, [products])
 
-  /*assign categoryItem to a new variable (products)*/
-  const products = categoryItems
   const filteredCategory = filterLists(
-    products,
+    categoryItems,
     selectedBrand,
     selectedTag,
     searchTerm
