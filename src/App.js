@@ -97,6 +97,7 @@ class App extends React.Component {
         currentPage: 1,
         searchTerm: '',
         selectedBrand: brand,
+        selectedTag: 'All Tags',
       },
       () => this.props.history.push('/')
     )
@@ -108,6 +109,7 @@ class App extends React.Component {
       {
         ...state,
         currentPage: 1,
+        selectedBrand: 'All Brands',
         searchTerm: '',
         selectedTag: tag,
       },
